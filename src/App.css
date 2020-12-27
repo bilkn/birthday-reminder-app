@@ -54,13 +54,13 @@ button {
   border-radius: 20px;
   color: #fff;
   display: flex;
+  justify-content: space-between;
   padding: 0.5rem 1rem;
 }
 
 .person-img-container {
   border-radius: 50%;
   height: var(--person-img-size);
-  margin-right: 50px;
   width: var(--person-img-size);
 }
 
@@ -73,8 +73,7 @@ button {
 
 .person-info {
   display: flex;
-  flex-direction: column;
-  margin-right: 1.7rem; /* ! May be removed/ */
+  flex-direction: column; 
 }
 
 .person-info__name {
@@ -89,6 +88,7 @@ button {
 .person-controls__remove-btn {
   color: var(--ui-color, #424874);
   font-size: 1.5rem;
+  margin-right: 10px;
 }
 
 /* Mobile Nav */
