@@ -73,7 +73,7 @@ button {
 
 .person-info {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .person-info__name {
@@ -87,6 +87,7 @@ button {
 
 .person-controls__remove-btn {
   color: var(--ui-color, #424874);
+  display: flex;
   font-size: 1.5rem;
   margin-right: 10px;
 }
@@ -104,10 +105,12 @@ button {
 }
 
 .mobile-nav__add-btn {
+  align-items: center;
   background: var(--third-color, #dcd6f7);
   border-radius: 50%;
   bottom: 30px;
   font-size: 2.3rem;
+  justify-content: center;
   height: var(--person-img-size);
   position: relative;
   width: var(--person-img-size);
