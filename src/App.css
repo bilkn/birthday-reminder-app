@@ -35,10 +35,10 @@ body {
 .person-list {
   display: grid;
   gap: 20px;
-  grid-template-columns: 350px;
+  grid-template-columns: 100%;
   justify-content: center;
   margin: 0 auto;
-  padding-top: 3rem;
+  padding: 3rem 0 6rem 0;
   width: 90%;
 }
 
