@@ -17,6 +17,12 @@ body {
   font-family: sans-serif;
 }
 
+button {
+  appearance: none;
+  background: none;
+  border: none;
+}
+
 /* App Head */
 .app-head {
   background: var(--ui-color, #424874);
@@ -68,6 +74,7 @@ body {
 .person-info {
   display: flex;
   flex-direction: column;
+  margin-right: 1.7rem; /* ! May be removed/ */
 }
 
 .person-info__name {
@@ -76,6 +83,11 @@ body {
 }
 
 .person-info__birthday {
+  font-size: 1.5rem;
+}
+
+.person-controls__remove-btn {
+  color: var(--ui-color, #424874);
   font-size: 1.5rem;
 }
 
@@ -92,10 +104,8 @@ body {
 }
 
 .mobile-nav__add-btn {
-  appearance: none;
   background: var(--third-color, #dcd6f7);
   border-radius: 50%;
-  border: none;
   bottom: 30px;
   font-size: 2.3rem;
   height: var(--person-img-size);

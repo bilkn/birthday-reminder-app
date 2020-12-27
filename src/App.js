@@ -46,6 +46,11 @@ function Person({ person }) {
         <p className="person-info__name">{name}</p>
         <p className="person-info__birthday">{birthday}</p>
       </div>
+      <div className="person-controls">
+        <button className="person-controls__remove-btn">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
     </div>
   );
 }
