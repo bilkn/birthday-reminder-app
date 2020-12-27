@@ -4,15 +4,25 @@ import './App.css';
 import people from './people';
 
 function App() {
-  return <Main />;
+  return (
+    <>
+      <AppHead />
+      <Main />
+      <MobileNav />
+    </>
+  );
 }
 
-function siteHead() {
-  return <header className="site-head"></header>;
+function AppHead() {
+  return <header className="app-head"></header>;
 }
 
 function Main() {
-  return <PersonList />;
+  return (
+    <main className="home-main">
+      <PersonList />
+    </main>
+  );
 }
 
 function PersonList() {
@@ -40,10 +50,10 @@ function Person({ person }) {
   );
 }
 
-function mobileNav() {
+function MobileNav() {
   return (
     <nav className="mobile-nav">
-      <button className="mobile-nav__btn">
+      <button className="mobile-nav__add-btn">
         <i class="fas fa-plus"></i>
       </button>
     </nav>
