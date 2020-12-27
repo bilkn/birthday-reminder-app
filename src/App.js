@@ -65,6 +65,7 @@ function Person({ person, removeItem }) {
 }
 
 function MobileNav() {
+  
   return (
     <nav className="mobile-nav">
       <button className="mobile-nav__add-btn">

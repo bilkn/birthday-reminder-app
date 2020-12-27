@@ -7,9 +7,11 @@
 :root {
   --main-color: #f4eeff;
   --sec-color: #b9b0e1;
+  --sec-color-hover: #b9b0e1d3;
   --ui-color: #424874;
   --third-color: #dcd6f7;
   --person-img-size: 70px;
+  --ui-color-hover: #424874d7;
 }
 
 body {
@@ -53,9 +55,15 @@ button {
   background: var(--sec-color, #b9b0e1);
   border-radius: 20px;
   color: #fff;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  transition: background 200ms ease;
+}
+
+.person:hover {
+  background: var(--sec-color-hover, #b9b0e1d3);
 }
 
 .person-img-container {
@@ -79,6 +87,7 @@ button {
 .person-info__name {
   font-size: 1.2rem;
   margin-bottom: 0.2rem;
+  text-align: center;
 }
 
 .person-info__birthday {
@@ -87,9 +96,19 @@ button {
 
 .person-controls__remove-btn {
   color: var(--ui-color, #424874);
+  cursor: pointer;
   display: flex;
   font-size: 1.5rem;
   margin-right: 10px;
+  transition: color 150ms ease;
+}
+
+.person-controls__remove-btn:hover {
+  color: var(--ui-color-hover, #424874d7);
+}
+
+.person-controls__remove-btn:hover .person {
+  background: var(--sec-color) !important;
 }
 
 /* Mobile Nav */
