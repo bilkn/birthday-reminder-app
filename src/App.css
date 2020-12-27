@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-color: #f4eeff;
+  --sec-color: #b9b0e1;
+  --ui-color: #424874;
+  --third-color: #dcd6f7;
+  --person-img-size: 70px;
+}
+
+body {
+  background: var(--main-color, #f4eeff);
+}
+
+/* Person List */
+.person-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin: 0 auto;
+  padding: 0;
+  width: 90%;
+}
+
+.person {
+  background: var(--sec-color, #b9b0e1);
+  color: #fff;
+  display: flex;
+  padding: 1.5rem;
+}
+
+.person-img-container {
+  border: 1px solid red;
+  height: var(--person-img-size);
+  width: var(--person-img-size);
+}
+
+.person-img-container__img {
+  object-fit: cover;
+  height: var(--person-img-size);
+  width: var(--person-img-size);
+}
+
+.person-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.person-info__name {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.person-info__birthday {
+  font-size: 1.5rem;
+}

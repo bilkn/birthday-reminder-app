@@ -1,34 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
+import people from './people';
 
-function App() {}
+function App() {
+  return <Main />;
+}
 
 function siteHead() {
   return <header className="site-head"></header>;
 }
 
 function Main() {
-  <PersonList />;
+  return <PersonList />;
 }
 
 function PersonList() {
-  <Person />;
+  return (
+    <ul className="person-list">
+      {people.map((person) => (
+        <Person key={person.id} person={person} />
+      ))}
+    </ul>
+  );
 }
 
-function Person(props) {
-  const { personName, birthday, imgSrc } = props;
+function Person({ person }) {
+  const { name, birthday, img } = person;
   return (
     <div className="person">
       <div className="person-img-container">
-        <img
-          className="person-img-container__img"
-          src={imgSrc}
-          alt={personName}
-        />
+        <img className="person-img-container__img" src={img} alt={name} />
       </div>
       <div className="person-info">
-        <p className="person-info__name">{personName}</p>
+        <p className="person-info__name">{name}</p>
         <p className="person-info__birthday">{birthday}</p>
       </div>
     </div>
@@ -44,5 +49,7 @@ function mobileNav() {
     </nav>
   );
 }
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 export default App;
