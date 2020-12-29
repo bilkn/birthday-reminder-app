@@ -9,9 +9,9 @@
   --sec-color: #b9b0e1;
   --sec-color-hover: #b9b0e1d3;
   --ui-color: #424874;
+  --ui-color-hover: #424874d7;
   --third-color: #dcd6f7;
   --person-img-size: 70px;
-  --ui-color-hover: #424874d7;
 }
 
 body {
@@ -44,7 +44,6 @@ button {
   display: grid;
   gap: 20px;
   grid-template-columns: 100%;
-  justify-content: center;
   margin: 0 auto;
   padding: 3rem 0 6rem 0;
   width: 90%;
@@ -137,13 +136,34 @@ button {
   width: var(--person-img-size);
 }
 
+.empty-box {
+  align-items: center;
+  border: 3px dashed #7a7a7a;
+  border-radius: 20px;
+  display: none;
+  justify-content: center;
+}
+
+.empty-box__add-icon {
+  color: #7a7a7a;
+  font-size: 1.7rem;
+}
+
+
+
+@media (min-width: 400px) {
+  .person-list {
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  }
+}
+
 /* 
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
 */
 
-@media (min-width: 400px) {
-  .person-list {
-    grid-template-columns: repeat(auto-fit, 330px);
+@media (min-width:768px) and (max-width: 1024px) {
+  .empty-box {
+    display: flex;
   }
 }
