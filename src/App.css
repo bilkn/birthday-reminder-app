@@ -7,14 +7,16 @@
 :root {
   --main-color: #f4eeff;
   --sec-color: #b9b0e1;
+  --sec-color-hover: #b9b0e1d3;
   --ui-color: #424874;
   --third-color: #dcd6f7;
   --person-img-size: 70px;
+  --ui-color-hover: #424874d7;
 }
 
 body {
   background: var(--main-color, #f4eeff);
-  font-family: sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 button {
@@ -53,9 +55,15 @@ button {
   background: var(--sec-color, #b9b0e1);
   border-radius: 20px;
   color: #fff;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 1rem;
+  transition: background 200ms ease;
+}
+
+.person:hover {
+  background: var(--sec-color-hover, #b9b0e1d3);
 }
 
 .person-img-container {
@@ -73,22 +81,36 @@ button {
 
 .person-info {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .person-info__name {
   font-size: 1.2rem;
   margin-bottom: 0.2rem;
+  text-align: center;
 }
 
 .person-info__birthday {
-  font-size: 1.5rem;
+  color: #2e2e31; /* May be changed. */
+  font-size: 1.6rem;
+  text-align: center;
 }
 
 .person-controls__remove-btn {
   color: var(--ui-color, #424874);
+  cursor: pointer;
+  display: flex;
   font-size: 1.5rem;
   margin-right: 10px;
+  transition: color 150ms ease;
+}
+
+.person-controls__remove-btn:hover {
+  color: var(--ui-color-hover, #424874d7);
+}
+
+.person-controls__remove-btn:hover .person {
+  background: var(--sec-color) !important;
 }
 
 /* Mobile Nav */
@@ -104,11 +126,24 @@ button {
 }
 
 .mobile-nav__add-btn {
+  align-items: center;
   background: var(--third-color, #dcd6f7);
   border-radius: 50%;
   bottom: 30px;
   font-size: 2.3rem;
+  justify-content: center;
   height: var(--person-img-size);
   position: relative;
   width: var(--person-img-size);
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 400px) {
+  .person-list {
+    grid-template-columns: repeat(auto-fit, 330px);
+  }
 }

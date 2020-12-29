@@ -1,7 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './App.css';
-import people from './people';
+import data from './people';
 
 function App() {
   return (
@@ -26,17 +26,25 @@ function Main() {
 }
 
 function PersonList() {
+  const [people, setPeople] = useState(data);
+  const removeItem = (id) => {
+    setPeople((oldPeople) => {
+      let newPeople = oldPeople.filter((person) => person.id !== id);
+      return newPeople;
+    });
+  };
   return (
     <ul className="person-list">
       {people.map((person) => (
-        <Person key={person.id} person={person} />
+        <Person key={person.id} person={person} removeItem={removeItem} />
       ))}
     </ul>
   );
 }
 
-function Person({ person }) {
-  const { name, birthday, img } = person;
+function Person({ person, removeItem }) {
+  const { id, name, birthday, img } = person;
+
   return (
     <div className="person">
       <div className="person-img-container">
@@ -47,8 +55,13 @@ function Person({ person }) {
         <p className="person-info__birthday">{birthday}</p>
       </div>
       <div className="person-controls">
-        <button className="person-controls__remove-btn">
-          <i class="fas fa-trash"></i>
+        <button
+          className="person-controls__remove-btn"
+          onClick={() => {
+            removeItem(id);
+          }}
+        >
+          <i className="fas fa-trash"></i>
         </button>
       </div>
     </div>
@@ -59,9 +72,19 @@ function MobileNav() {
   return (
     <nav className="mobile-nav">
       <button className="mobile-nav__add-btn">
-        <i class="fas fa-plus"></i>
+        <i className="fas fa-plus"></i>
       </button>
     </nav>
+  );
+}
+
+function EmptyBox() {
+  return (
+    <div className="empty-box">
+      <button className="empty-box__add-btn">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
   );
 }
 
