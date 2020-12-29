@@ -38,6 +38,7 @@ function PersonList() {
       {people.map((person) => (
         <Person key={person.id} person={person} removeItem={removeItem} />
       ))}
+      < EmptyBox />
     </ul>
   );
 }
@@ -82,7 +83,7 @@ function EmptyBox() {
   return (
     <div className="empty-box">
       <button className="empty-box__add-btn">
-        <i class="fa fa-plus" aria-hidden="true"></i>
+        <i className="fa fa-plus empty-box__add-icon" aria-hidden="true"></i>
       </button>
     </div>
   );
