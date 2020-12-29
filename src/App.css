@@ -16,7 +16,7 @@
 
 body {
   background: var(--main-color, #f4eeff);
-  font-family: sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 button {
@@ -91,7 +91,9 @@ button {
 }
 
 .person-info__birthday {
-  font-size: 1.5rem;
+  color: #2e2e31; /* May be changed. */
+  font-size: 1.6rem;
+  text-align: center;
 }
 
 .person-controls__remove-btn {
@@ -133,4 +135,15 @@ button {
   height: var(--person-img-size);
   position: relative;
   width: var(--person-img-size);
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 400px) {
+  .person-list {
+    grid-template-columns: repeat(auto-fit, 330px);
+  }
 }

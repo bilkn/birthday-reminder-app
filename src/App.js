@@ -36,7 +36,7 @@ function PersonList() {
   return (
     <ul className="person-list">
       {people.map((person) => (
-        <Person key={person.id} person={person} removeItem ={removeItem} />
+        <Person key={person.id} person={person} removeItem={removeItem} />
       ))}
     </ul>
   );
@@ -55,8 +55,12 @@ function Person({ person, removeItem }) {
         <p className="person-info__birthday">{birthday}</p>
       </div>
       <div className="person-controls">
-        <button className="person-controls__remove-btn" onClick={()=> {
-          removeItem(id)}}>
+        <button
+          className="person-controls__remove-btn"
+          onClick={() => {
+            removeItem(id);
+          }}
+        >
           <i className="fas fa-trash"></i>
         </button>
       </div>
@@ -65,13 +69,22 @@ function Person({ person, removeItem }) {
 }
 
 function MobileNav() {
-  
   return (
     <nav className="mobile-nav">
       <button className="mobile-nav__add-btn">
         <i className="fas fa-plus"></i>
       </button>
     </nav>
+  );
+}
+
+function EmptyBox() {
+  return (
+    <div className="empty-box">
+      <button className="empty-box__add-btn">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
+    </div>
   );
 }
 
