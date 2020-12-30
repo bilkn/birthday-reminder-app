@@ -1,3 +1,4 @@
+import "./Person.scss";
 function Person({ person, removeItem }) {
   const { id, name, birthday, img } = person;
 

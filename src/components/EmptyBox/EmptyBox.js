@@ -1,3 +1,4 @@
+import "./EmptyBox.scss";
 function EmptyBox() {
   return (
     <div className="empty-box">

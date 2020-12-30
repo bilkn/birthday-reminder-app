@@ -1,0 +1,14 @@
+.person-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 100%;
+  margin: 0 auto;
+  padding: 3rem 0 6rem 0;
+  width: 90%;
+}
+
+@media (min-width: 400px) {
+  .person-list {
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  }
+}

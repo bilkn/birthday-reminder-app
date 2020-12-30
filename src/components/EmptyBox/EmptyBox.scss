@@ -1,0 +1,23 @@
+.empty-box {
+  align-items: center;
+  border: 3px dashed #7a7a7a;
+  border-radius: 20px;
+  display: none;
+  justify-content: center;
+}
+
+.empty-box__add-icon {
+  color: #7a7a7a;
+  font-size: 1.7rem;
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width:768px) and (max-width: 1024px) {
+  .empty-box {
+    display: flex;
+  }
+}

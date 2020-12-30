@@ -1,3 +1,4 @@
+import "./MobileNav.scss";
 function MobileNav() {
   return (
     <nav className="mobile-nav">

@@ -2,6 +2,7 @@ import {useState} from "react";
 import data from "../../utils/data";
 import Person from "../Person/Person";
 import EmptyBox from "../EmptyBox/EmptyBox";
+import "./PersonList.scss";
 
 function PersonList() {
   const [people, setPeople] = useState(data);

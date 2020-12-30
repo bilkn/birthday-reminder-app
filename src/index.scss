@@ -1,0 +1,18 @@
+@import './styles/variables';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--main-color, #f4eeff);
+  font-family: 'Montserrat', sans-serif;
+}
+
+button {
+  appearance: none;
+  background: none;
+  border: none;
+}
