@@ -1,0 +1,8 @@
+@import "../../styles/variables";
+.app-head {
+  background: $ui-color;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}

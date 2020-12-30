@@ -1,4 +1,4 @@
-const people = [
+const data = [
   {id:1, name: 'Michael John', birthday: '20.10.2021', img: './assets/man-1.png' },
   {id:2, name: 'Niho Kerr', birthday: '06.04.2021', img: './assets/girl-1.png' },
   {id:3, name: 'William Bloom', birthday: '12.02.2021', img: './assets/man-2.png' },
@@ -6,4 +6,4 @@ const people = [
   {id:5, name: 'Lewis Milton', birthday: '15.11.2021', img: './assets/man-4.png' },
 ];
 
-export default people;
+export default data;
