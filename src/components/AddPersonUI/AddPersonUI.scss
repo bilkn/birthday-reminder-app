@@ -1,0 +1,35 @@
+@import '../../styles/variables';
+.add-person-ui {
+  align-items: center;
+  background: $sec-color;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -150px;
+  width: 300px
+}
+
+.add-person-ui-input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-person-ui-input-container__name {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+
+.add-person-ui-input-container__birthday {
+  color: #2e2e31; /* May be changed. */
+  font-size: 1.6rem;
+  text-align: center;
+}
