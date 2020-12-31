@@ -13,23 +13,37 @@
   top: 50%;
   left: 50%;
   margin-top: -50px;
-  margin-left: -150px;
-  width: 300px
+  margin-left: -165px;
+  width: 330px;
 }
 
 .add-person-ui-input-container {
   display: flex;
   flex-direction: column;
+
+  // add-person-ui-input-container__name
+  &__name {
+    appearance: none;
+    background: $sec-color;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    text-align: center;
+  }
+
+  // add-person-ui-input-container__birthday
+  &__birthday {
+    appearance: none;
+    background: $sec-color;
+    color: #2e2e31; /* May be changed. */
+    font-size: 1.6rem;
+    text-align: center;
+  }
 }
 
-.add-person-ui-input-container__name {
-  font-size: 1.2rem;
-  margin-bottom: 0.2rem;
-  text-align: center;
-}
-
-.add-person-ui-input-container__birthday {
-  color: #2e2e31; /* May be changed. */
-  font-size: 1.6rem;
-  text-align: center;
+.add-person-ui-controls {
+  // add-person-ui-controls__icon
+  &__icon {
+    font-size: 2rem;
+  }
 }

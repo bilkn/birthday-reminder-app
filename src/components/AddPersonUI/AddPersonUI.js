@@ -3,6 +3,9 @@ import './AddPersonUI.scss';
 function AddPersonUI({ callback }) {
   return (
     <div className="add-person-ui">
+      <div className="person-img-container">
+        <img className="person-img-container__img" src="#" alt="Empty" />
+      </div>
       <div className="add-person-ui-input-container">
         <input type="text" className="add-person-ui-input-container__name" />
         <input
@@ -17,7 +20,10 @@ function AddPersonUI({ callback }) {
             callback();
           }}
         >
-          <i className="fa fa-plus-circle" aria-hidden="true"></i>
+          <i
+            className="fa fa-plus-circle add-person-ui-controls__icon"
+            aria-hidden="true"
+          ></i>
         </button>
       </div>
     </div>
