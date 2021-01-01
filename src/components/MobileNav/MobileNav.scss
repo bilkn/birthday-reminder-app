@@ -21,3 +21,9 @@
   position: relative;
   width: $person-img-size;
 }
+
+@media (min-width: 768px) {
+  .mobile-nav {
+    display: none;
+  }
+}
