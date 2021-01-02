@@ -14,7 +14,7 @@ function MobileNav() {
         </button>
       </nav>
       {showAddPersonUI && (
-        <AddPersonUI callback={() => setShowAddPersonUI(!showAddPersonUI)} />
+        <AddPersonUI setShowAddPersonUI={() => setShowAddPersonUI(!showAddPersonUI)} />
       )}
     </>
   );

@@ -1,11 +1,11 @@
-import {useState} from "react";
-import data from "../../utils/data";
-import Person from "../Person/Person";
-import EmptyBox from "../EmptyBox/EmptyBox";
-import "./PersonList.scss";
+import { useContext } from 'react';
+import Person from '../Person/Person';
+import EmptyBox from '../EmptyBox/EmptyBox';
+import './PersonList.scss';
+import { PeopleContext } from '../PeopleContext/PeopleContext';
 
 function PersonList() {
-  const [people, setPeople] = useState(data);
+  const { people, setPeople } = useContext(PeopleContext);
   const removeItem = (id) => {
     setPeople((oldPeople) => {
       let newPeople = oldPeople.filter((person) => person.id !== id);
