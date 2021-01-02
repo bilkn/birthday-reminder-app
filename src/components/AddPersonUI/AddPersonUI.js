@@ -1,6 +1,7 @@
 import { useContext, useRef } from 'react';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 import './AddPersonUI.scss';
+import blankImg from "../../assets/no-picture.png";
 
 function AddPersonUI({ setShowAddPersonUI }) {
   const { people, setPeople } = useContext(PeopleContext);
@@ -15,7 +16,7 @@ function AddPersonUI({ setShowAddPersonUI }) {
       id: new Date().getTime().toString(),
       name: name,
       birthday: birthday,
-      img: null,
+      img: blankImg,
     };
     setPeople(() => [...people, newPerson]);
   };
