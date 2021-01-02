@@ -1,6 +1,6 @@
 import './AddPersonUI.scss';
 
-function AddPersonUI({ callback }) {
+function AddPersonUI({ setShowAddPersonUI }) {
   return (
     <div className="add-person-ui">
       <div className="person-img-container">
@@ -17,7 +17,7 @@ function AddPersonUI({ callback }) {
         <button
           className="add-person-ui-controls__add-btn"
           onClick={() => {
-            callback();
+            setShowAddPersonUI();
           }}
         >
           <i
