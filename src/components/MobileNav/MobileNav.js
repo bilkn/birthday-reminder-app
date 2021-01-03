@@ -1,5 +1,5 @@
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import './MobileNav.scss';
 import Modal from './Modal';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
