@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { PeopleContext } from "../PeopleContext/PeopleContext";
+import "./Modal.scss";
 
 function Modal() {
   const {state, dispatch} = useContext(PeopleContext);

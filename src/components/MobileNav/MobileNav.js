@@ -1,10 +1,15 @@
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './MobileNav.scss';
+import Modal from './Modal';
+import { PeopleContext } from '../PeopleContext/PeopleContext';
+
 function MobileNav() {
-    const [showAddPersonUI, setShowAddPersonUI] = useState(false);
+  const [showAddPersonUI, setShowAddPersonUI] = useState(false);
+  const { state } = useContext(PeopleContext);
   return (
     <>
+      {state.isModalOpen && <Modal />}
       <nav className="mobile-nav">
         <button
           className="mobile-nav__add-btn"
@@ -14,7 +19,9 @@ function MobileNav() {
         </button>
       </nav>
       {showAddPersonUI && (
-        <AddPersonUI setShowAddPersonUI={() => setShowAddPersonUI(!showAddPersonUI)} />
+        <AddPersonUI
+          setShowAddPersonUI={() => setShowAddPersonUI(!showAddPersonUI)}
+        />
       )}
     </>
   );
