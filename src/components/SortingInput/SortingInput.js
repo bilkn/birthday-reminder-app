@@ -5,12 +5,13 @@ function SortingInput() {
   const { state, dispatch } = useContext(PeopleContext);
   const selectBox = useRef(null);
   const changeHandler = () => {
-
     const value = selectBox.current.value;
     if (value === 'sort_by_age') {
       sortByAge(state, dispatch);
     } else if (value === 'sort_by_month') {
       sortByMonth(state, dispatch);
+    } else if (value === 'sort_by_name') {
+      sortByName(state, dispatch);
     }
   };
   return (
@@ -24,12 +25,16 @@ function SortingInput() {
       </option>
 
       <option className="sorting-input__option" value="sort_by_month">
-        Sort by date
+        Sort by month
+      </option>
+      <option className="sorting-input__option" value="sort_by_name">
+        Sort by name
       </option>
     </select>
   );
 }
 
+// People sorting could be merged into a single function in the future.
 function sortByAge(state, dispatch) {
   const oldPeople = state.people;
   const sortedPeople = oldPeople.sort((prev, cur) => {
@@ -44,8 +49,6 @@ function sortByAge(state, dispatch) {
 
 function sortByMonth(state, dispatch) {
   const oldPeople = state.people;
-
-  // People sorting could be merged into a single function in the future.
   const sortedPeople = oldPeople.sort((prev, cur) => {
     const [prevDay, prevMonth] = prev.birthday.split('.');
     const [curDay, curMonth] = cur.birthday.split('.');
@@ -54,6 +57,16 @@ function sortByMonth(state, dispatch) {
     return prevDatePoint - curDatePoint;
   });
   dispatch({ type: 'SORT_PEOPLE_BY_MONTH', payload: sortedPeople });
+}
+
+function sortByName(state, dispatch) {
+  const oldPeople = state.people;
+  const sortedPeople = oldPeople.sort((prev, cur) => {
+    const [prevName] = prev.name;
+    const [curName] = cur.name;
+    return prevName.charCodeAt(0) - curName.charCodeAt(0);
+  });
+  dispatch({ type: 'SORT_PEOPLE_BY_NAME', payload: sortedPeople });
 }
 
 export default SortingInput;

@@ -43,5 +43,11 @@ export const reducer = (state, action) => {
       isModalOpen: false,
       modalContent: '',
     };
+  } else if (action.type === 'SORT_PEOPLE_BY_NAME') {
+    return {
+      ...state,
+      isModalOpen: false,
+      modalContent: '',
+    };
   }
 };
