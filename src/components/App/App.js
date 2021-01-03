@@ -1,16 +1,24 @@
 import AppHead from '../AppHead/AppHead';
 import HomeMain from '../HomeMain/HomeMain';
 import MobileNav from '../MobileNav/MobileNav';
-import { useState } from 'react';
+import { useReducer } from 'react';
 import data from '../../utils/data';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
+import {reducer} from "./reducer";
 
 function App() {
-  const [people, setPeople] = useState(data);
+  const defaultState = {
+    people: data,
+    isModalOpen: false,
+    modalContext: '',
+  };
+
+  const [state, dispatch] = useReducer(reducer,  defaultState);
+  
   return (
     <>
       <AppHead />
-      <PeopleContext.Provider value={{people:people, setPeople: setPeople}}>
+      <PeopleContext.Provider value={{ state: state, dispatch: dispatch }}>
         <HomeMain />
         <MobileNav />
       </PeopleContext.Provider>

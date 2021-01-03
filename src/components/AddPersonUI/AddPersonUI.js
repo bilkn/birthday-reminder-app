@@ -1,57 +1,89 @@
 import { useContext, useRef } from 'react';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 import './AddPersonUI.scss';
-import blankImg from "../../assets/no-picture.png";
+import blankImg from '../../assets/no-picture.png';
 
 function AddPersonUI({ setShowAddPersonUI }) {
-  const { people, setPeople } = useContext(PeopleContext);
+  const { state, dispatch } = useContext(PeopleContext);
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
 
-  const addPerson = () => {
+  const validatePersonInfo = (name, date) => {
+    if (name.length <= 0) return 'INVALID_NAME';
+    else if (date.length !== 10) return 'INVALID_DATE';
+    return true;
+  };
+  const addPersonHandler = () => {
     let name = nameContainer.current.value;
+    const date = dateContainer.current.value;
+    const validationResult = validatePersonInfo(name, date);
+    if (typeof validationResult === 'boolean') {
+      addPerson(name, date);
+    } else if (validationResult === 'INVALID_NAME') {
+      dispatch({ type: 'INVALID_NAME' });
+    } else if (validationResult === 'INVALID_DATE') {
+      dispatch({ type: 'INVALID_DATE' });
+    }
+  };
+
+  const addPerson = (name, date) => {
     name = name.charAt(0).toUpperCase() + name.slice(1);
-    const birthday = dateContainer.current.value.split('-').reverse().join('.');
+    const birthday = transformTheDate(date);
+    const newPerson = createNewPerson(name, birthday);
+    dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
+  };
+
+  const createNewPerson = (name, birthday) => {
     const newPerson = {
       id: new Date().getTime().toString(),
       name: name,
       birthday: birthday,
       img: blankImg,
     };
-    setPeople(() => [...people, newPerson]);
+    return newPerson;
   };
+
+  const transformTheDate = (date) => {
+    const birthday = date.split('-').reverse().join('.');
+    return birthday;
+  };
+
   return (
-    <div className="add-person-ui">
-      <div className="person-img-container">
-        <img className="person-img-container__img" src="#" alt="Empty" />
+    <>
+      <div className="add-person-ui">
+        <div className="person-img-container">
+          <img className="person-img-container__img" src="#" alt="Empty" />
+        </div>
+
+        <div className="add-person-ui-input-container">
+          <input
+            type="text"
+            className="add-person-ui-input-container__name"
+            ref={nameContainer}
+            maxLength="20"
+          />
+          <input
+            type="date"
+            className="add-person-ui-input-container__birthday"
+            ref={dateContainer}
+          />
+        </div>
+        <div className="add-person-ui-controls">
+          <button
+            className="add-person-ui-controls__add-btn"
+            onClick={() => {
+              addPersonHandler();
+              setShowAddPersonUI();
+            }}
+          >
+            <i
+              className="fa fa-plus-circle add-person-ui-controls__icon"
+              aria-hidden="true"
+            ></i>
+          </button>
+        </div>
       </div>
-      <div className="add-person-ui-input-container">
-        <input
-          type="text"
-          className="add-person-ui-input-container__name"
-          ref={nameContainer}
-        />
-        <input
-          type="date"
-          className="add-person-ui-input-container__birthday"
-          ref={dateContainer}
-        />
-      </div>
-      <div className="add-person-ui-controls">
-        <button
-          className="add-person-ui-controls__add-btn"
-          onClick={() => {
-            addPerson();
-            setShowAddPersonUI();
-          }}
-        >
-          <i
-            className="fa fa-plus-circle add-person-ui-controls__icon"
-            aria-hidden="true"
-          ></i>
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 

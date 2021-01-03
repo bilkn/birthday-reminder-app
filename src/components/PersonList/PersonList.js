@@ -5,16 +5,16 @@ import './PersonList.scss';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 
 function PersonList() {
-  const { people, setPeople } = useContext(PeopleContext);
+  const { state, dispatch } = useContext(PeopleContext);
   const removeItem = (id) => {
-    setPeople((oldPeople) => {
-      let newPeople = oldPeople.filter((person) => person.id !== id);
-      return newPeople;
-    });
+    const oldPeople = state.people;
+    let newPeople = oldPeople.filter((person) => person.id !== id);
+    dispatch({ type: 'REMOVE_ITEM', payload: newPeople });
   };
+
   return (
     <ul className="person-list">
-      {people.map((person) => (
+      {state.people.map((person) => (
         <Person key={person.id} person={person} removeItem={removeItem} />
       ))}
       <EmptyBox />

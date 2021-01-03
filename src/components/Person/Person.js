@@ -1,7 +1,6 @@
 import "./Person.scss";
 function Person({ person, removeItem }) {
   const { id, name, birthday, img } = person;
-
   return (
     <div className="person">
       <div className="person-img-container">
