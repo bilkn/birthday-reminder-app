@@ -9,6 +9,7 @@ function MobileNav() {
   const [showAddPersonUI, setShowAddPersonUI] = useState(false);
   const [showSortingInput, setShowSortingInput] = useState(false);
   const { state } = useContext(PeopleContext);
+
   return (
     <>
       {state.isModalOpen && <Modal />}

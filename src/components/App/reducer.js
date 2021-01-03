@@ -37,5 +37,11 @@ export const reducer = (state, action) => {
       isModalOpen: false,
       modalContent: '',
     };
+  } else if (action.type === 'SORT_PEOPLE_BY_MONTH') {
+    return {
+      ...state,
+      isModalOpen: false,
+      modalContent: '',
+    };
   }
 };

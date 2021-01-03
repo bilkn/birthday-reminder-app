@@ -5,9 +5,12 @@ function SortingInput() {
   const { state, dispatch } = useContext(PeopleContext);
   const selectBox = useRef(null);
   const changeHandler = () => {
+
     const value = selectBox.current.value;
     if (value === 'sort_by_age') {
       sortByAge(state, dispatch);
+    } else if (value === 'sort_by_month') {
+      sortByMonth(state, dispatch);
     }
   };
   return (
@@ -19,11 +22,10 @@ function SortingInput() {
       <option className="sorting-input__option" value="sort_by_age">
         Sort by age
       </option>
-      {/* WIP */}
-      <option className="sorting-input__option" value="sort_by_date">
+
+      <option className="sorting-input__option" value="sort_by_month">
         Sort by date
       </option>
-      {/* WIP */}
     </select>
   );
 }
@@ -38,7 +40,20 @@ function sortByAge(state, dispatch) {
     return prevDateInMs - curDateInMs;
   });
   dispatch({ type: 'SORT_PEOPLE_BY_AGE', payload: sortedPeople });
-  console.log(sortedPeople);
+}
+
+function sortByMonth(state, dispatch) {
+  const oldPeople = state.people;
+
+  // People sorting could be merged into a single function in the future.
+  const sortedPeople = oldPeople.sort((prev, cur) => {
+    const [prevDay, prevMonth] = prev.birthday.split('.');
+    const [curDay, curMonth] = cur.birthday.split('.');
+    const prevDatePoint = +prevDay + +prevMonth * 10;
+    const curDatePoint = +curDay + +curMonth * 10;
+    return prevDatePoint - curDatePoint;
+  });
+  dispatch({ type: 'SORT_PEOPLE_BY_MONTH', payload: sortedPeople });
 }
 
 export default SortingInput;
