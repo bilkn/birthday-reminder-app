@@ -1,0 +1,11 @@
+.sorting-input {
+    appearance: none;
+    position: fixed;
+    width: 100vw;
+
+    // sorting-input__option 
+    &__option{
+        appearance: none;
+        background: chocolate;
+    }
+}

@@ -31,5 +31,11 @@ export const reducer = (state, action) => {
       isModalOpen: true,
       modalContent: 'Please provide correct date format.',
     };
+  } else if (action.type === 'SORT_PEOPLE_BY_AGE') {
+    return {
+      ...state,
+      isModalOpen: false,
+      modalContent: '',
+    };
   }
 };

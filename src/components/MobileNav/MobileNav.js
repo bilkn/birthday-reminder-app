@@ -1,5 +1,5 @@
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import './MobileNav.scss';
 import Modal from './Modal';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
@@ -17,7 +17,7 @@ function MobileNav() {
           className="mobile-nav__add-btn mobile-nav__add-btn--side"
           onClick={() => setShowSortingInput(!showSortingInput)}
         >
-          <i class="fas fa-sort-amount-down"></i>
+          <i className="fas fa-sort-amount-down"></i>
         </button>
         <button
           className="mobile-nav__add-btn"
@@ -26,11 +26,8 @@ function MobileNav() {
           <i className="fas fa-plus"></i>
         </button>
         {/* WIP */}
-        <button
-          className="mobile-nav__add-btn mobile-nav__add-btn--side"
-          onClick={() => setShowSortingInput(!showSortingInput)}
-        >
-          <i class="fas fa-star"></i>
+        <button className="mobile-nav__add-btn mobile-nav__add-btn--side">
+          <i className="fas fa-star"></i>
         </button>
         {/* WIP */}
       </nav>
@@ -41,7 +38,7 @@ function MobileNav() {
       )}
       {showSortingInput && (
         <SortingInput
-          setShowSortingInput={setShowSortingInput(!showSortingInput)}
+          setShowSortingInput={() => setShowSortingInput(!showSortingInput)}
         />
       )}
     </>
