@@ -7,21 +7,30 @@ function AddPersonUI({ setShowAddPersonUI }) {
   const { state, dispatch } = useContext(PeopleContext);
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
-  const validatePersonInfo = (name) => {
-    if (name.length <= 0) return 'name';
+
+  const validatePersonInfo = (name, date) => {
+    if (name.length <= 0) return 'INVALID_NAME';
+    else if (date.length !== 10) return 'INVALID_DATE';
     return true;
   };
   const addPersonHandler = () => {
     let name = nameContainer.current.value;
-    if (typeof validatePersonInfo(name) === 'boolean') {
-      name = name.charAt(0).toUpperCase() + name.slice(1);
-      const date = dateContainer.current.value;
-      const birthday = transformTheDate(date);
-      const newPerson = createNewPerson(name, birthday);
-      dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
-    } else {
-      console.log('wrong');
+    const date = dateContainer.current.value;
+    const validationResult = validatePersonInfo(name, date);
+    if (typeof validationResult === 'boolean') {
+      addPerson(name, date);
+    } else if (validationResult === 'INVALID_NAME') {
+      dispatch({ type: 'INVALID_NAME' });
+    } else if (validationResult === 'INVALID_DATE') {
+      dispatch({ type: 'INVALID_DATE' });
     }
+  };
+
+  const addPerson = (name, date) => {
+    name = name.charAt(0).toUpperCase() + name.slice(1);
+    const birthday = transformTheDate(date);
+    const newPerson = createNewPerson(name, birthday);
+    dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
   };
 
   const createNewPerson = (name, birthday) => {
