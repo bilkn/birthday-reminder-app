@@ -1,8 +1,15 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
 import './SearchBox.scss';
-function SearchBox() {
+import { PeopleContext } from '../PeopleContext/PeopleContext';
+import defaulState from '../App/defaultState';
+function SearchBox({ setShowSearchBox }) {
+  const { state, dispatch } = useContext(PeopleContext);
   const searchInput = useRef(null);
-  const changeHandler = () => {};
+  const changeHandler = () => {
+    const name = searchInput.current.value;
+    const people = defaulState.people;
+    filterByName(people, dispatch, name);
+  };
   return (
     <div className="search-box">
       <input
@@ -12,11 +19,25 @@ function SearchBox() {
         onChange={changeHandler}
         ref={searchInput}
       />
-      <button className="search-box__close-btn">
-        <i class="far fa-times-circle"></i>
+      <button
+        className="search-box__close-btn"
+        onClick={() => {
+          setShowSearchBox(false);
+        }}
+      >
+        <i className="far fa-times-circle"></i>
       </button>
     </div>
   );
+}
+
+function filterByName(people, dispatch, name) {
+  const filteredPeople = people.filter((person) => {
+    const personName = person.name.toLowerCase();
+    name = name.toLowerCase();
+    return personName.includes(name);
+  });
+  dispatch({ type: 'FILTER_PEOPLE_BY_NAME', payload: filteredPeople });
 }
 
 export default SearchBox;

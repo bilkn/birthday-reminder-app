@@ -49,5 +49,12 @@ export const reducer = (state, action) => {
       isModalOpen: false,
       modalContent: '',
     };
+  } else if (action.type === 'FILTER_PEOPLE_BY_NAME') {
+    return {
+      ...state,
+      people: action.payload,
+      isModalOpen: false,
+      modalContent: '',
+    };
   }
 };

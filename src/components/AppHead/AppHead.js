@@ -8,7 +8,7 @@ function AppHead() {
   return (
     <header className="app-head">
       <nav className="app-head-nav">
-        {(showSearchBox && <SearchBox />) || (
+        {(showSearchBox && <SearchBox setShowSearchBox = {setShowSearchBox} />) || (
           <button
             className="app-head-nav__search-btn"
             onClick={() => setShowSearchBox(!showSearchBox)}
