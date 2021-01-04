@@ -2,7 +2,7 @@ import { useContext, useRef } from 'react';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
-import addDataToLocalStorage from './addDataToLocalStorage';
+import addDataToLocalStorage from "../Logic/addDataToLocalStorage";
 
 function AddPersonUI({ setShowAddPersonUI }) {
   const { state, dispatch } = useContext(PeopleContext);
