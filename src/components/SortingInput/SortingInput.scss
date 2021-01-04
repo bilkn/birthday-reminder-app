@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+
+.sorting-input {
+  appearance: none;
+  bottom: $mobile-nav-height;
+  font-size: 1.5rem;
+  position: fixed;
+  width: 100vw;
+
+  // sorting-input__option
+  &__option {
+    appearance: none;
+    background: chocolate;
+  }
+}

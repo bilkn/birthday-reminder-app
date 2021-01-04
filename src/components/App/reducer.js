@@ -31,5 +31,30 @@ export const reducer = (state, action) => {
       isModalOpen: true,
       modalContent: 'Please provide correct date format.',
     };
+  } else if (action.type === 'SORT_PEOPLE_BY_AGE') {
+    return {
+      ...state,
+      isModalOpen: false,
+      modalContent: '',
+    };
+  } else if (action.type === 'SORT_PEOPLE_BY_MONTH') {
+    return {
+      ...state,
+      isModalOpen: false,
+      modalContent: '',
+    };
+  } else if (action.type === 'SORT_PEOPLE_BY_NAME') {
+    return {
+      ...state,
+      isModalOpen: false,
+      modalContent: '',
+    };
+  } else if (action.type === 'FILTER_PEOPLE_BY_NAME') {
+    return {
+      ...state,
+      people: action.payload,
+      isModalOpen: false,
+      modalContent: '',
+    };
   }
 };

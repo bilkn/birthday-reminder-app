@@ -2,6 +2,7 @@ import { useContext, useRef } from 'react';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
+import addDataToLocalStorage from './addDataToLocalStorage';
 
 function AddPersonUI({ setShowAddPersonUI }) {
   const { state, dispatch } = useContext(PeopleContext);
@@ -31,6 +32,7 @@ function AddPersonUI({ setShowAddPersonUI }) {
     const birthday = transformTheDate(date);
     const newPerson = createNewPerson(name, birthday);
     dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
+    addDataToLocalStorage(newPerson, 'data');
   };
 
   const createNewPerson = (name, birthday) => {

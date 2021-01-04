@@ -1,8 +1,21 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 .app-head {
   background: $ui-color;
   height: 60px;
+  padding: 0.6rem;
   position: fixed;
   top: 0;
   width: 100vw;
+}
+
+.app-head-nav {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  // app-head-nav__search-btn
+  &__search-btn {
+    color: $third-color;
+    font-size: 1.5rem;
+  }
 }
