@@ -1,6 +1,6 @@
-  import data from '../../utils/data';
+  import getData from '../../utils/data';
   const defaultState = {
-    people: data,
+    people: getData(),
     isModalOpen: false,
     modalContext: '',
   };

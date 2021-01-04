@@ -3,7 +3,7 @@ import './SearchBox.scss';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 import defaulState from '../App/defaultState';
 function SearchBox({ setShowSearchBox }) {
-  const { state, dispatch } = useContext(PeopleContext);
+  const { dispatch } = useContext(PeopleContext);
   const searchInput = useRef(null);
   const changeHandler = () => {
     const name = searchInput.current.value;
