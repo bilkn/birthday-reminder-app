@@ -1,22 +1,27 @@
-function DeletePersonWarning({ setShowWarning, removeItem, deletionUserID }) {
+import "./DeletePersonDialog.scss";
+function DeletePersonDialog({
+  setShowDeletePersonDialog,
+  removeItem,
+  deletionUserID,
+}) {
   const deleteBtnClickHandler = (e) => {
     const btnText = e.target.textContent;
     if (btnText === 'Yes') {
       removeItem(deletionUserID);
     }
-    setShowWarning(false);
+    setShowDeletePersonDialog(false);
   };
   return (
-    <div className="delete-person-warning">
+    <div className="delete-person-dialog">
       <p>Are you really want to delete this person?</p>
       <button
-        className="delete-person-warning__btn"
+        className="delete-person-dialog__btn"
         onClick={deleteBtnClickHandler}
       >
         Yes
       </button>
       <button
-        className="delete-person-warning__btn"
+        className="delete-person-dialog__btn"
         onClick={deleteBtnClickHandler}
       >
         No
@@ -25,4 +30,4 @@ function DeletePersonWarning({ setShowWarning, removeItem, deletionUserID }) {
   );
 }
 
-export default DeletePersonWarning;
+export default DeletePersonDialog;

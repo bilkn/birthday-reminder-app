@@ -1,0 +1,6 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+.delete-person-dialog {
+    @include CenteredAndFixedElement(300px, 100px);
+    display: flex;
+}

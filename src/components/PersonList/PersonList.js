@@ -8,11 +8,11 @@ import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 
 function PersonList() {
   const { state, dispatch } = useContext(PeopleContext);
-  const [showWarning, setShowWarning] = useState(false);
+  const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
 
   const removeItemHandler = (id) => {
-    setShowWarning(true);
+    setShowDeletePersonDialog(true);
     setDeletionUserID(id);
   };
 
@@ -25,9 +25,9 @@ function PersonList() {
 
   return (
     <>
-      {showWarning && (
+      {showDeletePersonDialog && (
         <DeletePersonDialog
-          setShowWarning={setShowWarning}
+          setShowDeletePersonDialog={setShowDeletePersonDialog}
           removeItem={removeItem}
           deletionUserID={deletionUserID}
         />
