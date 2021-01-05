@@ -1,14 +1,18 @@
 import { useRef, useContext } from 'react';
 import './SearchBox.scss';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
-import defaulState from '../App/defaultState';
 function SearchBox({ setShowSearchBox }) {
   const { dispatch } = useContext(PeopleContext);
   const searchInput = useRef(null);
   const changeHandler = () => {
     const name = searchInput.current.value;
-    const people = defaulState.people;
-    filterByName(people, dispatch, name);
+    const people = JSON.parse(localStorage.getItem('data')); // !! Choose more proper variabla names.
+
+    if (people) {
+      filterByName(people, dispatch, name);
+    } else {
+      console.log('Data could not found!');
+    }
   };
   return (
     <div className="search-box">

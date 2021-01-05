@@ -6,7 +6,10 @@ import { PeopleContext } from '../PeopleContext/PeopleContext';
 import { reducer } from './reducer';
 import defaultState from './defaultState';
 
+
 function App() {
+ 
+
   const [state, dispatch] = useReducer(reducer, defaultState);
   return (
     <>

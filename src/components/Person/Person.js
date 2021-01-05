@@ -1,5 +1,5 @@
 import "./Person.scss";
-function Person({ person, removeItem }) {
+function Person({ person, removeItemHandler }) {
   const { id, name, birthday, img } = person;
   return (
     <div className="person">
@@ -14,7 +14,7 @@ function Person({ person, removeItem }) {
         <button
           className="person-controls__remove-btn"
           onClick={() => {
-            removeItem(id);
+            removeItemHandler(id);
           }}
         >
           <i className="fas fa-trash"></i>

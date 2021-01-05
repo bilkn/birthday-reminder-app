@@ -10,25 +10,27 @@
   padding: 0 1rem;
   position: fixed;
   width: 100vw;
-}
 
-.mobile-nav__add-btn {
-  align-items: center;
-  background: $third-color;
-  border-radius: 50%;
-  bottom: 30px;
-  font-size: 2.3rem;
-  justify-content: center;
-  height: $person-img-size;
-  position: relative;
-  width: $person-img-size;
-}
+  // mobile-nav__add-btn
+  &__add-btn {
+    align-items: center;
+    background: $third-color;
+    border-radius: 50%;
+    bottom: 30px;
+    font-size: 2.3rem;
+    justify-content: center;
+    height: $person-img-size;
+    position: relative;
+    width: $person-img-size;
+  }
 
-.mobile-nav__add-btn--side {
-  font-size: 1.6rem;
-  position: static;
-  height: 60px;
-  width: 60px;
+  // mobile-nav__add-btn--side
+  &__add-btn--side {
+    font-size: 1.6rem;
+    position: static;
+    height: 60px;
+    width: 60px;
+  }
 }
 
 @media (min-width: 768px) {
