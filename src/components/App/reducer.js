@@ -56,5 +56,12 @@ export const reducer = (state, action) => {
       isModalOpen: false,
       modalContent: '',
     };
+  } else if (action.type === 'INITIAL_LOAD') {
+    return {
+      ...state,
+      people: action.payload,
+      isModalOpen: false,
+      modalContent: '',
+    };
   }
 };

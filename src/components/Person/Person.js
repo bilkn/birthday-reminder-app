@@ -1,10 +1,10 @@
 import "./Person.scss";
 function Person({ person, removeItemHandler }) {
-  const { id, name, birthday, img } = person;
+  const { id, name, birthday, picture } = person;
   return (
     <div className="person">
       <div className="person-img-container">
-        <img className="person-img-container__img" src={img} alt={name} />
+        <img className="person-img-container__img" src={picture} alt={name} />
       </div>
       <div className="person-info">
         <p className="person-info__name">{name}</p>

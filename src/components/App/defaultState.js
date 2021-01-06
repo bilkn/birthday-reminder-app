@@ -1,8 +1,13 @@
-  import getData from '../../utils/data';
+import getData from '../../utils/data';
+
+async function defaultState() {
+  const data = await getData();
   const defaultState = {
-    people: getData(),
+    people: data,
     isModalOpen: false,
     modalContext: '',
   };
+  return defaultState;
+}
 
-  export default defaultState;
+export default defaultState;

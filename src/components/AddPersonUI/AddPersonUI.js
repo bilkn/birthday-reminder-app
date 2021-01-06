@@ -2,7 +2,7 @@ import { useContext, useRef } from 'react';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
-import addDataToLocalStorage from "../Logic/addDataToLocalStorage";
+import { putItemToIDB } from '../IndexedDB/indexedDBManagement';
 
 function AddPersonUI({ setShowAddPersonUI }) {
   const { state, dispatch } = useContext(PeopleContext);
@@ -32,16 +32,17 @@ function AddPersonUI({ setShowAddPersonUI }) {
     const birthday = transformTheDate(date);
     const newPerson = createNewPerson(name, birthday);
     dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
-    addDataToLocalStorage(newPerson, 'data');
+    putItemToIDB(newPerson, 'userDatabase', '1', 'people');
   };
 
-  const createNewPerson = (name, birthday) => {
+  const createNewPerson = (name, birthday, picture) => {
     const newPerson = {
       id: new Date().getTime().toString(),
       name: name,
       birthday: birthday,
-      img: blankImg,
+      picture: picture || blankImg,
     };
+    console.log(blankImg);
     return newPerson;
   };
 
