@@ -23,10 +23,15 @@
   &__btn {
     background: $third-color;
     border-radius: 5px;
+    cursor: pointer;
     font-size: 1.3rem;
     padding: .3rem 0;
     text-align: center;
+    transition: background 100ms ease;
     width: 60px;
+  }
+  &__btn:hover {
+    background: lighten($third-color, 2%);
   }
   &__btn--no-margin {
     margin: 0;
