@@ -3,9 +3,8 @@ import Person from '../Person/Person';
 import EmptyBox from '../EmptyBox/EmptyBox';
 import './PersonList.scss';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
-import removeDataFromLocalStorage from '../Logic/removeDataFromLocalStorage';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
-
+import { removeDataFromIDBStore } from '../IndexedDB/indexedDBManagement';
 function PersonList() {
   const { state, dispatch } = useContext(PeopleContext);
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
@@ -19,7 +18,7 @@ function PersonList() {
   const removeItem = (id) => {
     const oldPeople = state.people;
     let newPeople = oldPeople.filter((person) => person.id !== id);
-    removeDataFromLocalStorage('data', id);
+    removeDataFromIDBStore('userDatabase', '1', 'people', id);
     dispatch({ type: 'REMOVE_ITEM', payload: newPeople });
   };
 
