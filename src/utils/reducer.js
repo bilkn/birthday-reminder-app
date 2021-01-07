@@ -63,5 +63,12 @@ export const reducer = (state, action) => {
       isModalOpen: false,
       modalContent: '',
     };
+  } else if (action.type === 'INVALID_FILE_TYPE') {
+    return {
+      ...state,
+      isModalOpen: true,
+      modalContent:
+        'Invalid file type. Please provide ".jpeg", or ".png" file for the picture.',
+    };
   }
 };

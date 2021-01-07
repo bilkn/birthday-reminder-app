@@ -5,6 +5,7 @@ import blankImg from '../../assets/no-picture.png';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
 import getFileURL from '../../utils/getFileURL';
+import validatePicture from "../../utils/helpers/validatePicture.js"
 
 function AddPersonUI({ setShowAddPersonUI }) {
   const { state, dispatch } = useContext(PeopleContext);
@@ -13,22 +14,29 @@ function AddPersonUI({ setShowAddPersonUI }) {
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
 
-  const validatePersonInfo = (name, date) => {
+  const validatePersonData = (name, date, picture) => {
     if (name.length <= 0) return 'INVALID_NAME';
     else if (date.length !== 10) return 'INVALID_DATE';
+    else if (!validatePicture(picture)) return 'INVALID_FILE_TYPE';
     return true;
   };
 
   const addPersonHandler = () => {
     let name = nameContainer.current.value;
     const date = dateContainer.current.value;
-    const validationResult = validatePersonInfo(name, date);
-    if (typeof validationResult === 'boolean') {
-      addPerson(name, date, currentPicture);
-    } else if (validationResult === 'INVALID_NAME') {
-      dispatch({ type: 'INVALID_NAME' });
-    } else if (validationResult === 'INVALID_DATE') {
-      dispatch({ type: 'INVALID_DATE' });
+    const picture = currentPicture || blankImg;
+    const validationResult = validatePersonData(name, date, picture);
+
+    switch (validationResult) {
+      case 'INVALID_NAME':
+      case 'INVALID_DATE':
+      case 'INVALID_FILE_TYPE':
+        dispatch({ type: validationResult });
+        break;
+      default:
+        addPerson(name, date, picture);
+        setShowAddPersonUI();
+        break;
     }
   };
 
@@ -45,7 +53,7 @@ function AddPersonUI({ setShowAddPersonUI }) {
       id: new Date().getTime().toString(),
       name: name,
       birthday: birthday,
-      picture: picture || blankImg,
+      picture: picture,
     };
     return newPerson;
   };
@@ -69,6 +77,7 @@ function AddPersonUI({ setShowAddPersonUI }) {
         ) : (
           <PictureInput
             setDidUserUploadPicture={setDidUserUploadPicture}
+            currentPicture= {currentPicture}
             setCurrentPicture={setCurrentPicture}
           />
         )}
@@ -90,7 +99,6 @@ function AddPersonUI({ setShowAddPersonUI }) {
             className="add-person-ui-controls__add-btn"
             onClick={() => {
               addPersonHandler();
-              setShowAddPersonUI();
             }}
           >
             <i

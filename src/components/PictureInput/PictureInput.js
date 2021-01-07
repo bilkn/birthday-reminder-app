@@ -1,8 +1,17 @@
+import { useContext } from 'react';
+import validatePicture from '../../utils/helpers/validatePicture';
+import { PeopleContext } from '../PeopleContext/PeopleContext';
+
 function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
+  const { dispatch } = useContext(PeopleContext);
   const fileInputHandler = (e) => {
-    setDidUserUploadPicture(true);
     const picture = e.target.files[0];
-    setCurrentPicture(picture);
+    if (validatePicture(picture)) {
+      setDidUserUploadPicture(true);
+      setCurrentPicture(picture);
+    } else {
+      dispatch({ type: 'INVALID_FILE_TYPE' });
+    }
   };
   return (
     <div className="add-person-ui-picture-container">
