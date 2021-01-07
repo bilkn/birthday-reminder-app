@@ -1,7 +1,7 @@
 import { useRef, useContext } from 'react';
 import './SearchBox.scss';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
-import {getDataFromIDBStore} from "../IndexedDB/indexedDBManagement";
+import {getDataFromIDBStore} from "../../utils/IndexedDB/indexedDBManagement";
 function SearchBox({ setShowSearchBox }) {
   const { dispatch } = useContext(PeopleContext);
   const searchInput = useRef(null);

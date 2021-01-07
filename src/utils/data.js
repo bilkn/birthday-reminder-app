@@ -1,4 +1,4 @@
-import { getDataFromIDBStore } from '../components/IndexedDB/indexedDBManagement';
+import { getDataFromIDBStore } from './IndexedDB/indexedDBManagement';
 /* const data = [
   {
     id: 1,
