@@ -1,5 +1,5 @@
 import { useContext, useRef } from 'react';
-import { PeopleContext } from '../PeopleContext/PeopleContext';
+import { PeopleContext } from '../../utils/PeopleContext/PeopleContext';
 import './SortingInput.scss';
 function SortingInput() {
   const { state, dispatch } = useContext(PeopleContext);

@@ -2,7 +2,7 @@ import AppHead from '../AppHead/AppHead';
 import HomeMain from '../HomeMain/HomeMain';
 import MobileNav from '../MobileNav/MobileNav';
 import { useEffect, useReducer } from 'react';
-import { PeopleContext } from '../PeopleContext/PeopleContext';
+import { PeopleContext } from '../../utils/PeopleContext/PeopleContext';
 import { reducer } from '../../utils/reducer';
 import defaultState from '../../utils/defaultState';
 

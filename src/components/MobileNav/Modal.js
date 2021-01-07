@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react';
-import { PeopleContext } from "../PeopleContext/PeopleContext";
-import "./Modal.scss";
+import { PeopleContext } from '../../utils/PeopleContext/PeopleContext';
+import './Modal.scss';
 
 function Modal() {
-  const {state, dispatch} = useContext(PeopleContext);
-  const clearModal = ()=> {
+  const { state, dispatch } = useContext(PeopleContext);
+  const clearModal = () => {
     dispatch({ type: 'REMOVE_MODAL' });
-  }
+  };
   useEffect(() => {
     setTimeout(() => clearModal(), 2000);
   });
@@ -14,5 +14,3 @@ function Modal() {
 }
 
 export default Modal;
-
-

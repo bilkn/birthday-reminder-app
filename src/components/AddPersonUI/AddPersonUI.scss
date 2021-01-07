@@ -17,18 +17,6 @@
   width: 330px;
 }
 
-.add-person-ui-picture-container {
-  // add-person-ui-picture-container__label
-  &__label {
-    align-items: center;
-    background-color: black;
-    border-radius: 50%;
-    display: flex;
-    height: $person-img-size;
-    justify-content: center;
-    width: $person-img-size;
-  }
-}
 .add-person-ui-info-container {
   width: 155px;
   // add-person-ui-info-container__name

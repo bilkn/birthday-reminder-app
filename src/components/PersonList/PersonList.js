@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import Person from '../Person/Person';
 import EmptyBox from '../EmptyBox/EmptyBox';
 import './PersonList.scss';
-import { PeopleContext } from '../PeopleContext/PeopleContext';
+import { PeopleContext } from '../../utils/PeopleContext/PeopleContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 function PersonList() {

@@ -1,0 +1,19 @@
+@import '../../styles/variables';
+
+.picture-input-container {
+  // picture-input-container__label
+  &__label {
+    align-items: center;
+    background-color: rgb(236, 235, 235);
+    border-radius: 50%;
+    color: black;
+    display: flex;
+    font-size: 2rem;
+    height: $person-img-size;
+    justify-content: center;
+    width: $person-img-size;
+  }
+  &__icon {
+      background: rgb(236, 235, 235);
+  }
+}

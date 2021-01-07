@@ -1,11 +1,11 @@
 import { useContext, useRef, useState } from 'react';
-import { PeopleContext } from '../PeopleContext/PeopleContext';
+import { PeopleContext } from '../../utils/PeopleContext/PeopleContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
 import getFileURL from '../../utils/getFileURL';
-import validatePicture from "../../utils/helpers/validatePicture.js"
+import validatePicture from '../../utils/helpers/validatePicture.js';
 
 function AddPersonUI({ setShowAddPersonUI }) {
   const { state, dispatch } = useContext(PeopleContext);
@@ -77,7 +77,7 @@ function AddPersonUI({ setShowAddPersonUI }) {
         ) : (
           <PictureInput
             setDidUserUploadPicture={setDidUserUploadPicture}
-            currentPicture= {currentPicture}
+            currentPicture={currentPicture}
             setCurrentPicture={setCurrentPicture}
           />
         )}
