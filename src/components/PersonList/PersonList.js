@@ -4,7 +4,7 @@ import EmptyBox from '../EmptyBox/EmptyBox';
 import './PersonList.scss';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
-import { removeDataFromIDBStore } from '../IndexedDB/indexedDBManagement';
+import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 function PersonList() {
   const { state, dispatch } = useContext(PeopleContext);
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);

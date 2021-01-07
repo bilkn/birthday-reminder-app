@@ -1,4 +1,4 @@
-import getData from '../../utils/data';
+import getData from './data';
 
 async function defaultState() {
   const data = await getData();

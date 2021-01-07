@@ -3,8 +3,8 @@ import HomeMain from '../HomeMain/HomeMain';
 import MobileNav from '../MobileNav/MobileNav';
 import { useEffect, useReducer } from 'react';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
-import { reducer } from './reducer';
-import defaultState from './defaultState';
+import { reducer } from '../../utils/reducer';
+import defaultState from '../../utils/defaultState';
 
 function App() {
   const def = {

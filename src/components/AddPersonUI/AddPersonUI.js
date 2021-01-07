@@ -2,12 +2,13 @@ import { useContext, useRef } from 'react';
 import { PeopleContext } from '../PeopleContext/PeopleContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
-import { putItemToIDB } from '../IndexedDB/indexedDBManagement';
+import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 
 function AddPersonUI({ setShowAddPersonUI }) {
   const { state, dispatch } = useContext(PeopleContext);
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
+  const pictureContainer = useRef(null);
 
   const validatePersonInfo = (name, date) => {
     if (name.length <= 0) return 'INVALID_NAME';
@@ -17,6 +18,8 @@ function AddPersonUI({ setShowAddPersonUI }) {
   const addPersonHandler = () => {
     let name = nameContainer.current.value;
     const date = dateContainer.current.value;
+    const picture = pictureContainer.current.files[0];
+    console.log(picture);
     const validationResult = validatePersonInfo(name, date);
     if (typeof validationResult === 'boolean') {
       addPerson(name, date);
@@ -25,6 +28,11 @@ function AddPersonUI({ setShowAddPersonUI }) {
     } else if (validationResult === 'INVALID_DATE') {
       dispatch({ type: 'INVALID_DATE' });
     }
+  };
+
+  const fileInputHandler = (e) => {
+    e.preventDefault();
+    console.log("hello");
   };
 
   const addPerson = (name, date) => {
@@ -42,7 +50,6 @@ function AddPersonUI({ setShowAddPersonUI }) {
       birthday: birthday,
       picture: picture || blankImg,
     };
-    console.log(blankImg);
     return newPerson;
   };
 
@@ -54,11 +61,18 @@ function AddPersonUI({ setShowAddPersonUI }) {
   return (
     <>
       <div className="add-person-ui">
-        <div className="person-img-container">
+        {/*  <div className="person-img-container">
           <img className="person-img-container__img" src="#" alt="Empty" />
-        </div>
+        </div> */}
 
         <div className="add-person-ui-input-container">
+          <input
+            type="file"
+            className="add-person-ui-input-container__picture"
+            ref={pictureContainer}
+            accept="image/png, image/jpeg"
+            onChange={fileInputHandler}
+          ></input>
           <input
             type="text"
             className="add-person-ui-input-container__name"

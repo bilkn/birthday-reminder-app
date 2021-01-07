@@ -5,7 +5,13 @@
         ".vscode": true,
         "**.json": true,
         "debug.log": true,
+        "LICENSE": true,
         "node_modules": true,
         "README.md": true
-    }
+    },
+    "liveSassCompile.settings.excludeList": [
+
+        "**/node_modules/**",
+        ".vscode/**"
+    ]
 }

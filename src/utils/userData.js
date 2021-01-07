@@ -1,4 +1,4 @@
-const userData = {
+/* const userData = {
   people: [
     {
       id: 1,
@@ -34,4 +34,4 @@ const userData = {
   favourites: []
 };
 
-export default userData; 
+export default userData;  */
