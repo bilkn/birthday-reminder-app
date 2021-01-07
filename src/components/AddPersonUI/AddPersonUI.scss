@@ -17,27 +17,41 @@
   width: 330px;
 }
 
-.add-person-ui-input-container {
-  display: flex;
-  flex-direction: column;
-
-  // add-person-ui-input-container__name
+.add-person-ui-picture-container {
+  // add-person-ui-picture-container__label
+  &__label {
+    align-items: center;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    height: $person-img-size;
+    justify-content: center;
+    width: $person-img-size;
+  }
+}
+.add-person-ui-info-container {
+  width: 155px;
+  // add-person-ui-info-container__name
   &__name {
     appearance: none;
     background: $sec-color;
+    border: none;
     color: #fff;
     font-size: 1.2rem;
     margin-bottom: 0.2rem;
     text-align: center;
+    width: 100%;
   }
 
-  // add-person-ui-input-container__birthday
+  // add-person-ui-info-container__birthday
   &__birthday {
     appearance: none;
     background: $sec-color;
+    border: none;
     color: #2e2e31; /* May be changed. */
     font-size: 1.6rem;
     text-align: center;
+    width: 100%;
   }
 }
 
