@@ -5,7 +5,7 @@
   background: #424874;
   border-radius: 10px;
   padding: 0.5rem;
-
+  z-index: 1000;
   // delete-person-dialog__text
   &__text {
     color: white;
@@ -25,7 +25,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.3rem;
-    padding: .3rem 0;
+    padding: 0.3rem 0;
     text-align: center;
     transition: background 100ms ease;
     width: 60px;

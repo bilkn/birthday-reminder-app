@@ -6,13 +6,15 @@ import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 
-
 function PersonList() {
-  const { state, dispatch } = useContext(PeopleContext);
+  const { state, dispatch, favState } = useContext(PeopleContext);
+  const [showFavourites] = favState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [currentPersonID, setCurrentPersonID] = useState(null);
 
+  const personList = showFavourites ? state.favourites : state.people;
+  console.log(state.favourites);
   const removeItemHandler = (id) => {
     setShowDeletePersonDialog(true);
     setDeletionUserID(id);
@@ -25,9 +27,14 @@ function PersonList() {
     dispatch({ type: 'REMOVE_ITEM', payload: newPeople });
   };
 
+  const selectPersonHandler = (id) => {
+    if (currentPersonID !== id) {
+      setCurrentPersonID(id);
+    }
+  };
+
   return (
     <>
-     
       {showDeletePersonDialog && (
         <DeletePersonDialog
           setShowDeletePersonDialog={setShowDeletePersonDialog}
@@ -36,13 +43,14 @@ function PersonList() {
         />
       )}
       <ul className="person-list">
-        {state.people.map((person) => (
+        {personList.map((person) => (
           <Person
             key={person.id}
             person={person}
             removeItemHandler={removeItemHandler}
-            currentPersonID = {currentPersonID}
-            setCurrentPersonID = {setCurrentPersonID}
+            currentPersonID={currentPersonID}
+            setCurrentPersonID={setCurrentPersonID}
+            selectPersonHandler={selectPersonHandler}
           />
         ))}
         <EmptyBox />

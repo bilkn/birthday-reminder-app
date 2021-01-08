@@ -8,6 +8,7 @@ function Person(props) {
     removeItemHandler,
     currentPersonID,
     setCurrentPersonID,
+    selectPersonHandler,
   } = props;
   const { id, name, birthday, picture } = person;
 
@@ -23,8 +24,13 @@ function Person(props) {
   };
 
   return (
-    <div className="person" onClick={() => setCurrentPersonID(id)}>
-      {currentPersonID === id && <PersonOptions />}
+    <div className="person" onClick={() => selectPersonHandler(id)}>
+      {currentPersonID === id && (
+        <PersonOptions
+          currentPersonID={currentPersonID}
+          setCurrentPersonID={setCurrentPersonID}
+        />
+      )}
       <div className="person-img-container">
         <img className="person-img-container__img" src={getURL()} alt={name} />
       </div>
