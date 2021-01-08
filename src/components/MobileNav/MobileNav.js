@@ -2,7 +2,7 @@ import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import { useState, useContext } from 'react';
 import './MobileNav.scss';
 import Modal from './Modal';
-import { PeopleContext } from '../PeopleContext/PeopleContext';
+import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import SortingInput from '../SortingInput/SortingInput';
 
 function MobileNav() {

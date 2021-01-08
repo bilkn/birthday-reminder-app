@@ -1,13 +1,13 @@
 import { useRef, useContext } from 'react';
 import './SearchBox.scss';
-import { PeopleContext } from '../PeopleContext/PeopleContext';
-import {getDataFromIDBStore} from "../../utils/IndexedDB/indexedDBManagement";
+import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { getDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 function SearchBox({ setShowSearchBox }) {
   const { dispatch } = useContext(PeopleContext);
   const searchInput = useRef(null);
   const changeHandler = async () => {
     const name = searchInput.current.value;
-    const people = await getDataFromIDBStore("userDatabase","1","people");
+    const people = await getDataFromIDBStore('userDatabase', '1', 'people');
     if (people) {
       filterByName(people, dispatch, name);
     } else {
