@@ -1,11 +1,12 @@
 import { useContext, useRef, useState } from 'react';
-import { PeopleContext } from '../../utils/PeopleContext/PeopleContext';
+import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
-import getFileURL from '../../utils/getFileURL';
-import validatePicture from '../../utils/helpers/validatePicture.js';
+import getFileURL from '../../helper/createFileURL';
+import validatePersonData from "../../helper/validatePersonData";
+import reformatData from "../../helper/reformatDate";
 
 function AddPersonUI({ setShowAddPersonUI }) {
   const { state, dispatch } = useContext(PeopleContext);
@@ -13,13 +14,6 @@ function AddPersonUI({ setShowAddPersonUI }) {
   const [currentPicture, setCurrentPicture] = useState(null);
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
-
-  const validatePersonData = (name, date, picture) => {
-    if (name.length <= 0) return 'INVALID_NAME';
-    else if (date.length !== 10) return 'INVALID_DATE';
-    else if (!validatePicture(picture)) return 'INVALID_FILE_TYPE';
-    return true;
-  };
 
   const addPersonHandler = () => {
     let name = nameContainer.current.value;
@@ -42,7 +36,7 @@ function AddPersonUI({ setShowAddPersonUI }) {
 
   const addPerson = (name, date, picture) => {
     name = name.charAt(0).toUpperCase() + name.slice(1);
-    const birthday = transformTheDate(date);
+    const birthday = reformatData(date);
     const newPerson = createNewPerson(name, birthday, picture);
     dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
     putItemToIDB(newPerson, 'userDatabase', '1', 'people');
@@ -56,11 +50,6 @@ function AddPersonUI({ setShowAddPersonUI }) {
       picture: picture,
     };
     return newPerson;
-  };
-
-  const transformTheDate = (date) => {
-    const birthday = date.split('-').reverse().join('.');
-    return birthday;
   };
 
   return (

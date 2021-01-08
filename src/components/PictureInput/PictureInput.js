@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import validatePicture from '../../utils/helpers/validatePicture';
-import { PeopleContext } from '../../utils/../utils/PeopleContext/PeopleContext';
+import validatePicture from '../../helper/validatePicture';
+import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import './PictureInput.scss';
 function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
   const { dispatch } = useContext(PeopleContext);

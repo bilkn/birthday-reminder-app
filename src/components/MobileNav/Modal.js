@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { PeopleContext } from '../../utils/PeopleContext/PeopleContext';
+import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import './Modal.scss';
 
 function Modal() {
