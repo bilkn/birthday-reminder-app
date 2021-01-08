@@ -1,8 +1,16 @@
 import './Person.scss';
 import createFileURL from '../../helper//createFileURL';
-function Person({ person, removeItemHandler }) {
+import PersonOptions from '../PersonOptions/PersonOptions';
+
+function Person(props) {
+  const {
+    person,
+    removeItemHandler,
+    currentPersonID,
+    setCurrentPersonID,
+  } = props;
   const { id, name, birthday, picture } = person;
-  
+
   const getURL = () => {
     let pictureURL = null;
     try {
@@ -15,13 +23,10 @@ function Person({ person, removeItemHandler }) {
   };
 
   return (
-    <div className="person">
+    <div className="person" onClick={() => setCurrentPersonID(id)}>
+      {currentPersonID === id && <PersonOptions />}
       <div className="person-img-container">
-        <img
-          className="person-img-container__img"
-          src={getURL()}
-          alt={name}
-        />
+        <img className="person-img-container__img" src={getURL()} alt={name} />
       </div>
       <div className="person-info">
         <p className="person-info__name">{name}</p>

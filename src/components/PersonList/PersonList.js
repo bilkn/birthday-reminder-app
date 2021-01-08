@@ -5,10 +5,13 @@ import './PersonList.scss';
 import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
+
+
 function PersonList() {
   const { state, dispatch } = useContext(PeopleContext);
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
+  const [currentPersonID, setCurrentPersonID] = useState(null);
 
   const removeItemHandler = (id) => {
     setShowDeletePersonDialog(true);
@@ -24,6 +27,7 @@ function PersonList() {
 
   return (
     <>
+     
       {showDeletePersonDialog && (
         <DeletePersonDialog
           setShowDeletePersonDialog={setShowDeletePersonDialog}
@@ -37,6 +41,8 @@ function PersonList() {
             key={person.id}
             person={person}
             removeItemHandler={removeItemHandler}
+            currentPersonID = {currentPersonID}
+            setCurrentPersonID = {setCurrentPersonID}
           />
         ))}
         <EmptyBox />

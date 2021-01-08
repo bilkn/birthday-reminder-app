@@ -7,7 +7,9 @@ function createFileURL(file) {
     (file.includes('.png') || file.includes('.jpeg') || file.includes('.jpg'))
   )
     return file;
-  throw Error('Input must be a File, URL, or Blob object.');
+  throw Error(
+    'Input must be a File, String (includes .png, .jpeg or .jpg), or Blob object.'
+  );
 }
 
 export default createFileURL;
