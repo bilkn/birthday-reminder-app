@@ -89,5 +89,13 @@ export const reducer = (state, action) => {
       modalContent: `${personName} has been added to your favorites.`,
       favourites: action.payload,
     };
+  } else if (action.type === 'REMOVE_FAVOURITE') {
+    const personName = action.payload[action.payload.length - 1].name;
+    return {
+      ...state,
+      isModalOpen: true,
+      modalContent: `${personName} has been removed from your favorites.`,
+      favourites: action.payload,
+    };
   }
 };

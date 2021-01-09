@@ -2,7 +2,11 @@ import './PersonOptions.scss';
 import { useContext } from 'react';
 import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import findPersonByID from '../../helper/findPersonByID';
-import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
+import {
+  putItemToIDB,
+  removeDataFromIDBStore,
+} from '../../utils/IndexedDB/indexedDBManagement';
+
 function PersonOptions({ currentPersonID, setCurrentPersonID }) {
   const { state, dispatch } = useContext(PeopleContext);
 
@@ -21,9 +25,16 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
     setCurrentPersonID(null);
   };
 
-   const removeFromFavouritesHandler = () => {
-
-  }
+  const removeFromFavouritesHandler = () => {
+    const newFavourites = state.favourites.filter(
+      (person) => person.id !== currentPersonID
+    );
+    dispatch({
+      type: 'REMOVE_FAVOURITE',
+      payload: newFavourites,
+    });
+    removeDataFromIDBStore('userDatabase', '1', 'favourites', currentPersonID);
+  };
 
   const setHandlerFunction = () => {
     return isPersonInFavourites()

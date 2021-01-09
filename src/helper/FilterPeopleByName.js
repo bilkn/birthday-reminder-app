@@ -12,4 +12,6 @@ function FilterPeopleByName(people, name, dispatch, showFavourites) {
   dispatch({ type: type, payload: filteredPeople });
 }
 
+
+
 export default FilterPeopleByName;

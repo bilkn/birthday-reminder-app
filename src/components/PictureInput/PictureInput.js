@@ -17,8 +17,8 @@ function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
     <div className="picture-input-container">
       <label htmlFor="picture" className="picture-input-container__label">
         <i
-          className="fa fa-plus picture-input-container__icon"
-          aria-hidden="true"
+          className="fas fa-camera picture-input-container__icon"
+          aria-hidden={true}
         ></i>
       </label>
       <input
