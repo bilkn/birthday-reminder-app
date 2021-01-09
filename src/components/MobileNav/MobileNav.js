@@ -6,9 +6,10 @@ import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import SortingInput from '../SortingInput/SortingInput';
 
 function MobileNav() {
+  const { state, favState } = useContext(PeopleContext);
   const [showAddPersonUI, setShowAddPersonUI] = useState(false);
   const [showSortingInput, setShowSortingInput] = useState(false);
-  const { state } = useContext(PeopleContext);
+  const [showFavourites, setShowFavourites] = favState;
 
   return (
     <>
@@ -26,11 +27,13 @@ function MobileNav() {
         >
           <i className="fas fa-plus"></i>
         </button>
-        {/* WIP */}
-        <button className="mobile-nav__add-btn mobile-nav__add-btn--side">
+
+        <button
+          className="mobile-nav__add-btn mobile-nav__add-btn--side"
+          onClick={() => setShowFavourites(!showFavourites)}
+        >
           <i className="fas fa-star"></i>
         </button>
-        {/* WIP */}
       </nav>
       {showAddPersonUI && (
         <AddPersonUI

@@ -7,9 +7,12 @@ export const reducer = (state, action) => {
       modalContent: 'Person is added.',
     };
   } else if (action.type === 'REMOVE_ITEM') {
+    const people = action.payload.people;
+    const favourites = action.payload.favourites;
     return {
       ...state,
-      people: action.payload,
+      people: people,
+      favourites: favourites,
       isModalOpen: true,
       modalContent: 'Person is removed.',
     };
@@ -59,7 +62,8 @@ export const reducer = (state, action) => {
   } else if (action.type === 'INITIAL_LOAD') {
     return {
       ...state,
-      people: action.payload,
+      people: action.payload.people,
+      favourites: action.payload.favourites,
       isModalOpen: false,
       modalContent: '',
     };
@@ -69,6 +73,14 @@ export const reducer = (state, action) => {
       isModalOpen: true,
       modalContent:
         'Invalid file type. Please provide ".jpeg", or ".png" file for the picture.',
+    };
+  } else if (action.type === 'ADD_FAVOURITE') {
+    const personName = action.payload[action.payload.length - 1].name;
+    return {
+      ...state,
+      isModalOpen: true,
+      modalContent: `${personName} has been added to your favorites.`,
+      favourites: action.payload,
     };
   }
 };

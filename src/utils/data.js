@@ -32,12 +32,12 @@ import { getDataFromIDBStore } from './IndexedDB/indexedDBManagement';
   },
 ];
  */
-async function getData() {
+async function getData(database, version, store) {
   try {
     const data = await getDataFromIDBStore(
-      'userDatabase',
-      '1',
-      'people'
+      database,
+      version,
+      store
     );
     return data;
   } catch (err) {
