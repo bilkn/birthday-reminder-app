@@ -7,9 +7,12 @@ export const reducer = (state, action) => {
       modalContent: 'Person is added.',
     };
   } else if (action.type === 'REMOVE_ITEM') {
+    const people = action.payload.people;
+    const favourites = action.payload.favourites;
     return {
       ...state,
-      people: action.payload,
+      people: people,
+      favourites: favourites,
       isModalOpen: true,
       modalContent: 'Person is removed.',
     };

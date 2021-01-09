@@ -6,52 +6,51 @@ import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 function PersonOptions({ currentPersonID, setCurrentPersonID }) {
   const { state, dispatch } = useContext(PeopleContext);
 
+  const isPersonInFavourites = () => {
+    // Prevents the person from being added to favorites again.
+    return state.favourites.some((person) => person.id === currentPersonID);
+  };
+
   const addToFavoritesHandler = () => {
-    const isPersonInFavourites = state.favourites.some(
-      (person) => person.id === currentPersonID
-    );
-    if (!isPersonInFavourites) {
-      const person = findPersonByID(state.people, currentPersonID);
-      dispatch({
-        type: 'ADD_FAVOURITE',
-        payload: [...state.favourites, person],
-      });
-      putItemToIDB(person, 'userDatabase', '1', 'favourites');
-    }
+    const person = findPersonByID(state.people, currentPersonID);
+    dispatch({
+      type: 'ADD_FAVOURITE',
+      payload: [...state.favourites, person],
+    });
+    putItemToIDB(person, 'userDatabase', '1', 'favourites');
+
     setCurrentPersonID(null);
+  };
+
+  const removeFromFavouritesHandler = () => {};
+
+  const setHandlerFunction = () => {
+    console.log('hello');
+    return isPersonInFavourites()
+      ? removeFromFavouritesHandler
+      : addToFavoritesHandler;
+  };
+
+  const setText = () => {
+    return isPersonInFavourites()
+      ? 'Remove from favourites'
+      : 'Add to favourites';
   };
 
   return (
     <div className="person-options-container">
       <ul className="person-options-list">
         <li className="person-options-list__item">
-          <label
-            className="person-options-list__label"
-            htmlFor="favourite"
-            onClick={addToFavoritesHandler}
+          <button
+            className="person-options-list__btn"
+            onClick={() => setHandlerFunction()()}
           >
-            Add to favorites
-          </label>
-          <input
-            id="favourite"
-            type="text"
-            hidden={true}
-            value="add-favourite"
-            readOnly={true}
-          />
+            {setText()}
+          </button>
         </li>
         <hr className="person-options-list__line" />
         <li className="person-options-list__item">
-          <label className="person-options-list__label" htmlFor="edit">
-            Edit
-          </label>
-          <input
-            id="edit"
-            type="text"
-            hidden={true}
-            value="edit-person"
-            readOnly={true}
-          />
+          <button className="person-options-list__btn">Edit</button>
         </li>
       </ul>
     </div>

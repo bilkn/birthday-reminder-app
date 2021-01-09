@@ -14,17 +14,23 @@ function PersonList() {
   const [currentPersonID, setCurrentPersonID] = useState(null);
 
   const personList = showFavourites ? state.favourites : state.people;
-  console.log(state.favourites);
-  const removeItemHandler = (id) => {
+  const removeItemHandler = (e, id) => {
+    e.stopPropagation();
     setShowDeletePersonDialog(true);
     setDeletionUserID(id);
   };
 
   const removeItem = (id) => {
     const oldPeople = state.people;
+    const oldFavourites = state.favourites;
     let newPeople = oldPeople.filter((person) => person.id !== id);
+    let newFavourites = oldFavourites.filter((person) => person.id !== id);
     removeDataFromIDBStore('userDatabase', '1', 'people', id);
-    dispatch({ type: 'REMOVE_ITEM', payload: newPeople });
+    removeDataFromIDBStore('userDatabase', '1', 'favourites', id);
+    dispatch({
+      type: 'REMOVE_ITEM',
+      payload: { people: newPeople, favourites: newFavourites },
+    });
   };
 
   const selectPersonHandler = (id) => {

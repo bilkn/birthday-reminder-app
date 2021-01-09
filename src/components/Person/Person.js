@@ -41,8 +41,8 @@ function Person(props) {
       <div className="person-controls">
         <button
           className="person-controls__remove-btn"
-          onClick={() => {
-            removeItemHandler(id);
+          onClick={(e) => {
+            removeItemHandler(e, id);
           }}
         >
           <i className="fas fa-trash"></i>
