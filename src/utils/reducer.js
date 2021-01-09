@@ -59,6 +59,13 @@ export const reducer = (state, action) => {
       isModalOpen: false,
       modalContent: '',
     };
+  } else if (action.type === 'FILTER_FAVOURITES_BY_NAME') {
+    return {
+      ...state,
+      favourites: action.payload,
+      isModalOpen: false,
+      modalContent: '',
+    };
   } else if (action.type === 'INITIAL_LOAD') {
     return {
       ...state,

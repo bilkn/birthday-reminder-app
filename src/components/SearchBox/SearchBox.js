@@ -2,14 +2,23 @@ import { useRef, useContext } from 'react';
 import './SearchBox.scss';
 import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
 import { getDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
+import FilterPeopleByName from '../../helper/FilterPeopleByName';
+
 function SearchBox({ setShowSearchBox }) {
-  const { dispatch } = useContext(PeopleContext);
+  const { dispatch, favState } = useContext(PeopleContext);
+  const [showFavourites] = favState;
   const searchInput = useRef(null);
+
   const changeHandler = async () => {
     const name = searchInput.current.value;
-    const people = await getDataFromIDBStore('userDatabase', '1', 'people');
+    let people = null;
+    if (showFavourites) {
+      people = await getDataFromIDBStore('userDatabase', '1', 'favourites');
+    } else {
+      people = await getDataFromIDBStore('userDatabase', '1', 'people');
+    }
     if (people) {
-      filterByName(people, dispatch, name);
+      FilterPeopleByName(people, name, dispatch, showFavourites);
     } else {
       console.log('Data could not found!');
     }
@@ -33,15 +42,6 @@ function SearchBox({ setShowSearchBox }) {
       </button>
     </div>
   );
-}
-
-function filterByName(people, dispatch, name) {
-  const filteredPeople = people.filter((person) => {
-    const personName = person.name.toLowerCase();
-    name = name.toLowerCase();
-    return personName.includes(name);
-  });
-  dispatch({ type: 'FILTER_PEOPLE_BY_NAME', payload: filteredPeople });
 }
 
 export default SearchBox;

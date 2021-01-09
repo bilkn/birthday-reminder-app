@@ -18,14 +18,14 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
       payload: [...state.favourites, person],
     });
     putItemToIDB(person, 'userDatabase', '1', 'favourites');
-
     setCurrentPersonID(null);
   };
 
-  const removeFromFavouritesHandler = () => {};
+   const removeFromFavouritesHandler = () => {
+
+  }
 
   const setHandlerFunction = () => {
-    console.log('hello');
     return isPersonInFavourites()
       ? removeFromFavouritesHandler
       : addToFavoritesHandler;
