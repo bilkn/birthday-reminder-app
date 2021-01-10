@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
-import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { AppContext } from '../../context/AppContext/AppContext';
 import './Modal.scss';
 
 function Modal() {
-  const { state, dispatch } = useContext(PeopleContext);
+  const { state, dispatch } = useContext(AppContext);
   const clearModal = () => {
     dispatch({ type: 'REMOVE_MODAL' });
   };

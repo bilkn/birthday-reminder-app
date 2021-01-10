@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import validatePicture from '../../helper/validatePicture';
-import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { AppContext } from '../../context/AppContext/AppContext';
 import './PictureInput.scss';
 function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
-  const { dispatch } = useContext(PeopleContext);
+  const { dispatch } = useContext(AppContext);
   const fileInputHandler = (e) => {
     const picture = e.target.files[0];
     if (validatePicture(picture)) {

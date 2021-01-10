@@ -1,11 +1,11 @@
 import { useRef, useContext } from 'react';
 import './SearchBox.scss';
-import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { AppContext } from '../../context/AppContext/AppContext';
 import { getDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 import FilterPeopleByName from '../../helper/FilterPeopleByName';
 
 function SearchBox({ setShowSearchBox }) {
-  const { dispatch, favState } = useContext(PeopleContext);
+  const { dispatch, favState } = useContext(AppContext);
   const [showFavourites] = favState;
   const searchInput = useRef(null);
 
