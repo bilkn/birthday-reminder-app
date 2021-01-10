@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import validatePicture from '../../helper/validatePicture';
-import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { AppContext } from '../../context/AppContext/AppContext';
 import './PictureInput.scss';
 function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
-  const { dispatch } = useContext(PeopleContext);
+  const { dispatch } = useContext(AppContext);
   const fileInputHandler = (e) => {
     const picture = e.target.files[0];
     if (validatePicture(picture)) {
@@ -17,8 +17,8 @@ function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
     <div className="picture-input-container">
       <label htmlFor="picture" className="picture-input-container__label">
         <i
-          className="fa fa-plus picture-input-container__icon"
-          aria-hidden="true"
+          className="fas fa-camera picture-input-container__icon"
+          aria-hidden={true}
         ></i>
       </label>
       <input

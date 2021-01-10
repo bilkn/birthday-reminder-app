@@ -1,15 +1,15 @@
 import { useContext, useRef, useState } from 'react';
-import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { AppContext } from '../../context/AppContext/AppContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
 import getFileURL from '../../helper/createFileURL';
-import validatePersonData from "../../helper/validatePersonData";
-import reformatData from "../../helper/reformatDate";
+import validatePersonData from '../../helper/validatePersonData';
+import reformatData from '../../helper/reformatDate';
 
 function AddPersonUI({ setShowAddPersonUI }) {
-  const { state, dispatch } = useContext(PeopleContext);
+  const { state, dispatch } = useContext(AppContext);
   const [didUserUploadPicture, setDidUserUploadPicture] = useState(false);
   const [currentPicture, setCurrentPicture] = useState(null);
   const nameContainer = useRef(null);

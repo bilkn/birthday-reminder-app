@@ -59,6 +59,13 @@ export const reducer = (state, action) => {
       isModalOpen: false,
       modalContent: '',
     };
+  } else if (action.type === 'FILTER_FAVOURITES_BY_NAME') {
+    return {
+      ...state,
+      favourites: action.payload,
+      isModalOpen: false,
+      modalContent: '',
+    };
   } else if (action.type === 'INITIAL_LOAD') {
     return {
       ...state,
@@ -80,6 +87,14 @@ export const reducer = (state, action) => {
       ...state,
       isModalOpen: true,
       modalContent: `${personName} has been added to your favorites.`,
+      favourites: action.payload,
+    };
+  } else if (action.type === 'REMOVE_FAVOURITE') {
+    const personName = action.payload[action.payload.length - 1].name;
+    return {
+      ...state,
+      isModalOpen: true,
+      modalContent: `${personName} has been removed from your favorites.`,
       favourites: action.payload,
     };
   }

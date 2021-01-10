@@ -2,11 +2,11 @@ import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import { useState, useContext } from 'react';
 import './MobileNav.scss';
 import Modal from './Modal';
-import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { AppContext } from '../../context/AppContext/AppContext';
 import SortingInput from '../SortingInput/SortingInput';
 
 function MobileNav() {
-  const { state, favState } = useContext(PeopleContext);
+  const { state, favState } = useContext(AppContext);
   const [showAddPersonUI, setShowAddPersonUI] = useState(false);
   const [showSortingInput, setShowSortingInput] = useState(false);
   const [showFavourites, setShowFavourites] = favState;

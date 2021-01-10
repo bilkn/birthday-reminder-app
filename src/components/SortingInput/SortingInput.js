@@ -1,8 +1,8 @@
 import { useContext, useRef } from 'react';
-import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { AppContext } from '../../context/AppContext/AppContext';
 import './SortingInput.scss';
 function SortingInput() {
-  const { state, dispatch } = useContext(PeopleContext);
+  const { state, dispatch } = useContext(AppContext);
   const selectBox = useRef(null);
   const changeHandler = () => {
     const value = selectBox.current.value;

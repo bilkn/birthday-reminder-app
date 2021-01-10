@@ -2,16 +2,17 @@ import { useContext, useState } from 'react';
 import Person from '../Person/Person';
 import EmptyBox from '../EmptyBox/EmptyBox';
 import './PersonList.scss';
-import { PeopleContext } from '../../context/PeopleContext/PeopleContext';
+import { AppContext } from '../../context/AppContext/AppContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
+import removePersonFromFavourites from '../../helper/removePersonFromFavourites';
 
-function PersonList() {
-  const { state, dispatch, favState } = useContext(PeopleContext);
+function PersonList(props) {
+  const { currentPersonID, setCurrentPersonID, showUI } = props;
+  const { state, dispatch, favState } = useContext(AppContext);
   const [showFavourites] = favState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
-  const [currentPersonID, setCurrentPersonID] = useState(null);
 
   const personList = showFavourites ? state.favourites : state.people;
   const removeItemHandler = (e, id) => {
@@ -22,11 +23,9 @@ function PersonList() {
 
   const removeItem = (id) => {
     const oldPeople = state.people;
-    const oldFavourites = state.favourites;
+    const newFavourites = removePersonFromFavourites(id, state.favourites);
     let newPeople = oldPeople.filter((person) => person.id !== id);
-    let newFavourites = oldFavourites.filter((person) => person.id !== id);
     removeDataFromIDBStore('userDatabase', '1', 'people', id);
-    removeDataFromIDBStore('userDatabase', '1', 'favourites', id);
     dispatch({
       type: 'REMOVE_ITEM',
       payload: { people: newPeople, favourites: newFavourites },
@@ -34,7 +33,8 @@ function PersonList() {
   };
 
   const selectPersonHandler = (id) => {
-    if (currentPersonID !== id) {
+    console.log(id, showUI);
+    if (currentPersonID !== id && showUI) {
       setCurrentPersonID(id);
     }
   };
