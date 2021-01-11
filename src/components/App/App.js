@@ -5,7 +5,7 @@ import { useEffect, useReducer, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import { reducer } from '../../utils/reducer';
 import defaultState from '../../utils/defaultState';
-
+import DarkBackground from '../DarkBackground/DarkBackground';
 function App() {
   // Default state.
   const def = {
@@ -20,6 +20,8 @@ function App() {
   const favState = [showFavourites, setShowFavourites];
   const [showUI, setShowUI] = useState(true);
   const [currentPersonID, setCurrentPersonID] = useState(null);
+  const [showBackground, setShowBackground] = useState(false);
+  const backgroundState = [showBackground, setShowBackground];
   const getInitialData = async () => {
     const data = await defaultState();
     const people = data.people;
@@ -31,7 +33,6 @@ function App() {
     });
   };
 
-  
   useEffect(() => {
     getInitialData();
   }, []);
@@ -39,8 +40,14 @@ function App() {
   return (
     <>
       <AppContext.Provider
-        value={{ state: state, dispatch: dispatch, favState }}
+        value={{ state: state, dispatch: dispatch, favState, backgroundState }}
       >
+        <DarkBackground
+          showBackground={showBackground}
+          setShowBackground={setShowBackground}
+          currentPersonID={currentPersonID}
+          setCurrentPersonID={setCurrentPersonID}
+        />
         <AppHead />
         <HomeMain
           showUI={showUI}

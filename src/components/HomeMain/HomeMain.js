@@ -1,7 +1,13 @@
 import PersonList from '../PersonList/PersonList';
 import './HomeMain.scss';
 
-function HomeMain({ showUI, setShowUI, currentPersonID, setCurrentPersonID }) {
+function HomeMain(props) {
+  const {
+    showUI,
+    setShowUI,
+    currentPersonID,
+    setCurrentPersonID,
+  } = props;
   return (
     <main className="home-main">
       <PersonList

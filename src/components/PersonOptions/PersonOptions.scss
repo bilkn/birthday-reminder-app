@@ -1,11 +1,12 @@
 .person-options-container {
   background-color: #434975;
-  border-radius: 10px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100vw;
-  z-index: 100011;
+  z-index: 100000;
 
   // person-options-container__name
   &__name {
