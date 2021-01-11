@@ -1,7 +1,9 @@
 import './DarkBackground.scss';
-import '../../context/AppContext/AppContext';
-import { useEffect } from 'react';
+import { AppContext } from '../../context/AppContext/AppContext';
+import { useEffect, useContext } from 'react';
 function DarkBackground(props) {
+  const { showAddPersonUIState } = useContext(AppContext);
+  const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const {
     showBackground,
     setShowBackground,
@@ -9,10 +11,11 @@ function DarkBackground(props) {
     setCurrentPersonID,
   } = props;
   const backgroundHandler = (e) => {
-    if (currentPersonID) {
+    if (currentPersonID || showAddPersonUI) {
       e.stopPropagation();
       setShowBackground(false);
       setCurrentPersonID(null);
+      setShowAddPersonUI(false);
     }
   };
   useEffect(() => {

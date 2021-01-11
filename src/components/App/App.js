@@ -17,11 +17,13 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, def);
   const [showFavourites, setShowFavourites] = useState(false);
-  const favState = [showFavourites, setShowFavourites];
   const [showUI, setShowUI] = useState(true);
   const [currentPersonID, setCurrentPersonID] = useState(null);
   const [showBackground, setShowBackground] = useState(false);
+  const [showAddPersonUI, setShowAddPersonUI] = useState(false);
+  const showAddPersonUIState = [showAddPersonUI, setShowAddPersonUI];
   const backgroundState = [showBackground, setShowBackground];
+  const favState = [showFavourites, setShowFavourites];
   const getInitialData = async () => {
     const data = await defaultState();
     const people = data.people;
@@ -40,7 +42,7 @@ function App() {
   return (
     <>
       <AppContext.Provider
-        value={{ state: state, dispatch: dispatch, favState, backgroundState }}
+        value={{ state: state, dispatch: dispatch, favState, backgroundState, showAddPersonUIState }}
       >
         <DarkBackground
           showBackground={showBackground}

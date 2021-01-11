@@ -8,7 +8,7 @@ import getFileURL from '../../helper/createFileURL';
 import validatePersonData from '../../helper/validatePersonData';
 import reformatData from '../../helper/reformatDate';
 
-function AddPersonUI({ setShowAddPersonUI }) {
+function AddPersonUI({ showAddPersonUIHandler }) {
   const { state, dispatch } = useContext(AppContext);
   const [didUserUploadPicture, setDidUserUploadPicture] = useState(false);
   const [currentPicture, setCurrentPicture] = useState(null);
@@ -29,7 +29,7 @@ function AddPersonUI({ setShowAddPersonUI }) {
         break;
       default:
         addPerson(name, date, picture);
-        setShowAddPersonUI();
+        showAddPersonUIHandler();
         break;
     }
   };
