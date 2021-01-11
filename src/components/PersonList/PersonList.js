@@ -9,11 +9,11 @@ import removePersonFromFavourites from '../../helper/removePersonFromFavourites'
 
 function PersonList(props) {
   const { currentPersonID, setCurrentPersonID, showUI } = props;
-  const { state, dispatch, favState } = useContext(AppContext);
+  const { state, dispatch, favState, backgroundState } = useContext(AppContext);
   const [showFavourites] = favState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
-
+  const [, setShowBackground] = backgroundState;
   const personList = showFavourites ? state.favourites : state.people;
   const removeItemHandler = (e, id) => {
     e.stopPropagation();
@@ -33,7 +33,7 @@ function PersonList(props) {
   };
 
   const selectPersonHandler = (id) => {
-    console.log(id, showUI);
+    setShowBackground(true);
     if (currentPersonID !== id && showUI) {
       setCurrentPersonID(id);
     }

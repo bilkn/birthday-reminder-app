@@ -8,8 +8,9 @@ import {
 } from '../../utils/IndexedDB/indexedDBManagement';
 
 function PersonOptions({ currentPersonID, setCurrentPersonID }) {
-  const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch, backgroundState } = useContext(AppContext);
   const person = findPersonByID(state.people, currentPersonID);
+  const [, setShowBackground] = backgroundState;
   const isPersonInFavourites = () => {
     // Prevents the person from being added to favorites again.
     return state.favourites.some((person) => person.id === currentPersonID);
@@ -33,9 +34,12 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
       payload: newFavourites,
     });
     removeDataFromIDBStore('userDatabase', '1', 'favourites', currentPersonID);
+    setCurrentPersonID(null);
   };
 
-  const setHandlerFunction = () => {
+  const setHandlerFunction = (e) => {
+    e.stopPropagation();
+    setShowBackground(false);
     return isPersonInFavourites()
       ? removeFromFavouritesHandler
       : addToFavoritesHandler;
@@ -46,7 +50,6 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
       ? 'Remove from favourites'
       : 'Add to favourites';
   };
-
   return (
     <div className="person-options-container">
       <p className="person-options-container__name">Person: {person.name}</p>
@@ -54,7 +57,7 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
         <li className="person-options-list__item">
           <button
             className="person-options-list__btn"
-            onClick={() => setHandlerFunction()()}
+            onClick={(e) => setHandlerFunction(e)()}
           >
             {setText()}
           </button>

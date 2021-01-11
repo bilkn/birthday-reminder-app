@@ -22,7 +22,6 @@ function Person(props) {
     }
     return pictureURL;
   };
-
   return (
     <div className="person" onClick={() => selectPersonHandler(id)}>
       {currentPersonID === id && (
