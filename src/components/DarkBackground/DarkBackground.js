@@ -1,5 +1,6 @@
 import './DarkBackground.scss';
 import '../../context/AppContext/AppContext';
+import { useEffect } from 'react';
 function DarkBackground(props) {
   const {
     showBackground,
@@ -14,6 +15,11 @@ function DarkBackground(props) {
       setCurrentPersonID(null);
     }
   };
+  useEffect(() => {
+    showBackground
+      ? (document.body.style.overflow = 'hidden')
+      : (document.body.style.overflow = 'initial');
+  }, [showBackground]);
   const className = showBackground
     ? 'dark-background dark-background--visible'
     : 'dark-background';
