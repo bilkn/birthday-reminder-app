@@ -34,6 +34,7 @@ function PersonList(props) {
 
   const selectPersonHandler = (id) => {
     setShowBackground(true);
+
     if (currentPersonID !== id && showUI) {
       setCurrentPersonID(id);
     }

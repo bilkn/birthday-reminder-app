@@ -5,7 +5,7 @@
   background: #424874;
   border-radius: 10px;
   padding: 0.5rem;
-  z-index: 1000;
+  z-index: 10000000;
   // delete-person-dialog__text
   &__text {
     color: white;
@@ -37,6 +37,3 @@
     margin: 0;
   }
 }
-/* width 306px */
-
-/* height 119px b-radius-20px */

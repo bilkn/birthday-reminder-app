@@ -17,6 +17,10 @@
   background: $sec-color-hover;
 }
 
+.person--highlighted {
+  z-index: 1000000;
+}
+
 .person-img-container {
   border-radius: 50%;
   height: $person-img-size;

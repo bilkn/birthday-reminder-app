@@ -2,6 +2,7 @@ import './Person.scss';
 import createFileURL from '../../helper//createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 
+
 function Person(props) {
   const {
     person,
@@ -22,8 +23,11 @@ function Person(props) {
     }
     return pictureURL;
   };
+  let parentClassName =
+    currentPersonID === id ? 'person person--highlighted' : 'person';
+
   return (
-    <div className="person" onClick={() => selectPersonHandler(id)}>
+    <div className={parentClassName} onClick={() => selectPersonHandler(id)}>
       {currentPersonID === id && (
         <PersonOptions
           currentPersonID={currentPersonID}

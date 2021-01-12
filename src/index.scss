@@ -16,3 +16,7 @@ button {
   background: none;
   border: none;
 }
+
+::-webkit-calendar-picker-indicator {
+  display: none;
+}
