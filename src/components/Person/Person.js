@@ -1,7 +1,7 @@
 import './Person.scss';
 import createFileURL from '../../helper//createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
-
+import { useState } from 'react';
 
 function Person(props) {
   const {
@@ -12,7 +12,7 @@ function Person(props) {
     selectPersonHandler,
   } = props;
   const { id, name, birthday, picture } = person;
-
+  
   const getURL = () => {
     let pictureURL = null;
     try {

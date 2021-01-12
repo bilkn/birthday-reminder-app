@@ -1,0 +1,6 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+.edit-person-ui {
+  @include PersonUIStyle;
+  z-index: 9999999999;
+}

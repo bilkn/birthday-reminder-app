@@ -21,9 +21,12 @@ function App() {
   const [currentPersonID, setCurrentPersonID] = useState(null);
   const [showBackground, setShowBackground] = useState(false);
   const [showAddPersonUI, setShowAddPersonUI] = useState(false);
+  const [showEditPersonUI, setShowEditPersonUI] = useState(false);
   const showAddPersonUIState = [showAddPersonUI, setShowAddPersonUI];
+  const showEditPersonUIState = [showEditPersonUI, setShowEditPersonUI];
   const backgroundState = [showBackground, setShowBackground];
   const favState = [showFavourites, setShowFavourites];
+  
   const getInitialData = async () => {
     const data = await defaultState();
     const people = data.people;
@@ -42,7 +45,14 @@ function App() {
   return (
     <>
       <AppContext.Provider
-        value={{ state: state, dispatch: dispatch, favState, backgroundState, showAddPersonUIState }}
+        value={{
+          state: state,
+          dispatch: dispatch,
+          favState,
+          backgroundState,
+          showAddPersonUIState,
+          showEditPersonUIState
+        }}
       >
         <DarkBackground
           showBackground={showBackground}

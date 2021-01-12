@@ -7,6 +7,8 @@ import PictureInput from '../PictureInput/PictureInput';
 import getFileURL from '../../helper/createFileURL';
 import validatePersonData from '../../helper/validatePersonData';
 import reformatData from '../../helper/reformatDate';
+import AddPersonUIControls from '../AddPersonUIControls/AddPersonUIControls';
+import AddPersonUIINfo from '../AddPersonUIInfo/AddPersonUIInfo';
 
 function AddPersonUI({ showAddPersonUIHandler }) {
   const { state, dispatch } = useContext(AppContext);
@@ -70,32 +72,11 @@ function AddPersonUI({ showAddPersonUIHandler }) {
             setCurrentPicture={setCurrentPicture}
           />
         )}
-        <div className="add-person-ui-info-container">
-          <input
-            type="text"
-            className="add-person-ui-info-container__name"
-            ref={nameContainer}
-            maxLength="15"
-          />
-          <input
-            type="date"
-            className="add-person-ui-info-container__birthday"
-            ref={dateContainer}
-          />
-        </div>
-        <div className="add-person-ui-controls">
-          <button
-            className="add-person-ui-controls__add-btn"
-            onClick={() => {
-              addPersonHandler();
-            }}
-          >
-            <i
-              className="fa fa-plus-circle add-person-ui-controls__icon"
-              aria-hidden="true"
-            ></i>
-          </button>
-        </div>
+        <AddPersonUIINfo
+          nameContainer={nameContainer}
+          dateContainer={dateContainer}
+        />
+        <AddPersonUIControls addPersonHandler={addPersonHandler} />
       </div>
     </>
   );

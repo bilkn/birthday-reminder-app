@@ -1,52 +1,5 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 .add-person-ui {
-  align-items: center;
-  background: $sec-color;
-  border-radius: 20px;
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  height: 100px;
-  justify-content: space-between;
-  padding: 0.5rem 1rem;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -165px;
-  width: 330px;
-  z-index: 99999999;
-}
-
-.add-person-ui-info-container {
-  width: 155px;
-  // add-person-ui-info-container__name
-  &__name {
-    appearance: none;
-    background: $sec-color;
-    border: none;
-    color: #fff;
-    font-size: 1.2rem;
-    margin-bottom: 0.2rem;
-    text-align: center;
-    width: 100%;
-  }
-
-  // add-person-ui-info-container__birthday
-  &__birthday {
-    appearance: none;
-    background: $sec-color;
-    border: none;
-    color: #2e2e31; /* May be changed. */
-    font-size: 1.6rem;
-    text-align: center;
-    width: 100%;
-  }
-}
-
-.add-person-ui-controls {
-  // add-person-ui-controls__icon
-  &__icon {
-    font-size: 2rem;
-  }
+  @include PersonUIStyle;
 }
