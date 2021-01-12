@@ -1,9 +1,23 @@
+@import './variables';
 @mixin CenteredAndFixedElement($width, $height) {
   height: $height;
   top: 50%;
   left: 50%;
-  margin-top:  #{ - $height / 2};
-  margin-left: #{ - $width / 2};
+  margin-top: #{- $height / 2};
+  margin-left: #{- $width / 2};
   position: fixed;
   width: $width;
+}
+
+@mixin PersonUIStyle {
+  @include CenteredAndFixedElement(330px, 100px);
+  align-items: center;
+  background: $sec-color;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  z-index: 9999999;
 }

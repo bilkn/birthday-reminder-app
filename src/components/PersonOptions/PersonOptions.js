@@ -8,12 +8,24 @@ import {
 } from '../../utils/IndexedDB/indexedDBManagement';
 
 function PersonOptions({ currentPersonID, setCurrentPersonID }) {
-  const { state, dispatch, backgroundState } = useContext(AppContext);
+  const {
+    state,
+    dispatch,
+    backgroundState,
+    showEditPersonUIState,
+  } = useContext(AppContext);
   const person = findPersonByID(state.people, currentPersonID);
   const [, setShowBackground] = backgroundState;
+  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const isPersonInFavourites = () => {
-    // Prevents the person from being added to favorites again.
+    // Prevents the person from being added to favourites again.
     return state.favourites.some((person) => person.id === currentPersonID);
+  };
+
+  const editPersonHandler = (e) => {
+    e.stopPropagation();
+    setShowEditPersonUI(true);
+   
   };
 
   const addToFavoritesHandler = () => {
@@ -64,7 +76,12 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
         </li>
         <hr className="person-options-list__line" />
         <li className="person-options-list__item">
-          <button className="person-options-list__btn">Edit</button>
+          <button
+            className="person-options-list__btn"
+            onClick={(e) => editPersonHandler(e)}
+          >
+            Edit
+          </button>
         </li>
       </ul>
     </div>

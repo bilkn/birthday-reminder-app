@@ -6,14 +6,23 @@ import { AppContext } from '../../context/AppContext/AppContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 import removePersonFromFavourites from '../../helper/removePersonFromFavourites';
+import EditPersonUI from '../EditPersonUI/EditPersonUI';
 
 function PersonList(props) {
   const { currentPersonID, setCurrentPersonID, showUI } = props;
-  const { state, dispatch, favState, backgroundState } = useContext(AppContext);
+  const {
+    state,
+    dispatch,
+    favState,
+    backgroundState,
+    showEditPersonUIState,
+  } = useContext(AppContext);
   const [showFavourites] = favState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
+  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [, setShowBackground] = backgroundState;
+
   const personList = showFavourites ? state.favourites : state.people;
   const removeItemHandler = (e, id) => {
     e.stopPropagation();
@@ -62,6 +71,7 @@ function PersonList(props) {
         ))}
         <EmptyBox />
       </ul>
+      {showEditPersonUI && <EditPersonUI currentPersonID={currentPersonID} />}
     </>
   );
 }

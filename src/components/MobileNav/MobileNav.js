@@ -6,19 +6,24 @@ import { AppContext } from '../../context/AppContext/AppContext';
 import SortingInput from '../SortingInput/SortingInput';
 
 function MobileNav() {
-  const { state, favState, showAddPersonUIState, backgroundState } = useContext(
-    AppContext
-  );
+  const {
+    state,
+    favState,
+    showAddPersonUIState,
+    backgroundState,
+   
+  } = useContext(AppContext);
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showSortingInput, setShowSortingInput] = useState(false);
   const [showFavourites, setShowFavourites] = favState;
   const [showBackground, setShowBackground] = backgroundState;
 
   const showAddPersonUIHandler = () => {
-    console.log(backgroundState);
     setShowBackground(!showBackground);
     setShowAddPersonUI(!showAddPersonUI);
   };
+
+
   return (
     <>
       {state.isModalOpen && <Modal />}
