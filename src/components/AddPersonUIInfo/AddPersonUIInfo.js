@@ -2,8 +2,10 @@ import './AddPersonUIInfo.scss';
 
 function AddPersonUIINfo({ nameContainer, dateContainer, name, birthday }) {
   let formattedBirthday = null;
-  formattedBirthday = birthday.split('.').reverse().join('-');
-
+  if (birthday) {
+    formattedBirthday = birthday.split('.').reverse().join('-');
+  }
+  
   return (
     <div className="add-person-ui-info-container">
       <input
