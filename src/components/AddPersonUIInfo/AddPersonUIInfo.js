@@ -1,6 +1,7 @@
 import './AddPersonUIInfo.scss';
 
-function AddPersonUIINfo({ nameContainer, dateContainer, name, birthday }) {
+function AddPersonUIINfo(props) {
+  const { nameContainer, dateContainer, name, birthday } = props;
   let formattedBirthday = null;
   if (birthday) {
     formattedBirthday = birthday.split('.').reverse().join('-');

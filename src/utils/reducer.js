@@ -97,5 +97,16 @@ export const reducer = (state, action) => {
       modalContent: `${personName} has been removed from your favorites.`,
       favourites: action.payload,
     };
+  } else if (action.type === 'EDIT_PERSON') {
+    const favourites = action.payload.favourites;
+    const personName =
+      favourites[favourites.length - 1].name;
+    return {
+      ...state,
+      isModalOpen: true,
+      modalContent: `${personName}'s information has been edited.`,
+      people: action.payload.people,
+      favourites: favourites,
+    };
   }
 };
