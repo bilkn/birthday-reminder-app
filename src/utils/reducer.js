@@ -90,21 +90,24 @@ export const reducer = (state, action) => {
       favourites: action.payload,
     };
   } else if (action.type === 'REMOVE_FAVOURITE') {
-    const personName = action.payload[action.payload.length - 1].name;
+    const personName =
+      action.payload.length && action.payload[action.payload.length - 1].name;
+    const modalContent = personName
+      ? `${personName} has been removed from your favorites.`
+      : 'Favourites have been cleared.';
     return {
       ...state,
       isModalOpen: true,
-      modalContent: `${personName} has been removed from your favorites.`,
+      modalContent: modalContent,
       favourites: action.payload,
     };
   } else if (action.type === 'EDIT_PERSON') {
     const favourites = action.payload.favourites;
-    const personName =
-      favourites[favourites.length - 1].name;
+    const personName = favourites[favourites.length - 1].name;
     return {
       ...state,
       isModalOpen: true,
-      modalContent: `${personName}'s information has been edited.`,
+      modalContent: `${personName}'s information has been changed.`,
       people: action.payload.people,
       favourites: favourites,
     };

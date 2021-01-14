@@ -1,11 +1,14 @@
 @import "../../styles/variables";
 .modal {
-  color: orangered;
+  background-color: rgba(218, 218, 218, 0.938);
+  border-radius: 10px;
+  color: black;
   font-size: 1.3rem;
   left: 50%;
-  margin-left: -100px;
+  margin-left: -40vw;
+  padding: 1rem;
   position: fixed;
   text-align: center;
   top: $site-head-height--mobile;
-  width: 200px;
+  width: 80vw;
 }

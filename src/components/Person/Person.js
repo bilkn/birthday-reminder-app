@@ -1,7 +1,6 @@
 import './Person.scss';
 import createFileURL from '../../helper//createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
-import { useState } from 'react';
 
 function Person(props) {
   const {
