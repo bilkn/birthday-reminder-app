@@ -23,6 +23,22 @@ function SearchBox({ setShowSearchBox }) {
       console.log('Data could not found!');
     }
   };
+
+  const closeBtnClickHandler = async () => {
+    setShowSearchBox(false);
+    let people = null;
+    let name = '';
+    if (showFavourites) {
+      people = await getDataFromIDBStore('userDatabase', '1', 'favourites');
+    } else {
+      people = await getDataFromIDBStore('userDatabase', '1', 'people');
+    }
+    if (people) {
+      FilterPeopleByName(people, name, dispatch, showFavourites);
+    } else {
+      console.log('Data could not found!');
+    }
+  };
   return (
     <div className="search-box">
       <input
@@ -32,12 +48,7 @@ function SearchBox({ setShowSearchBox }) {
         onChange={changeHandler}
         ref={searchInput}
       />
-      <button
-        className="search-box__close-btn"
-        onClick={() => {
-          setShowSearchBox(false);
-        }}
-      >
+      <button className="search-box__close-btn" onClick={closeBtnClickHandler}>
         <i className="far fa-times-circle"></i>
       </button>
     </div>
