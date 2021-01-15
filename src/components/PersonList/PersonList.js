@@ -43,7 +43,6 @@ function PersonList(props) {
 
   const selectPersonHandler = (id) => {
     setShowBackground(true);
-
     if (currentPersonID !== id && showUI) {
       setCurrentPersonID(id);
     }
@@ -71,7 +70,14 @@ function PersonList(props) {
         ))}
         <EmptyBox />
       </ul>
-      {showEditPersonUI && <EditPersonUI currentPersonID={currentPersonID} />}
+      {showEditPersonUI && (
+        <EditPersonUI
+          currentPersonID={currentPersonID}
+          setCurrentPersonID={setCurrentPersonID}
+          setShowEditPersonUI={setShowEditPersonUI}
+          setShowBackground={setShowBackground}
+        />
+      )}
     </>
   );
 }

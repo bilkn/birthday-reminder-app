@@ -4,12 +4,12 @@ import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
-import getFileURL from '../../helper/createFileURL';
+import createFileURL from '../../helper/createFileURL';
 import validatePersonData from '../../helper/validatePersonData';
 import reformatData from '../../helper/reformatDate';
 import AddPersonUIControls from '../AddPersonUIControls/AddPersonUIControls';
 import AddPersonUIINfo from '../AddPersonUIInfo/AddPersonUIInfo';
-
+import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
 function AddPersonUI({ showAddPersonUIHandler }) {
   const { state, dispatch } = useContext(AppContext);
   const [didUserUploadPicture, setDidUserUploadPicture] = useState(false);
@@ -58,13 +58,11 @@ function AddPersonUI({ showAddPersonUIHandler }) {
     <>
       <div className="add-person-ui">
         {didUserUploadPicture ? (
-          <div className="person-img-container">
-            <img
-              className="person-img-container__img"
-              src={getFileURL(currentPicture)}
-              alt={nameContainer.current.value}
-            />
-          </div>
+          <PersonImgContainer
+            createFileURL={createFileURL}
+            currentPicture={currentPicture}
+            nameContainer={nameContainer}
+          />
         ) : (
           <PictureInput
             setDidUserUploadPicture={setDidUserUploadPicture}

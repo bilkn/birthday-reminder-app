@@ -21,19 +21,6 @@
   z-index: 1000000;
 }
 
-.person-img-container {
-  border-radius: 50%;
-  height: $person-img-size;
-  width: $person-img-size;
-}
-
-.person-img-container__img {
-  border-radius: 50%;
-  object-fit: cover;
-  height: $person-img-size;
-  width: $person-img-size;
-}
-
 .person-info {
   display: flex;
   flex-direction: column;

@@ -1,22 +1,25 @@
 .search-box {
+  border: none;
   border-radius: 5px;
   height: 30px;
   margin: 0 auto;
   position: relative;
   width: 80%;
-  // search-box__close-btn
 
   &__search-input {
-    border-radius: 5fpx;
+    border: none;
+    border-radius: 5px;
     height: 100%;
     padding: 0.7rem;
     width: 100%;
   }
+
+  // search-box__close-btn
   &__close-btn {
     font-size: 1.2rem;
     height: 30px;
     padding: 0.2rem;
     position: absolute;
-    right: 0;
+    right: 3px;
   }
 }

@@ -16,16 +16,16 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
   } = useContext(AppContext);
   const person = findPersonByID(state.people, currentPersonID);
   const [, setShowBackground] = backgroundState;
-  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
+  const [, setShowEditPersonUI] = showEditPersonUIState;
   const isPersonInFavourites = () => {
     // Prevents the person from being added to favourites again.
     return state.favourites.some((person) => person.id === currentPersonID);
   };
 
-  const editPersonHandler = (e) => {
+  const editClickHandler = (e) => {
     e.stopPropagation();
     setShowEditPersonUI(true);
-   
+    setTimeout(() => setCurrentPersonID(null), 0);
   };
 
   const addToFavoritesHandler = () => {
@@ -78,7 +78,7 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
         <li className="person-options-list__item">
           <button
             className="person-options-list__btn"
-            onClick={(e) => editPersonHandler(e)}
+            onClick={(e) => editClickHandler(e)}
           >
             Edit
           </button>
