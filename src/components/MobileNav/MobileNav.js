@@ -3,34 +3,49 @@ import { useState, useContext } from 'react';
 import './MobileNav.scss';
 import Modal from '../Modal/Modal';
 import { AppContext } from '../../context/AppContext/AppContext';
-import SortingInput from '../SortingInput/SortingInput';
+import sortingLogic from '../../helper/sortingLogic';
 
 function MobileNav() {
   const {
     state,
+    dispatch,
     favState,
     showAddPersonUIState,
     backgroundState,
-   
   } = useContext(AppContext);
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
-  const [showSortingInput, setShowSortingInput] = useState(false);
   const [showFavourites, setShowFavourites] = favState;
   const [showBackground, setShowBackground] = backgroundState;
+  const [sortState, setSortState] = useState('sortByAge');
 
   const showAddPersonUIHandler = () => {
     setShowBackground(!showBackground);
     setShowAddPersonUI(!showAddPersonUI);
   };
 
-
+  const sortingClickHandler = () => {
+    switch (sortState) {
+      case 'sortByAge':
+        setSortState('sortByName');
+        break;
+      case 'sortByName':
+        setSortState('sortByMonth');
+        break;
+      case 'sortByMonth':
+        setSortState('sortByAge');
+        break;
+      default:
+        break;
+    }
+    sortingLogic(state, dispatch, sortState);
+  };
   return (
     <>
       {state.isModalOpen && <Modal />}
       <nav className="mobile-nav">
         <button
           className="mobile-nav__add-btn mobile-nav__add-btn--side"
-          onClick={() => setShowSortingInput(!showSortingInput)}
+          onClick={sortingClickHandler}
         >
           <i className="fas fa-sort-amount-down"></i>
         </button>
@@ -50,11 +65,6 @@ function MobileNav() {
       </nav>
       {showAddPersonUI && (
         <AddPersonUI showAddPersonUIHandler={showAddPersonUIHandler} />
-      )}
-      {showSortingInput && (
-        <SortingInput
-          setShowSortingInput={() => setShowSortingInput(!showSortingInput)}
-        />
       )}
     </>
   );
