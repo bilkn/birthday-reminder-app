@@ -1,7 +1,6 @@
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import { useState, useContext } from 'react';
 import './MobileNav.scss';
-import Modal from '../Modal/Modal';
 import { AppContext } from '../../context/AppContext/AppContext';
 import sortingLogic from '../../helper/sortingLogic';
 
@@ -16,6 +15,7 @@ function MobileNav() {
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showFavourites, setShowFavourites] = favState;
   const [showBackground, setShowBackground] = backgroundState;
+
   const [sortState, setSortState] = useState('sortByAge');
 
   const showAddPersonUIHandler = () => {
@@ -41,7 +41,7 @@ function MobileNav() {
   };
   return (
     <>
-      {state.isModalOpen && <Modal />}
+     
       <nav className="mobile-nav">
         <button
           className="mobile-nav__add-btn mobile-nav__add-btn--side"

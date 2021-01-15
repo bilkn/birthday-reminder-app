@@ -7,7 +7,7 @@ import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 import removePersonFromFavourites from '../../helper/removePersonFromFavourites';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
-
+import Modal from '../Modal/Modal';
 function PersonList(props) {
   const { currentPersonID, setCurrentPersonID, showUI } = props;
   const {
@@ -22,7 +22,7 @@ function PersonList(props) {
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [, setShowBackground] = backgroundState;
-
+  const [isTimePassed, setIsTimePassed] = useState(true);
   const personList = showFavourites ? state.favourites : state.people;
   const removeItemHandler = (e, id) => {
     e.stopPropagation();
@@ -39,6 +39,7 @@ function PersonList(props) {
       type: 'REMOVE_ITEM',
       payload: { people: newPeople, favourites: newFavourites },
     });
+    setShowBackground(false);
   };
 
   const selectPersonHandler = (id) => {
@@ -50,6 +51,9 @@ function PersonList(props) {
 
   return (
     <>
+      {state.isModalOpen && (
+        <Modal isTimePassed={isTimePassed} setIsTimePassed={setIsTimePassed} />
+      )}
       {showDeletePersonDialog && (
         <DeletePersonDialog
           setShowDeletePersonDialog={setShowDeletePersonDialog}
