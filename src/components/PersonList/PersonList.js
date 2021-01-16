@@ -74,7 +74,6 @@ function PersonList(props) {
     }
   });
 
-  
   return (
     <>
       {state.isModalOpen && (

@@ -2,7 +2,10 @@ import { useContext, useRef, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
-import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
+import {
+  putItemToIDB,
+  blobToArrayBuffer,
+} from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
 import createFileURL from '../../helper/createFileURL';
 import validatePersonData from '../../helper/validatePersonData';
@@ -17,12 +20,14 @@ function AddPersonUI({ showAddPersonUIHandler }) {
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
 
-  const addPersonHandler = () => {
+  const addPersonHandler = async () => {
     let name = nameContainer.current.value;
     const date = dateContainer.current.value;
-    const picture = currentPicture || blankImg;
+    let picture = currentPicture
+      ? await blobToArrayBuffer(currentPicture)
+      : blankImg;
     const validationResult = validatePersonData(name, date, picture);
-
+    console.log(picture);
     switch (validationResult) {
       case 'INVALID_NAME':
       case 'INVALID_DATE':
