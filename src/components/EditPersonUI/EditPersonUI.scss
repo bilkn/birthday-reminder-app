@@ -2,5 +2,6 @@
 @import '../../styles/variables';
 .edit-person-ui {
   @include PersonUIStyle;
+  @include CenteredAndFixedElement(330px, 100px);
   z-index: 9999999999;
 }

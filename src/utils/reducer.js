@@ -61,6 +61,30 @@ export const reducer = (state, action) => {
         modalContent: 'SORT BY NAME',
       };
     }
+    case 'SORT_FAVOURITES_BY_AGE': {
+      return {
+        ...state,
+        isModalOpen: true,
+        modalContent: 'SORT BY AGE',
+        favourites: action.payload,
+      };
+    }
+    case 'SORT_FAVOURITES_BY_NAME': {
+      return {
+        ...state,
+        isModalOpen: true,
+        modalContent: 'SORT BY AGE',
+        favourites: action.payload,
+      };
+    }
+    case 'SORT_FAVOURITES_BY_MONTH': {
+      return {
+        ...state,
+        isModalOpen: true,
+        modalContent: 'SORT BY AGE',
+        favourites: action.payload,
+      };
+    }
     case 'FILTER_PEOPLE_BY_NAME': {
       return {
         ...state,
