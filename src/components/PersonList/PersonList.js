@@ -8,6 +8,8 @@ import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagemen
 import removePersonFromFavourites from '../../helper/removePersonFromFavourites';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Modal from '../Modal/Modal';
+import AddPersonUI from '../AddPersonUI/AddPersonUI';
+
 function PersonList(props) {
   const { currentPersonID, setCurrentPersonID, showUI } = props;
   const {
@@ -16,18 +18,23 @@ function PersonList(props) {
     favState,
     backgroundState,
     showEditPersonUIState,
+    showAddPersonUIState,
   } = useContext(AppContext);
   const [showFavourites] = favState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [deletionUserID, setDeletionUserID] = useState(null);
-  const [, setShowBackground] = backgroundState;
+  const [showBackground, setShowBackground] = backgroundState;
   const [isTimePassed, setIsTimePassed] = useState(true);
+  const [showAddPersonUI, setShowAddPersonUI] = useState(false);
   const personList = showFavourites ? state.favourites : state.people;
   const removeItemHandler = (e, id) => {
     e.stopPropagation();
     setShowDeletePersonDialog(true);
     setDeletionUserID(id);
+  };
+  const showAddPersonUIHandler = () => {
+    setShowAddPersonUI(!showAddPersonUI);
   };
 
   const removeItem = (id) => {
@@ -47,6 +54,10 @@ function PersonList(props) {
     if (currentPersonID !== id && showUI) {
       setCurrentPersonID(id);
     }
+  };
+
+  const showAddPersonUIHandlerForLargerScreen = () => {
+    setShowAddPersonUI(!showAddPersonUI);
   };
 
   const keyHandler = (e) => {
@@ -88,7 +99,15 @@ function PersonList(props) {
             setShowBackground={setShowBackground}
           />
         ))}
-        <EmptyBox />
+        {(showAddPersonUI && (
+          <AddPersonUI showAddPersonUIHandler={showAddPersonUIHandler} />
+        )) || (
+          <EmptyBox
+            showAddPersonUIHandlerForLargerScreen={
+              showAddPersonUIHandlerForLargerScreen
+            }
+          />
+        )}
       </ul>
       {showEditPersonUI && (
         <EditPersonUI
