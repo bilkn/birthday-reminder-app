@@ -10,7 +10,6 @@
 }
 
 @mixin PersonUIStyle {
-  @include CenteredAndFixedElement(330px, 100px);
   align-items: center;
   background: $sec-color;
   border-radius: 20px;
@@ -21,3 +20,4 @@
   padding: 0.5rem 1rem;
   z-index: 9999999;
 }
+

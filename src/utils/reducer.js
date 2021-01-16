@@ -43,22 +43,22 @@ export const reducer = (state, action) => {
     case 'SORT_PEOPLE_BY_AGE': {
       return {
         ...state,
-        isModalOpen: false,
-        modalContent: '',
+        isModalOpen: true,
+        modalContent: 'SORT BY AGE',
       };
     }
     case 'SORT_PEOPLE_BY_MONTH': {
       return {
         ...state,
-        isModalOpen: false,
-        modalContent: '',
+        isModalOpen: true,
+        modalContent: 'SORT BY MONTH',
       };
     }
     case 'SORT_PEOPLE_BY_NAME': {
       return {
         ...state,
-        isModalOpen: false,
-        modalContent: '',
+        isModalOpen: true,
+        modalContent: 'SORT BY NAME',
       };
     }
     case 'FILTER_PEOPLE_BY_NAME': {

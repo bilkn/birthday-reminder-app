@@ -1,37 +1,11 @@
-import { useContext, useRef } from 'react';
-import { AppContext } from '../../context/AppContext/AppContext';
-import './SortingInput.scss';
-function SortingInput() {
-  const { state, dispatch } = useContext(AppContext);
-  const selectBox = useRef(null);
-  const changeHandler = () => {
-    const value = selectBox.current.value;
-    if (value === 'sort_by_age') {
-      sortByAge(state, dispatch);
-    } else if (value === 'sort_by_month') {
-      sortByMonth(state, dispatch);
-    } else if (value === 'sort_by_name') {
-      sortByName(state, dispatch);
-    }
-  };
-  return (
-    <select
-      onChange={() => changeHandler(state, dispatch)}
-      className="sorting-input"
-      ref={selectBox}
-    >
-      <option className="sorting-input__option" value="sort_by_age">
-        Sort by age
-      </option>
-
-      <option className="sorting-input__option" value="sort_by_month">
-        Sort by month
-      </option>
-      <option className="sorting-input__option" value="sort_by_name">
-        Sort by name
-      </option>
-    </select>
-  );
+function sortingLogic(state, dispatch, sortState) {
+  if (sortState === 'sortByAge') {
+    sortByAge(state, dispatch);
+  } else if (sortState === 'sortByMonth') {
+    sortByMonth(state, dispatch);
+  } else if (sortState === 'sortByName') {
+    sortByName(state, dispatch);
+  }
 }
 
 // People sorting could be merged into a single function in the future.
@@ -69,4 +43,4 @@ function sortByName(state, dispatch) {
   dispatch({ type: 'SORT_PEOPLE_BY_NAME', payload: sortedPeople });
 }
 
-export default SortingInput;
+export default sortingLogic;

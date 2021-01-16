@@ -2,4 +2,14 @@
 @import '../../styles/mixins';
 .add-person-ui {
   @include PersonUIStyle;
+  @include CenteredAndFixedElement(330px, 100px);
+}
+
+@media (min-width: 768px) {
+  .add-person-ui {
+    position: static !important;
+    height: initial !important;
+    margin: 0 !important;
+    width: initial !important;
+  }
 }

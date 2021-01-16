@@ -27,9 +27,17 @@ function Person(props) {
   };
   let parentClassName =
     currentPersonID === id ? 'person person--highlighted' : 'person';
+  const keyPressHandler = (e) => {
+    if (e.key === 'Enter' && !currentPersonID) selectPersonHandler(id);
+  };
 
   return (
-    <div className={parentClassName} onClick={() => selectPersonHandler(id)}>
+    <div
+      className={parentClassName}
+      onKeyPress={(e) => keyPressHandler(e)}
+      onClick={() => selectPersonHandler(id)}
+      tabIndex={1}
+    >
       {currentPersonID === id && (
         <PersonOptions
           currentPersonID={currentPersonID}
