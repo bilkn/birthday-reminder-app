@@ -18,13 +18,12 @@ function PersonList(props) {
     favState,
     backgroundState,
     showEditPersonUIState,
-    showAddPersonUIState,
   } = useContext(AppContext);
   const [showFavourites] = favState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [deletionUserID, setDeletionUserID] = useState(null);
-  const [showBackground, setShowBackground] = backgroundState;
+  const [setShowBackground] = backgroundState;
   const [isTimePassed, setIsTimePassed] = useState(true);
   const [showAddPersonUI, setShowAddPersonUI] = useState(false);
   const personList = showFavourites ? state.favourites : state.people;
