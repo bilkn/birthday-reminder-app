@@ -5,14 +5,23 @@
   display: none;
   height: 86px;
   justify-content: center;
+  transition: background 100ms ease;
 }
 
 .empty-box__add-icon {
   color: #7a7a7a;
+  cursor: pointer;
   font-size: 1.7rem;
 }
 
+.empty-box:hover {
+  background: #e0e0e0;
+  cursor: pointer;
+}
 
+.empty-box:active {
+  background: #d6d6d6;
+}
 
 @media (min-width: 768px) {
   .empty-box {

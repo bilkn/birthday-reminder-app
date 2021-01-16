@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Person from '../Person/Person';
 import EmptyBox from '../EmptyBox/EmptyBox';
 import './PersonList.scss';
@@ -49,6 +49,21 @@ function PersonList(props) {
     }
   };
 
+  const keyHandler = (e) => {
+    if (e.key === 'Escape') {
+      setCurrentPersonID(null);
+      setShowBackground(false);
+    }
+  };
+
+  useEffect(() => {
+    if (currentPersonID) {
+      window.addEventListener('keyup', keyHandler);
+    } else {
+      window.removeEventListener('keyup', keyHandler);
+    }
+  });
+
   return (
     <>
       {state.isModalOpen && (
@@ -70,6 +85,7 @@ function PersonList(props) {
             currentPersonID={currentPersonID}
             setCurrentPersonID={setCurrentPersonID}
             selectPersonHandler={selectPersonHandler}
+            setShowBackground={setShowBackground}
           />
         ))}
         <EmptyBox />
