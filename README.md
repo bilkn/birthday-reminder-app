@@ -1,8 +1,8 @@
-# MotiveMe - motivational site
+# Birthday Reminder App 
 
 React applicaton, where you can add and organize your loved ones' birthdays.
 
-[MotiveMe](https://motiveme.xyz/)
+[Birthday Reminder App](https://bilkn.github.io/birthday-reminder-app/)
 
 ## Getting Started
 
@@ -23,7 +23,7 @@ npm install npm@latest -g
 1. Clone the repo
 
 ``` 
-git clone https://github.com/bilkn/motive-me.git
+git clone https://github.com/bilkn/birthday-reminder-app.git
 ```
 
 2. Run npm install inside project root
