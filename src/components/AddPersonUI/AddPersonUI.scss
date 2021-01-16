@@ -5,6 +5,8 @@
   @include CenteredAndFixedElement(330px, 100px);
 }
 
+
+
 @media (min-width: 768px) {
   .add-person-ui {
     position: static !important;

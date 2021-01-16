@@ -1,14 +1,14 @@
 import './EmptyBox.scss';
-function EmptyBox({ showAddPersonUIHandlerForLargerScreen }) {
+function EmptyBox({ toggleAddPersonUIHandlerForLargerScreen }) {
   return (
     <div
       className="empty-box"
       tabIndex={1}
-      onClick={showAddPersonUIHandlerForLargerScreen}
+      onClick={toggleAddPersonUIHandlerForLargerScreen}
     >
-      <button className="empty-box__add-btn" tabIndex={-1}>
+      <div className="empty-box__icon-container">
         <i className="fa fa-plus empty-box__add-icon" aria-hidden="true"></i>
-      </button>
+      </div>
     </div>
   );
 }
