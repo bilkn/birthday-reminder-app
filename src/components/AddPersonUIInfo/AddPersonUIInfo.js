@@ -18,7 +18,7 @@ function AddPersonUIINfo(props) {
         defaultValue={name || ''}
       />
       <input
-        type="date"
+        type="number"
         className="add-person-ui-info-container__birthday"
         ref={dateContainer}
         defaultValue={formattedBirthday || ''}
