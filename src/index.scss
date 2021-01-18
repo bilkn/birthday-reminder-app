@@ -6,7 +6,13 @@
   padding: 0;
 }
 
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
+  height: 100%;
   background: var(--main-color, #f4eeff);
   font-family: 'Montserrat', sans-serif;
 }
@@ -17,6 +23,6 @@ button {
   border: none;
 }
 
-::-webkit-calendar-picker-indicator {
+input::-webkit-calendar-picker-indicator {
   display: none;
 }

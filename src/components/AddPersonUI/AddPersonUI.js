@@ -27,7 +27,6 @@ function AddPersonUI({ showAddPersonUIHandler }) {
       ? await blobToArrayBuffer(currentPicture)
       : blankImg;
     const validationResult = validatePersonData(name, date, picture);
-    console.log(picture);
     switch (validationResult) {
       case 'INVALID_NAME':
       case 'INVALID_DATE':

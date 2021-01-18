@@ -6,7 +6,7 @@ function AddPersonUIINfo(props) {
   if (birthday) {
     formattedBirthday = birthday.split('.').reverse().join('-');
   }
-  
+
   return (
     <div className="add-person-ui-info-container">
       <input
@@ -18,10 +18,12 @@ function AddPersonUIINfo(props) {
         defaultValue={name || ''}
       />
       <input
-        type="number"
+        type="text"
         className="add-person-ui-info-container__birthday"
         ref={dateContainer}
         defaultValue={formattedBirthday || ''}
+        maxLength="10"
+        placeholder="dd/mm/yyyy"
       />
     </div>
   );
