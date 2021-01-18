@@ -9,7 +9,6 @@ import {
 import PictureInput from '../PictureInput/PictureInput';
 import createFileURL from '../../helper/createFileURL';
 import validatePersonData from '../../helper/validatePersonData';
-import reformatData from '../../helper/reformatDate';
 import AddPersonUIControls from '../AddPersonUIControls/AddPersonUIControls';
 import AddPersonUIINfo from '../AddPersonUIInfo/AddPersonUIInfo';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
@@ -40,9 +39,8 @@ function AddPersonUI({ showAddPersonUIHandler }) {
     }
   };
 
-  const addPerson = (name, date, picture) => {
+  const addPerson = (name, birthday, picture) => {
     name = name.charAt(0).toUpperCase() + name.slice(1);
-    const birthday = reformatData(date);
     const newPerson = createNewPerson(name, birthday, picture);
     dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
     putItemToIDB(newPerson, 'userDatabase', '1', 'people');

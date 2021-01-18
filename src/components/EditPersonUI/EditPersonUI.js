@@ -6,7 +6,6 @@ import { AppContext } from '../../context/AppContext/AppContext';
 import findPersonByID from '../../helper/findPersonByID';
 import './EditPersonUI.scss';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
-import reformatDate from '../../helper/reformatDate';
 import blankImg from '../../assets/no-picture.png';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
 import createFileURL from '../../helper/createFileURL';
@@ -27,8 +26,7 @@ function EditPersonUI({
   const handleAcceptClick = (e) => {
     e.stopPropagation();
     const newName = nameContainer.current.value;
-    const dateValue = dateContainer.current.value;
-    const newBirthday = reformatDate(dateValue);
+    const newBirthday = dateContainer.current.value;;
     const editedPerson = createEditedPerson(
       newName,
       newBirthday,

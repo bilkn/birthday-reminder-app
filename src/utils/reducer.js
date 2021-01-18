@@ -37,7 +37,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isModalOpen: true,
-        modalContent: 'Please provide correct date format.',
+        modalContent: 'Please provide correct date format, (yyyy/mm/dd), or (dd/mm/yyyy) with any date seperators.',
       };
     }
     case 'SORT_PEOPLE_BY_AGE': {

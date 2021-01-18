@@ -1,4 +1,4 @@
-import validatePicture from "./validatePicture";
+import validatePicture from './validatePicture';
 const validatePersonData = (name, date, picture) => {
   if (name.length <= 0) return 'INVALID_NAME';
   else if (!dateValidation(date)) return 'INVALID_DATE';
@@ -6,9 +6,10 @@ const validatePersonData = (name, date, picture) => {
   return true;
 };
 
-function dateValidation (date) {
-  let regex = /\d\d(\.|\s|-|\/)?\d\d(\.|\s|-|\/)?\d\d\d\d/;
-  return regex.test(date);
+function dateValidation(date) {
+  let regex = /\d\d(\.|-|\/)\d\d(\.|-|\/)\d\d\d\d/;
+  let regex2 = /\d\d\d\d(\.|-|\/)\d\d(\.|-|\/)\d\d/;
+  return regex.test(date) || regex2.test(date);
 }
 
 export default validatePersonData;
