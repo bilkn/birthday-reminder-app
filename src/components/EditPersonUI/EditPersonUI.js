@@ -11,7 +11,6 @@ import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
 import createFileURL from '../../helper/createFileURL';
 function EditPersonUI({
   currentPersonID,
-  setCurrentPersonID,
   setShowEditPersonUI,
   setShowBackground,
 }) {
@@ -26,7 +25,7 @@ function EditPersonUI({
   const handleAcceptClick = (e) => {
     e.stopPropagation();
     const newName = nameContainer.current.value;
-    const newBirthday = dateContainer.current.value;;
+    const newBirthday = dateContainer.current.value;
     const editedPerson = createEditedPerson(
       newName,
       newBirthday,

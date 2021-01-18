@@ -2,10 +2,6 @@ import './AddPersonUIInfo.scss';
 
 function AddPersonUIINfo(props) {
   const { nameContainer, dateContainer, name, birthday } = props;
-  let formattedBirthday = null;
-  if (birthday) {
-    formattedBirthday = birthday.split('.').reverse().join('-');
-  }
 
   return (
     <div className="add-person-ui-info-container">
@@ -21,7 +17,7 @@ function AddPersonUIINfo(props) {
         type="text"
         className="add-person-ui-info-container__birthday"
         ref={dateContainer}
-        defaultValue={formattedBirthday || ''}
+        defaultValue={birthday || ''}
         maxLength="10"
         placeholder="dd/mm/yyyy"
       />

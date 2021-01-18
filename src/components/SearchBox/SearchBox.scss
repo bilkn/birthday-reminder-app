@@ -1,26 +1,29 @@
+@import "../../styles/variables";
 .search-box {
   border: none;
   border-radius: 5px;
-  height: 30px;
+  height: 35px;
   margin: 0 auto;
   position: relative;
-  width: 80%;
+  width: 90%;
 
   &__search-input {
-    border: none;
+    border: 2px solid $icon-color;
     border-radius: 5px;
     font-size: 1.1rem;
     height: 100%;
-    padding: 0.7rem;
+    padding: 0 0.7rem;
     width: 100%;
   }
 
   // search-box__close-btn
   &__close-btn {
+    color: $icon-color;
     font-size: 1.2rem;
-    height: 30px;
+    height: 35px;
     padding: 0.2rem;
     position: absolute;
+    top: 1px;
     right: 3px;
   }
 }

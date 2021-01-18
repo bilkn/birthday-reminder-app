@@ -111,7 +111,6 @@ function PersonList(props) {
       {showEditPersonUI && (
         <EditPersonUI
           currentPersonID={currentPersonID}
-          setCurrentPersonID={setCurrentPersonID}
           setShowEditPersonUI={setShowEditPersonUI}
           setShowBackground={setShowBackground}
         />
