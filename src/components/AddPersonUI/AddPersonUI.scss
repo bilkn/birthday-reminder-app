@@ -5,11 +5,18 @@
   @include CenteredAndFixedElement(330px, 100px);
 }
 
+
+
 @media (min-width: 768px) {
   .add-person-ui {
     position: static !important;
     height: initial !important;
     margin: 0 !important;
     width: initial !important;
+    // add-person-ui__close-btn
+    &__close-btn {
+      position: absolute;
+      top: 0;
+    }
   }
 }

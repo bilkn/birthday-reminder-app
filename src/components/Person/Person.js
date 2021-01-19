@@ -1,7 +1,7 @@
 import './Person.scss';
 import createFileURL from '../../helper//createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
-
+import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
 function Person(props) {
   const {
     person,
@@ -16,7 +16,8 @@ function Person(props) {
     let pictureURL = null;
     try {
       if (typeof picture !== 'string') {
-        pictureURL = createFileURL(picture);
+        const blob = arrayBufferToBlob(picture);
+        pictureURL = createFileURL(blob);
       } else {
         pictureURL = picture;
       }

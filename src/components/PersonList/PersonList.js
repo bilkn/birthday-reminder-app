@@ -23,7 +23,7 @@ function PersonList(props) {
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [deletionUserID, setDeletionUserID] = useState(null);
-  const [setShowBackground] = backgroundState;
+  const [, setShowBackground] = backgroundState;
   const [isTimePassed, setIsTimePassed] = useState(true);
   const [showAddPersonUI, setShowAddPersonUI] = useState(false);
   const personList = showFavourites ? state.favourites : state.people;
@@ -55,7 +55,7 @@ function PersonList(props) {
     }
   };
 
-  const showAddPersonUIHandlerForLargerScreen = () => {
+  const toggleAddPersonUIHandlerForLargerScreen = () => {
     setShowAddPersonUI(!showAddPersonUI);
   };
 
@@ -102,8 +102,8 @@ function PersonList(props) {
           <AddPersonUI showAddPersonUIHandler={showAddPersonUIHandler} />
         )) || (
           <EmptyBox
-            showAddPersonUIHandlerForLargerScreen={
-              showAddPersonUIHandlerForLargerScreen
+            toggleAddPersonUIHandlerForLargerScreen={
+              toggleAddPersonUIHandlerForLargerScreen
             }
           />
         )}
@@ -111,7 +111,6 @@ function PersonList(props) {
       {showEditPersonUI && (
         <EditPersonUI
           currentPersonID={currentPersonID}
-          setCurrentPersonID={setCurrentPersonID}
           setShowEditPersonUI={setShowEditPersonUI}
           setShowBackground={setShowBackground}
         />

@@ -12,7 +12,7 @@ function Modal({ isTimePassed, setIsTimePassed }) {
   useEffect(() => {
     if (isTimePassed) {
       setIsTimePassed(false);
-      setTimeout(modalHandler, 2000);
+      setTimeout(modalHandler, 2500);
     }
   });
   const modalHandler = () => {

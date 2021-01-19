@@ -15,7 +15,6 @@ function MobileNav() {
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showFavourites, setShowFavourites] = favState;
   const [showBackground, setShowBackground] = backgroundState;
-
   const [sortState, setSortState] = useState('sortByAge');
 
   const showAddPersonUIHandler = () => {
@@ -37,7 +36,7 @@ function MobileNav() {
       default:
         break;
     }
-    sortingLogic(state, dispatch, sortState);
+    sortingLogic({state, dispatch, sortState, showFavourites});
   };
   return (
     <>

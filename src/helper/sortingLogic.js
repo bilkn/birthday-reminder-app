@@ -1,16 +1,16 @@
-function sortingLogic(state, dispatch, sortState) {
+function sortingLogic({ state, dispatch, sortState, showFavourites }) {
+  const people = (showFavourites && state.favourites) || state.people;
   if (sortState === 'sortByAge') {
-    sortByAge(state, dispatch);
+    sortByAge(people, dispatch, showFavourites);
   } else if (sortState === 'sortByMonth') {
-    sortByMonth(state, dispatch);
+    sortByMonth(people, dispatch, showFavourites);
   } else if (sortState === 'sortByName') {
-    sortByName(state, dispatch);
+    sortByName(people, dispatch, showFavourites);
   }
 }
 
 // People sorting could be merged into a single function in the future.
-function sortByAge(state, dispatch) {
-  const oldPeople = state.people;
+function sortByAge(oldPeople, dispatch, showFavourites) {
   const sortedPeople = oldPeople.sort((prev, cur) => {
     const [prevDay, prevMonth, prevYear] = prev.birthday.split('.');
     const [curDay, curMonth, curYear] = cur.birthday.split('.');
@@ -18,11 +18,17 @@ function sortByAge(state, dispatch) {
     const curDateInMs = new Date(curYear, curMonth, curDay).getTime();
     return prevDateInMs - curDateInMs;
   });
-  dispatch({ type: 'SORT_PEOPLE_BY_AGE', payload: sortedPeople });
+  if (showFavourites) {
+    dispatch({ type: 'SORT_FAVOURITES_BY_AGE', payload: sortedPeople });
+  } else {
+    dispatch({
+      type: 'SORT_PEOPLE_BY_AGE',
+      payload: sortedPeople,
+    });
+  }
 }
 
-function sortByMonth(state, dispatch) {
-  const oldPeople = state.people;
+function sortByMonth(oldPeople, dispatch, showFavourites) {
   const sortedPeople = oldPeople.sort((prev, cur) => {
     const [prevDay, prevMonth] = prev.birthday.split('.');
     const [curDay, curMonth] = cur.birthday.split('.');
@@ -30,17 +36,24 @@ function sortByMonth(state, dispatch) {
     const curDatePoint = +curDay + +curMonth * 10;
     return prevDatePoint - curDatePoint;
   });
-  dispatch({ type: 'SORT_PEOPLE_BY_MONTH', payload: sortedPeople });
+  if (showFavourites) {
+    dispatch({ type: 'SORT_FAVOURITES_BY_MONTH', payload: sortedPeople });
+  } else {
+    dispatch({ type: 'SORT_PEOPLE_BY_MONTH', payload: sortedPeople });
+  }
 }
 
-function sortByName(state, dispatch) {
-  const oldPeople = state.people;
+function sortByName(oldPeople, dispatch, showFavourites) {
   const sortedPeople = oldPeople.sort((prev, cur) => {
     const [prevName] = prev.name;
     const [curName] = cur.name;
     return prevName.charCodeAt(0) - curName.charCodeAt(0);
   });
-  dispatch({ type: 'SORT_PEOPLE_BY_NAME', payload: sortedPeople });
+  if (showFavourites) {
+    dispatch({ type: 'SORT_FAVOURITES_BY_NAME', payload: sortedPeople });
+  } else {
+    dispatch({ type: 'SORT_PEOPLE_BY_NAME', payload: sortedPeople });
+  }
 }
 
 export default sortingLogic;

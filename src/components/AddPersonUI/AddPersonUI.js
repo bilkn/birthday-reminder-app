@@ -2,11 +2,13 @@ import { useContext, useRef, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import './AddPersonUI.scss';
 import blankImg from '../../assets/no-picture.png';
-import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
+import {
+  putItemToIDB,
+  blobToArrayBuffer,
+} from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
 import createFileURL from '../../helper/createFileURL';
 import validatePersonData from '../../helper/validatePersonData';
-import reformatData from '../../helper/reformatDate';
 import AddPersonUIControls from '../AddPersonUIControls/AddPersonUIControls';
 import AddPersonUIINfo from '../AddPersonUIInfo/AddPersonUIInfo';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
@@ -17,12 +19,13 @@ function AddPersonUI({ showAddPersonUIHandler }) {
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
 
-  const addPersonHandler = () => {
+  const addPersonHandler = async () => {
     let name = nameContainer.current.value;
     const date = dateContainer.current.value;
-    const picture = currentPicture || blankImg;
+    let picture = currentPicture
+      ? await blobToArrayBuffer(currentPicture)
+      : blankImg;
     const validationResult = validatePersonData(name, date, picture);
-
     switch (validationResult) {
       case 'INVALID_NAME':
       case 'INVALID_DATE':
@@ -36,9 +39,8 @@ function AddPersonUI({ showAddPersonUIHandler }) {
     }
   };
 
-  const addPerson = (name, date, picture) => {
+  const addPerson = (name, birthday, picture) => {
     name = name.charAt(0).toUpperCase() + name.slice(1);
-    const birthday = reformatData(date);
     const newPerson = createNewPerson(name, birthday, picture);
     dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
     putItemToIDB(newPerson, 'userDatabase', '1', 'people');
@@ -75,6 +77,9 @@ function AddPersonUI({ showAddPersonUIHandler }) {
           dateContainer={dateContainer}
         />
         <AddPersonUIControls addPersonHandler={addPersonHandler} />
+        <button className="add-person-ui__close-btn">
+          <i className="fas fa-times"></i>
+        </button>
       </div>
     </>
   );

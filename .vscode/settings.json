@@ -1,13 +1,13 @@
 {
     "files.exclude": {
-        ".eslintcache": false,
-        ".gitignore": false,
-        ".vscode": false,
-        "**.json": false,
-        "debug.log": false,
-        "LICENSE": false,
-        "node_modules": false,
-        "README.md": false
+        ".eslintcache": true,
+        ".gitignore": true,
+        ".vscode": true,
+        "**.json": true,
+        "debug.log": true,
+        "LICENSE": true,
+        "node_modules": true,
+        "README.md": true
     },
     "liveSassCompile.settings.excludeList": [
 

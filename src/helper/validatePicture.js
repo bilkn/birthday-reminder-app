@@ -4,7 +4,7 @@ const validatePicture = (picture) => {
     const pictureType = picture.type;
     return (
       // If user doesn't choose any picture, picture will be "no-picture.png" (URL as string).
-      pictureType === 'image/jpeg' || pictureType === 'image/png'
+      pictureType === 'image/jpeg' || pictureType === 'image/png' || picture instanceof ArrayBuffer
     );
   } catch (err) {
     console.log(err);

@@ -28,4 +28,19 @@ async function getDataFromIDBStore(database, version, store) {
   }
 } 
 
-export { putItemToIDB, getDataFromIDBStore, removeDataFromIDBStore };
+function arrayBufferToBlob(buffer, type) {
+  return new Blob([buffer], { type: type });
+}
+
+function blobToArrayBuffer(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener('loadend', (e) => {
+      resolve(reader.result);
+    });
+    reader.addEventListener('error', reject);
+    reader.readAsArrayBuffer(blob);
+  });
+}
+
+export { putItemToIDB, getDataFromIDBStore, removeDataFromIDBStore, blobToArrayBuffer, arrayBufferToBlob };
