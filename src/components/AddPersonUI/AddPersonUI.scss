@@ -13,5 +13,10 @@
     height: initial !important;
     margin: 0 !important;
     width: initial !important;
+    // add-person-ui__close-btn
+    &__close-btn {
+      position: absolute;
+      top: 0;
+    }
   }
 }

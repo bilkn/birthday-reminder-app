@@ -77,6 +77,9 @@ function AddPersonUI({ showAddPersonUIHandler }) {
           dateContainer={dateContainer}
         />
         <AddPersonUIControls addPersonHandler={addPersonHandler} />
+        <button className="add-person-ui__close-btn">
+          <i className="fas fa-times"></i>
+        </button>
       </div>
     </>
   );
