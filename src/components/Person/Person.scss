@@ -24,18 +24,19 @@
 .person-info {
   display: flex;
   flex-direction: column;
-}
 
-.person-info__name {
-  font-size: 1.2rem;
-  margin-bottom: 0.2rem;
-  text-align: center;
-}
-
-.person-info__birthday {
-  color: #2e2e31; /* May be changed. */
-  font-size: 1.6rem;
-  text-align: center;
+  // person-info__name
+  &__name {
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+    text-align: center;
+  }
+  // person-info__birthday
+  &__birthday {
+    color: #2e2e31; /* May be changed. */
+    font-size: 1.6rem;
+    text-align: center;
+  }
 }
 
 .person-controls__remove-btn {

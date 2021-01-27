@@ -3,20 +3,40 @@
 .add-person-ui {
   @include PersonUIStyle;
   @include CenteredAndFixedElement(330px, 100px);
+  // add-person-ui__close-btn
+  &__close-btn {
+    display: none;
+  }
 }
-
-
 
 @media (min-width: 768px) {
   .add-person-ui {
-    position: static !important;
+    position: relative !important;
     height: initial !important;
+    left: 0;
     margin: 0 !important;
+    top: 0;
     width: initial !important;
+    z-index: 0;
     // add-person-ui__close-btn
     &__close-btn {
+      align-items: center;
+      background: #e0e0e0d0;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      font-size: 1.3rem;
+      height: 30px;
+      justify-content: center;
+      padding: 0 5px;
       position: absolute;
-      top: 0;
+      transition: background 100ms ease;
+      right: -10px;
+      top: -10px;
+      width: 30px;
+    }
+    &__close-btn:hover {
+      background: #e0e0e0;
     }
   }
 }
