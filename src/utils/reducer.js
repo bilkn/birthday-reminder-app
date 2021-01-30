@@ -151,7 +151,9 @@ export const reducer = (state, action) => {
         favourites: favourites,
       };
     }
-    default:
-      break;
+    default: {
+      throw new Error(`Unhandled action type: ${action.type}`);
+    }
+    
   }
 };
