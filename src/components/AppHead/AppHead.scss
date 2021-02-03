@@ -1,22 +1,52 @@
 @import '../../styles/variables';
 .app-head {
   background: $ui-color;
+  display: flex;
   height: 60px;
+  justify-content: space-between;
   padding: 0.6rem;
   position: fixed;
   top: 0;
   width: 100vw;
   z-index: 1000;
+  &__logo {
+    color: white;
+  }
 }
 
 .app-head-nav {
   align-items: center;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   height: 100%;
+
   // app-head-nav__search-btn
   &__search-btn {
     color: $third-color;
     font-size: 1.5rem;
+    margin-right: 1rem;
+  }
+
+  // app-head-nav__fav-btn
+  &__fav-btn {
+    cursor: pointer;
+    display: none;
+    font-size: 1.3rem;
+    color: $sec-color;
+  }
+
+  &__search-btn {
+    cursor: pointer;
+  }
+ 
+}
+
+@media (min-width: 760px) {
+  .app-head-nav {
+    padding: 1rem;
+    // app-head-nav__fav-btn
+    &__fav-btn {
+      display: initial;
+    }
   }
 }

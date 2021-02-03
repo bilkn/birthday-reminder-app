@@ -87,6 +87,9 @@ function PersonList(props) {
         />
       )}
       <ul className="person-list">
+        <button className="person-list__btn">
+          <i className="fas fa-sort person-list__icon"></i>
+        </button>
         {personList.map((person) => (
           <Person
             key={person.id}

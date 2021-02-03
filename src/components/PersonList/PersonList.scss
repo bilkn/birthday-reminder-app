@@ -5,7 +5,27 @@
   margin: 0 auto;
   justify-content: center;
   padding: 3rem 0 6rem 0;
+  position: relative;
   width: 90%;
+
+  // person-list__btn
+  &__btn {
+    display: none;
+    font-size: 1.7rem;
+    position: absolute;
+    right: 95px;
+    top: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  .person-list {
+    padding: 5rem 0 6rem 0;
+    // person-list__btn
+    &__btn {
+      display: initial;
+    }
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
