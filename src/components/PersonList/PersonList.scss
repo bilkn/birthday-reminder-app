@@ -10,11 +10,12 @@
 
   // person-list__btn
   &__btn {
+    align-self: flex-start;
     display: none;
     font-size: 1.7rem;
-    position: absolute;
-    right: 95px;
-    top: 40px;
+    justify-self: end;
+    grid-column: 3;
+    width: max-content;
   }
 }
 
@@ -31,6 +32,10 @@
 @media (min-width: 768px) and (max-width: 1023px) {
   .person-list {
     grid-template-columns: repeat(auto-fill, 330px);
+    // person-list__btn
+    &__btn {
+      grid-column: 2;
+    }
   }
 }
 

@@ -45,6 +45,7 @@ function EditPersonUI({
         favourites: newFavourites || state.favourites,
       },
     });
+    
     setShowBackground(false);
     setShowEditPersonUI(false);
   };

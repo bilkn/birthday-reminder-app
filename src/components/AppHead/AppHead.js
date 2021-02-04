@@ -9,7 +9,7 @@ function AppHead() {
 
   return (
     <header className="app-head">
-        <h1 className="app-head__logo">BirthdayApp</h1>
+       {/*  <h1 className="app-head__logo">BirthdayApp</h1> */}
       <nav className="app-head-nav">
         {(showSearchBox && (
           <SearchBox setShowSearchBox={setShowSearchBox} />

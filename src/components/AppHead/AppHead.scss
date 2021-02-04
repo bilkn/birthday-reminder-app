@@ -17,8 +17,9 @@
 .app-head-nav {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 100%;
+  width: 100%;
 
   // app-head-nav__search-btn
   &__search-btn {
@@ -41,7 +42,7 @@
  
 }
 
-@media (min-width: 760px) {
+@media (min-width: 768px) {
   .app-head-nav {
     padding: 1rem;
     // app-head-nav__fav-btn

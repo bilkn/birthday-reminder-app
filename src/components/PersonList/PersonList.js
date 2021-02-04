@@ -45,11 +45,17 @@ function PersonList(props) {
       type: 'REMOVE_ITEM',
       payload: { people: newPeople, favourites: newFavourites },
     });
+
     setShowBackground(false);
   };
 
   const selectPersonHandler = (id) => {
-    setShowBackground(true);
+    const mql = window.matchMedia('(max-width: 768px)');
+    if (mql.matches) {
+      console.log("hello")
+      setShowBackground(true);
+    }
+
     if (currentPersonID !== id && showUI) {
       setCurrentPersonID(id);
     }

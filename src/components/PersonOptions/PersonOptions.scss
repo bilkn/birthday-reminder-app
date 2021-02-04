@@ -1,12 +1,14 @@
+@import '../../styles/variables';
+
 .person-options-container {
-  background-color: #434975;
+  background-color: $options-ui-color;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw;
+  position: fixed;
   z-index: 100000;
+  width: 100vw;
 
   // person-options-container__name
   &__name {
@@ -18,15 +20,63 @@
 .person-options-list {
   list-style: none;
 
+  // person-options-list__item
+  &__item {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    cursor: pointer;
+    transition: background 200ms ease;
+  }
   // person-options-list__btn
   &__btn {
     color: white;
     font-size: 20px;
     padding: 1rem 2rem;
+    text-align: left;
+    width: 100%;
+  }
+  &__item:hover {
+    background: lighten($options-ui-color, 5%);
+  }
+
+  // person-options-list__item--edit-btn
+  &__item--edit-btn {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 
   // person-options-list__line {
   .person-options-list__line {
     border-bottom: 1px solid white;
+  }
+}
+
+@media (min-width: 768px) {
+  .person-options-container {
+    bottom: -125px;
+    border-radius: 20px;
+    left: unset;
+    position: absolute;
+    right: 10px;
+    width: max-content;
+    // person-options-container__name
+    &__name {
+      display: none;
+    }
+  }
+
+  .person-options-container::before {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #434975;
+    content: '';
+    display: block;
+    height: 0;
+    position: absolute;
+    right: 10px;
+    top: -7px;
+    width: 0;
   }
 }
