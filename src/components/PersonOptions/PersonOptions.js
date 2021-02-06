@@ -73,13 +73,13 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
     const handleMouseOut = () => {
       console.log("mouse out")
       setCurrentPersonID(null);
-      target.removeEventListener('mouseout', handleMouseOut);
+      target.removeEventListener('mouseleave', handleMouseOut);
     };
-    target.addEventListener('mouseout', handleMouseOut);
+    target.addEventListener('mouseleave', handleMouseOut);
   };
 
   return (
-    <div className="person-options-container" onMouseOver={handleMouseOver}>
+    <div className="person-options-container" onMouseEnter={handleMouseOver}>
       <p className="person-options-container__name">Person: {person.name}</p>
       <ul className="person-options-list">
         <li className="person-options-list__item person-options-list__item--triangled">
@@ -90,7 +90,7 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
             {setText()}
           </button>
         </li>
-        <hr className="person-options-list__line" />
+        {/* <hr className="person-options-list__line" /> */}
         <li className="person-options-list__item person-options-list__item--edit-btn">
           <button
             className="person-options-list__btn"

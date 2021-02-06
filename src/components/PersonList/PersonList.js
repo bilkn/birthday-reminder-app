@@ -52,7 +52,7 @@ function PersonList(props) {
   const selectPersonHandler = (id) => {
     const mql = window.matchMedia('(max-width: 768px)');
     if (mql.matches) {
-      console.log("hello")
+      console.log('hello');
       setShowBackground(true);
     }
 
@@ -73,12 +73,11 @@ function PersonList(props) {
   };
 
   useEffect(() => {
-    if (currentPersonID) {
-      window.addEventListener('keyup', keyHandler);
-    } else {
+    window.addEventListener('keyup', keyHandler);
+    return () => {
       window.removeEventListener('keyup', keyHandler);
-    }
-  });
+    };
+  }, []);
 
   return (
     <>
