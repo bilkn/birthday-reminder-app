@@ -2,6 +2,7 @@ import './Person.scss';
 import createFileURL from '../../helper//createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
+import { useState } from 'react';
 function Person(props) {
   const {
     person,
@@ -11,7 +12,7 @@ function Person(props) {
     selectPersonHandler,
   } = props;
   const { id, name, birthday, picture } = person;
-
+  const [optionsBtnStyle, setOptionsBtnStyle] = useState(null);
   const getURL = () => {
     let pictureURL = null;
     try {
@@ -32,6 +33,24 @@ function Person(props) {
     if (e.key === 'Enter' && !currentPersonID) selectPersonHandler(id);
   };
 
+  const handleMouseEnter = (e) => {
+    const target = e.target.closest('button');
+    selectPersonHandler(id);
+    const style = { height: '50px', width: '30px' };
+    setOptionsBtnStyle(style);
+    console.log('mouse enter');
+    const handleMouseLeave = (e) => {
+      const nextTarget = e.relatedTarget;
+      if (!nextTarget.classList.contains('person-options-list__item')) {
+        setCurrentPersonID(null);
+        setOptionsBtnStyle(null);
+        target.removeEventListener('mouseleave', handleMouseLeave);
+      }
+      console.log('mouse leave');
+    };
+    target.addEventListener('mouseleave', handleMouseLeave);
+  };
+
   return (
     <div
       className={parentClassName}
@@ -39,6 +58,13 @@ function Person(props) {
       onClick={() => selectPersonHandler(id)}
       tabIndex={1}
     >
+      <button
+        className="person__options-btn"
+        onMouseEnter={handleMouseEnter}
+        style={optionsBtnStyle}
+      >
+        <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
+      </button>
       {currentPersonID === id && (
         <PersonOptions
           currentPersonID={currentPersonID}

@@ -16,7 +16,7 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
   } = useContext(AppContext);
   const person = findPersonByID(state.people, currentPersonID);
   const [, setShowBackground] = backgroundState;
-  const [, setShowEditPersonUI] = showEditPersonUIState;
+  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const isPersonInFavourites = () => {
     // Prevents the person from being added to favourites again.
     return state.favourites.some((person) => person.id === currentPersonID);
@@ -24,6 +24,10 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
 
   const editClickHandler = (e) => {
     e.stopPropagation();
+    const mql = window.matchMedia('(max-width: 768px)');
+    if (mql.matches) {
+      setShowBackground(true);
+    }
     setShowEditPersonUI(true);
     setTimeout(() => setCurrentPersonID(null), 0);
   };
@@ -62,11 +66,23 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
       ? 'Remove from favourites'
       : 'Add to favourites';
   };
+
+  const handleMouseOver = (e) => {
+    const target = e.target.closest('div');
+    console.log('mouse over');
+    const handleMouseOut = () => {
+      console.log("mouse out")
+      setCurrentPersonID(null);
+      target.removeEventListener('mouseleave', handleMouseOut);
+    };
+    target.addEventListener('mouseleave', handleMouseOut);
+  };
+
   return (
-    <div className="person-options-container">
+    <div className="person-options-container" onMouseEnter={handleMouseOver}>
       <p className="person-options-container__name">Person: {person.name}</p>
       <ul className="person-options-list">
-        <li className="person-options-list__item">
+        <li className="person-options-list__item person-options-list__item--triangled">
           <button
             className="person-options-list__btn"
             onClick={(e) => setHandlerFunction(e)()}
@@ -74,8 +90,8 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
             {setText()}
           </button>
         </li>
-        <hr className="person-options-list__line" />
-        <li className="person-options-list__item">
+        {/* <hr className="person-options-list__line" /> */}
+        <li className="person-options-list__item person-options-list__item--edit-btn">
           <button
             className="person-options-list__btn"
             onClick={(e) => editClickHandler(e)}

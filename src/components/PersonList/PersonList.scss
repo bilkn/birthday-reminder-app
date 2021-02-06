@@ -5,12 +5,37 @@
   margin: 0 auto;
   justify-content: center;
   padding: 3rem 0 6rem 0;
+  position: relative;
   width: 90%;
+
+  // person-list__btn
+  &__btn {
+    align-self: flex-start;
+    display: none;
+    font-size: 1.7rem;
+    justify-self: end;
+    grid-column: 3;
+    width: max-content;
+  }
+}
+
+@media (min-width: 768px) {
+  .person-list {
+    padding: 5rem 0 6rem 0;
+    // person-list__btn
+    &__btn {
+      display: initial;
+    }
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .person-list {
     grid-template-columns: repeat(auto-fill, 330px);
+    // person-list__btn
+    &__btn {
+      grid-column: 2;
+    }
   }
 }
 

@@ -45,11 +45,17 @@ function PersonList(props) {
       type: 'REMOVE_ITEM',
       payload: { people: newPeople, favourites: newFavourites },
     });
+
     setShowBackground(false);
   };
 
   const selectPersonHandler = (id) => {
-    setShowBackground(true);
+    const mql = window.matchMedia('(max-width: 768px)');
+    if (mql.matches) {
+      console.log('hello');
+      setShowBackground(true);
+    }
+
     if (currentPersonID !== id && showUI) {
       setCurrentPersonID(id);
     }
@@ -67,12 +73,11 @@ function PersonList(props) {
   };
 
   useEffect(() => {
-    if (currentPersonID) {
-      window.addEventListener('keyup', keyHandler);
-    } else {
+    window.addEventListener('keyup', keyHandler);
+    return () => {
       window.removeEventListener('keyup', keyHandler);
-    }
-  });
+    };
+  }, []);
 
   return (
     <>
@@ -87,6 +92,9 @@ function PersonList(props) {
         />
       )}
       <ul className="person-list">
+        <button className="person-list__btn">
+          <i className="fas fa-sort person-list__icon"></i>
+        </button>
         {personList.map((person) => (
           <Person
             key={person.id}

@@ -10,6 +10,7 @@ function HomeMain(props) {
   } = props;
   return (
     <main className="home-main">
+      
       <PersonList
         currentPersonID={currentPersonID}
         setCurrentPersonID={setCurrentPersonID}

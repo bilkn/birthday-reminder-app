@@ -9,6 +9,7 @@
 
   // search-box__search-input
   &__search-input {
+    appearance: none;
     border: 2px solid $icon-color;
     border-radius: 5px;
     font-size: 1.1rem;
@@ -26,5 +27,11 @@
     position: absolute;
     top: 1px;
     right: 3px;
+  }
+}
+
+@media (min-width: 768px) {
+  .search-box {
+    margin-right: 2rem;
   }
 }
