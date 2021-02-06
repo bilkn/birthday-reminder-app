@@ -66,11 +66,23 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
       ? 'Remove from favourites'
       : 'Add to favourites';
   };
+
+  const handleMouseOver = (e) => {
+    const target = e.target.closest('div');
+    console.log('mouse over');
+    const handleMouseOut = () => {
+      console.log("mouse out")
+      setCurrentPersonID(null);
+      target.removeEventListener('mouseout', handleMouseOut);
+    };
+    target.addEventListener('mouseout', handleMouseOut);
+  };
+
   return (
-    <div className="person-options-container">
+    <div className="person-options-container" onMouseOver={handleMouseOver}>
       <p className="person-options-container__name">Person: {person.name}</p>
       <ul className="person-options-list">
-        <li className="person-options-list__item">
+        <li className="person-options-list__item person-options-list__item--triangled">
           <button
             className="person-options-list__btn"
             onClick={(e) => setHandlerFunction(e)()}

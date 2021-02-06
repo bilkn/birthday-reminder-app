@@ -32,6 +32,10 @@ function Person(props) {
     if (e.key === 'Enter' && !currentPersonID) selectPersonHandler(id);
   };
 
+  const handleMouseOver = () => {
+    selectPersonHandler(id);
+  };
+
   return (
     <div
       className={parentClassName}
@@ -39,6 +43,9 @@ function Person(props) {
       onClick={() => selectPersonHandler(id)}
       tabIndex={1}
     >
+      <button className="person__options-btn" onMouseOver={handleMouseOver}>
+        <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
+      </button>
       {currentPersonID === id && (
         <PersonOptions
           currentPersonID={currentPersonID}

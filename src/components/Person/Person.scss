@@ -11,6 +11,21 @@
   padding: 0.5rem 1rem;
   position: relative;
   transition: background 200ms ease;
+
+  &__options-btn {
+    color: rgb(77, 76, 76);
+    cursor: pointer;
+    display: none;
+    font-size: 1.5rem;
+    height: 50px;
+    position: absolute;
+    right: 10px;
+    transition: color 200ms ease;
+    top: 0;
+  }
+  &__options-btn:hover {
+    color: rgb(46, 46, 46);
+  }
 }
 
 .person:hover {
@@ -39,19 +54,30 @@
   }
 }
 
-.person-controls__remove-btn {
-  color: $ui-color, #424874;
-  cursor: pointer;
-  display: flex;
-  font-size: 1.5rem;
-  margin-right: 10px;
-  transition: color 150ms ease;
+.person-controls {
+  // person-controls__remove-btn
+  &__remove-btn {
+    color: $ui-color, #424874;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.5rem;
+    margin-right: 10px;
+    transition: color 150ms ease;
+  }
+
+  &__remove-btn:hover {
+    color: $ui-color-hover;
+  }
+  &__remove-btn:hover .person {
+    background: $sec-color !important;
+  }
 }
 
-.person-controls__remove-btn:hover {
-  color: $ui-color-hover;
-}
-
-.person-controls__remove-btn:hover .person {
-  background: $sec-color !important;
+@media (min-width: 768px) {
+  .person {
+    // person__options-btn
+    &__options-btn {
+      display: flex;
+    }
+  }
 }
