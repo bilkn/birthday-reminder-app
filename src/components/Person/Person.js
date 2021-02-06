@@ -36,7 +36,7 @@ function Person(props) {
   const handleMouseEnter = (e) => {
     const target = e.target.closest('button');
     selectPersonHandler(id);
-    const style = { height: '50px' };
+    const style = { height: '50px', width: '30px' };
     setOptionsBtnStyle(style);
     console.log('mouse enter');
     const handleMouseLeave = (e) => {
