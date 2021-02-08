@@ -7,7 +7,8 @@ import {
   removeDataFromIDBStore,
 } from '../../utils/IndexedDB/indexedDBManagement';
 
-function PersonOptions({ currentPersonID, setCurrentPersonID }) {
+function PersonOptions(props) {
+  const { currentPersonID, setCurrentPersonID, handleDeletePerson } = props;
   const {
     state,
     dispatch,
@@ -16,18 +17,15 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
   } = useContext(AppContext);
   const person = findPersonByID(state.people, currentPersonID);
   const [, setShowBackground] = backgroundState;
-  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
+  const [, setShowEditPersonUI] = showEditPersonUIState;
   const isPersonInFavourites = () => {
     // Prevents the person from being added to favourites again.
     return state.favourites.some((person) => person.id === currentPersonID);
   };
 
-  const editClickHandler = (e) => {
+  const editHandler = (e) => {
     e.stopPropagation();
-    const mql = window.matchMedia('(max-width: 768px)');
-    if (mql.matches) {
-      setShowBackground(true);
-    }
+    setShowBackground(true);
     setShowEditPersonUI(true);
     setTimeout(() => setCurrentPersonID(null), 0);
   };
@@ -69,11 +67,12 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
 
   const handleMouseOver = (e) => {
     const target = e.target.closest('div');
-    console.log('mouse over');
-    const handleMouseOut = () => {
-      console.log("mouse out")
-      setCurrentPersonID(null);
-      target.removeEventListener('mouseleave', handleMouseOut);
+    const handleMouseOut = (e) => {
+      const relatedTarget = e.relatedTarget;
+      if (!relatedTarget.classList.contains('person__options-btn')) {
+        setCurrentPersonID(null);
+        target.removeEventListener('mouseleave', handleMouseOut);
+      }
     };
     target.addEventListener('mouseleave', handleMouseOut);
   };
@@ -90,13 +89,20 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
             {setText()}
           </button>
         </li>
-        {/* <hr className="person-options-list__line" /> */}
         <li className="person-options-list__item person-options-list__item--edit-btn">
           <button
             className="person-options-list__btn"
-            onClick={(e) => editClickHandler(e)}
+            onClick={(e) => editHandler(e)}
           >
             Edit
+          </button>
+        </li>
+        <li className="person-options-list__item person-options-list__item--delete-btn">
+          <button
+            className="person-options-list__btn"
+            onClick={(e) => handleDeletePerson(e, currentPersonID)}
+          >
+            Delete
           </button>
         </li>
       </ul>

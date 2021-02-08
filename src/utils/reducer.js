@@ -37,7 +37,16 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isModalOpen: true,
-        modalContent: 'Please provide correct date format, (yyyy/mm/dd), or (dd/mm/yyyy) with any date seperators.',
+        modalContent:
+          'Please provide correct date format, (yyyy/mm/dd), or (dd/mm/yyyy) with any date seperators.',
+      };
+    }
+    case 'INVALID_MONTH': {
+      return {
+        ...state,
+        isModalOpen: true,
+        modalContent:
+          "Please provide correct date format, month value cannot be greater than 12",
       };
     }
     case 'SORT_PEOPLE_BY_AGE': {
@@ -154,6 +163,5 @@ export const reducer = (state, action) => {
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
-    
   }
 };

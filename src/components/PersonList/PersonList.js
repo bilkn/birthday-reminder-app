@@ -27,7 +27,7 @@ function PersonList(props) {
   const [isTimePassed, setIsTimePassed] = useState(true);
   const [showAddPersonUI, setShowAddPersonUI] = useState(false);
   const personList = showFavourites ? state.favourites : state.people;
-  const removeItemHandler = (e, id) => {
+  const handleDeletePerson = (e, id) => {
     e.stopPropagation();
     setShowDeletePersonDialog(true);
     setDeletionUserID(id);
@@ -52,7 +52,6 @@ function PersonList(props) {
   const selectPersonHandler = (id) => {
     const mql = window.matchMedia('(max-width: 768px)');
     if (mql.matches) {
-      console.log('hello');
       setShowBackground(true);
     }
 
@@ -77,7 +76,7 @@ function PersonList(props) {
     return () => {
       window.removeEventListener('keyup', keyHandler);
     };
-  }, []);
+  });
 
   return (
     <>
@@ -99,7 +98,7 @@ function PersonList(props) {
           <Person
             key={person.id}
             person={person}
-            removeItemHandler={removeItemHandler}
+            handleDeletePerson={handleDeletePerson}
             currentPersonID={currentPersonID}
             setCurrentPersonID={setCurrentPersonID}
             selectPersonHandler={selectPersonHandler}

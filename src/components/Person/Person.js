@@ -2,18 +2,22 @@ import './Person.scss';
 import createFileURL from '../../helper//createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import getPersonAge from '../../helper/getPersonAge';
 function Person(props) {
   const {
     person,
-    removeItemHandler,
+    handleDeletePerson,
     currentPersonID,
     setCurrentPersonID,
     selectPersonHandler,
   } = props;
   const { id, name, birthday, picture } = person;
   const [optionsBtnStyle, setOptionsBtnStyle] = useState(null);
-  const getURL = () => {
+  const [pictureURL, setPictureURL] = useState(null);
+  const [parentClass, setParentClass] = useState('');
+  const [personAge, setPersonAge] = useState(null);
+  useEffect(() => {
     let pictureURL = null;
     try {
       if (typeof picture !== 'string') {
@@ -25,35 +29,42 @@ function Person(props) {
     } catch (err) {
       console.log(err);
     }
-    return pictureURL;
-  };
-  let parentClassName =
-    currentPersonID === id ? 'person person--highlighted' : 'person';
+
+    setPictureURL((oldState) => (oldState = pictureURL));
+  }, [picture]);
+
+  useEffect(() => {
+    let parentClassName =
+      currentPersonID === id ? 'person person--highlighted' : 'person';
+    setParentClass(parentClassName);
+  }, [currentPersonID, id]);
+
+  useEffect(() => {
+    setPersonAge(getPersonAge(person));
+  }, [person]);
+
   const keyPressHandler = (e) => {
     if (e.key === 'Enter' && !currentPersonID) selectPersonHandler(id);
   };
-
   const handleMouseEnter = (e) => {
     const target = e.target.closest('button');
     selectPersonHandler(id);
     const style = { height: '50px', width: '30px' };
     setOptionsBtnStyle(style);
-    console.log('mouse enter');
     const handleMouseLeave = (e) => {
-      const nextTarget = e.relatedTarget;
-      if (!nextTarget.classList.contains('person-options-list__item')) {
+      const relatedTarget = e.relatedTarget;
+      if (!relatedTarget.classList.contains('person-options-list__item')) {
         setCurrentPersonID(null);
         setOptionsBtnStyle(null);
         target.removeEventListener('mouseleave', handleMouseLeave);
       }
-      console.log('mouse leave');
     };
     target.addEventListener('mouseleave', handleMouseLeave);
   };
 
   return (
     <div
-      className={parentClassName}
+      className={parentClass}
       onKeyPress={(e) => keyPressHandler(e)}
       onClick={() => selectPersonHandler(id)}
       tabIndex={1}
@@ -69,24 +80,23 @@ function Person(props) {
         <PersonOptions
           currentPersonID={currentPersonID}
           setCurrentPersonID={setCurrentPersonID}
+          handleDeletePerson={handleDeletePerson}
         />
       )}
       <div className="person-img-container">
-        <img className="person-img-container__img" src={getURL()} alt={name} />
+        <img
+          className="person-img-container__img"
+          src={pictureURL}
+          alt={name}
+        />
       </div>
       <div className="person-info">
         <p className="person-info__name">{name}</p>
         <p className="person-info__birthday">{birthday}</p>
       </div>
-      <div className="person-controls">
-        <button
-          className="person-controls__remove-btn"
-          onClick={(e) => {
-            removeItemHandler(e, id);
-          }}
-        >
-          <i className="fas fa-trash"></i>
-        </button>
+      <div className="person-age-container">
+        <p className="person-age-container__title">Age:</p>
+        <p className="person-age-container__age">{personAge}</p>
       </div>
     </div>
   );

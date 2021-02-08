@@ -29,6 +29,7 @@ function AddPersonUI({ showAddPersonUIHandler }) {
     switch (validationResult) {
       case 'INVALID_NAME':
       case 'INVALID_DATE':
+      case 'INVALID_MONTH':
       case 'INVALID_FILE_TYPE':
         dispatch({ type: validationResult });
         break;
@@ -77,7 +78,10 @@ function AddPersonUI({ showAddPersonUIHandler }) {
           dateContainer={dateContainer}
         />
         <AddPersonUIControls addPersonHandler={addPersonHandler} />
-        <button className="add-person-ui__close-btn" onClick= {showAddPersonUIHandler}>
+        <button
+          className="add-person-ui__close-btn"
+          onClick={showAddPersonUIHandler}
+        >
           <i className="fas fa-times"></i>
         </button>
       </div>
