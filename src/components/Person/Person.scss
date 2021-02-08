@@ -11,7 +11,7 @@
   padding: 0.5rem 1rem;
   position: relative;
   transition: background 200ms ease;
-
+  // person__options-btn
   &__options-btn {
     color: rgb(77, 76, 76);
     cursor: pointer;
@@ -47,28 +47,22 @@
   }
   // person-info__birthday
   &__birthday {
-    color: #2e2e31; /* May be changed. */
+    color: #2e2e31;
     font-size: 1.6rem;
     text-align: center;
   }
 }
 
-.person-controls {
-  // person-controls__remove-btn
-  &__remove-btn {
-    color: $ui-color, #424874;
-    cursor: pointer;
-    display: flex;
-    font-size: 1.5rem;
-    margin-right: 10px;
-    transition: color 150ms ease;
-  }
-
-  &__remove-btn:hover {
-    color: $ui-color-hover;
-  }
-  &__remove-btn:hover .person {
-    background: $sec-color !important;
+.person-age-container {
+  text-align: center;
+ /*  // .person-age-container__title {
+  &__title {
+    font-size: 1rem;
+  } */
+  // person-age-container__age
+  &__age {
+    color: black;
+    font-size: 1.6rem;
   }
 }
 

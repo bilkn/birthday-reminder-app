@@ -29,6 +29,7 @@ function AddPersonUI({ showAddPersonUIHandler }) {
     switch (validationResult) {
       case 'INVALID_NAME':
       case 'INVALID_DATE':
+      case 'INVALID_MONTH':
       case 'INVALID_FILE_TYPE':
         dispatch({ type: validationResult });
         break;
@@ -42,7 +43,7 @@ function AddPersonUI({ showAddPersonUIHandler }) {
   const addPerson = (name, birthday, picture) => {
     name = name.charAt(0).toUpperCase() + name.slice(1);
     const newPerson = createNewPerson(name, birthday, picture);
-    dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
+    dispatch({ type: 'ADD_PERSON', payload: [...state.people, newPerson] });
     putItemToIDB(newPerson, 'userDatabase', '1', 'people');
   };
 
@@ -52,6 +53,7 @@ function AddPersonUI({ showAddPersonUIHandler }) {
       name: name,
       birthday: birthday,
       picture: picture,
+      inFavourites: false,
     };
     return newPerson;
   };
@@ -77,7 +79,10 @@ function AddPersonUI({ showAddPersonUIHandler }) {
           dateContainer={dateContainer}
         />
         <AddPersonUIControls addPersonHandler={addPersonHandler} />
-        <button className="add-person-ui__close-btn" onClick= {showAddPersonUIHandler}>
+        <button
+          className="add-person-ui__close-btn"
+          onClick={showAddPersonUIHandler}
+        >
           <i className="fas fa-times"></i>
         </button>
       </div>

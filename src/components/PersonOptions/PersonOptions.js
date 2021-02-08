@@ -2,12 +2,10 @@ import './PersonOptions.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import findPersonByID from '../../helper/findPersonByID';
-import {
-  putItemToIDB,
-  removeDataFromIDBStore,
-} from '../../utils/IndexedDB/indexedDBManagement';
+import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 
-function PersonOptions({ currentPersonID, setCurrentPersonID }) {
+function PersonOptions(props) {
+  const { currentPersonID, setCurrentPersonID, handleDeletePerson } = props;
   const {
     state,
     dispatch,
@@ -16,64 +14,78 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
   } = useContext(AppContext);
   const person = findPersonByID(state.people, currentPersonID);
   const [, setShowBackground] = backgroundState;
-  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
-  const isPersonInFavourites = () => {
-    // Prevents the person from being added to favourites again.
-    return state.favourites.some((person) => person.id === currentPersonID);
+  const [, setShowEditPersonUI] = showEditPersonUIState;
+  const isPersonInFavourites = (person) => {
+    return person.inFavourites;
   };
 
-  const editClickHandler = (e) => {
+  const editHandler = (e) => {
     e.stopPropagation();
-    const mql = window.matchMedia('(max-width: 768px)');
-    if (mql.matches) {
-      setShowBackground(true);
-    }
+    setShowBackground(true);
     setShowEditPersonUI(true);
     setTimeout(() => setCurrentPersonID(null), 0);
   };
 
   const addToFavoritesHandler = () => {
+    const oldPeople = state.people.filter(
+      (person) => currentPersonID !== person.id
+    );
+    const modifiedPerson = {
+      ...person,
+      inFavourites: true,
+    };
+
     dispatch({
       type: 'ADD_FAVOURITE',
-      payload: [...state.favourites, person],
+      payload: {
+        people: [...oldPeople, modifiedPerson],
+        name: modifiedPerson.name,
+      },
     });
-    putItemToIDB(person, 'userDatabase', '1', 'favourites');
+    putItemToIDB(modifiedPerson, 'userDatabase', '1', 'people');
     setCurrentPersonID(null);
   };
 
   const removeFromFavouritesHandler = () => {
-    const newFavourites = state.favourites.filter(
+    const oldPeople = state.people.filter(
       (person) => person.id !== currentPersonID
     );
+    const modifiedPerson = {
+      ...person,
+      inFavourites: false,
+    };
     dispatch({
       type: 'REMOVE_FAVOURITE',
-      payload: newFavourites,
+      payload: {
+        people: [...oldPeople, modifiedPerson],
+        name: modifiedPerson.name,
+      },
     });
-    removeDataFromIDBStore('userDatabase', '1', 'favourites', currentPersonID);
     setCurrentPersonID(null);
   };
 
   const setHandlerFunction = (e) => {
     e.stopPropagation();
     setShowBackground(false);
-    return isPersonInFavourites()
+    return isPersonInFavourites(person)
       ? removeFromFavouritesHandler
       : addToFavoritesHandler;
   };
 
   const setText = () => {
-    return isPersonInFavourites()
+    return isPersonInFavourites(person)
       ? 'Remove from favourites'
       : 'Add to favourites';
   };
 
   const handleMouseOver = (e) => {
     const target = e.target.closest('div');
-    console.log('mouse over');
-    const handleMouseOut = () => {
-      console.log("mouse out")
-      setCurrentPersonID(null);
-      target.removeEventListener('mouseleave', handleMouseOut);
+    const handleMouseOut = (e) => {
+      const relatedTarget = e.relatedTarget;
+      if (!relatedTarget.classList.contains('person__options-btn')) {
+        setCurrentPersonID(null);
+        target.removeEventListener('mouseleave', handleMouseOut);
+      }
     };
     target.addEventListener('mouseleave', handleMouseOut);
   };
@@ -90,13 +102,20 @@ function PersonOptions({ currentPersonID, setCurrentPersonID }) {
             {setText()}
           </button>
         </li>
-        {/* <hr className="person-options-list__line" /> */}
         <li className="person-options-list__item person-options-list__item--edit-btn">
           <button
             className="person-options-list__btn"
-            onClick={(e) => editClickHandler(e)}
+            onClick={(e) => editHandler(e)}
           >
             Edit
+          </button>
+        </li>
+        <li className="person-options-list__item person-options-list__item--delete-btn">
+          <button
+            className="person-options-list__btn"
+            onClick={(e) => handleDeletePerson(e, currentPersonID)}
+          >
+            Delete
           </button>
         </li>
       </ul>

@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AppContext } from '../../context/AppContext/AppContext';
 import './DeletePersonDialog.scss';
 function DeletePersonDialog({
   setShowDeletePersonDialog,
@@ -10,7 +12,11 @@ function DeletePersonDialog({
       removeItem(deletionUserID);
     }
     setShowDeletePersonDialog(false);
+    setShowBackground(false);
   };
+  const context = useContext(AppContext);
+  const { backgroundState } = context;
+  const [, setShowBackground] = backgroundState;
   return (
     <div className="delete-person-dialog">
       <p className="delete-person-dialog__text">

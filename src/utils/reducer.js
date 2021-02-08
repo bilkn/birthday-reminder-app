@@ -1,6 +1,6 @@
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case 'ADD_PERSON':
       return {
         ...state,
         people: action.payload,
@@ -8,13 +8,10 @@ export const reducer = (state, action) => {
         modalContent: 'Person is added.',
       };
 
-    case 'REMOVE_ITEM': {
-      const people = action.payload.people;
-      const favourites = action.payload.favourites;
+    case 'REMOVE_PERSON': {
       return {
         ...state,
-        people: people,
-        favourites: favourites,
+        people: action.payload.people,
         isModalOpen: true,
         modalContent: 'Person is removed.',
       };
@@ -37,7 +34,16 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isModalOpen: true,
-        modalContent: 'Please provide correct date format, (yyyy/mm/dd), or (dd/mm/yyyy) with any date seperators.',
+        modalContent:
+          'Please provide correct date format, (yyyy/mm/dd), or (dd/mm/yyyy) with any date seperators.',
+      };
+    }
+    case 'INVALID_MONTH': {
+      return {
+        ...state,
+        isModalOpen: true,
+        modalContent:
+          'Please provide correct date format, month value cannot be greater than 12',
       };
     }
     case 'SORT_PEOPLE_BY_AGE': {
@@ -61,30 +67,6 @@ export const reducer = (state, action) => {
         modalContent: 'SORT BY NAME',
       };
     }
-    case 'SORT_FAVOURITES_BY_AGE': {
-      return {
-        ...state,
-        isModalOpen: true,
-        modalContent: 'SORT BY AGE',
-        favourites: action.payload,
-      };
-    }
-    case 'SORT_FAVOURITES_BY_NAME': {
-      return {
-        ...state,
-        isModalOpen: true,
-        modalContent: 'SORT BY AGE',
-        favourites: action.payload,
-      };
-    }
-    case 'SORT_FAVOURITES_BY_MONTH': {
-      return {
-        ...state,
-        isModalOpen: true,
-        modalContent: 'SORT BY AGE',
-        favourites: action.payload,
-      };
-    }
     case 'FILTER_PEOPLE_BY_NAME': {
       return {
         ...state,
@@ -93,19 +75,10 @@ export const reducer = (state, action) => {
         modalContent: '',
       };
     }
-    case 'FILTER_FAVOURITES_BY_NAME': {
-      return {
-        ...state,
-        favourites: action.payload,
-        isModalOpen: false,
-        modalContent: '',
-      };
-    }
     case 'INITIAL_LOAD': {
       return {
         ...state,
         people: action.payload.people,
-        favourites: action.payload.favourites,
         isModalOpen: false,
         modalContent: '',
       };
@@ -119,41 +92,34 @@ export const reducer = (state, action) => {
       };
     }
     case 'ADD_FAVOURITE': {
-      const personName = action.payload[action.payload.length - 1].name;
+      const personName = action.payload.name;
       return {
         ...state,
         isModalOpen: true,
         modalContent: `${personName} has been added to your favorites.`,
-        favourites: action.payload,
+        people: action.payload.people,
       };
     }
     case 'REMOVE_FAVOURITE': {
-      const personName =
-        action.payload.length && action.payload[action.payload.length - 1].name;
-      const modalContent = personName
-        ? `${personName} has been removed from your favorites.`
-        : 'Favourites have been cleared.';
+      const personName = action.payload.name;
       return {
         ...state,
         isModalOpen: true,
-        modalContent: modalContent,
-        favourites: action.payload,
+        modalContent: `${personName} has been removed from your favorites.`,
+        people: action.payload.people,
       };
     }
     case 'EDIT_PERSON': {
-      const favourites = action.payload.favourites;
-      const personName = favourites[favourites.length - 1].name;
+      const personName = action.payload.name;
       return {
         ...state,
         isModalOpen: true,
         modalContent: `${personName}'s information has been changed.`,
         people: action.payload.people,
-        favourites: favourites,
       };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
-    
   }
 };

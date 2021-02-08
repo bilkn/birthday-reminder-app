@@ -7,8 +7,8 @@
   bottom: 0;
   left: 0;
   position: fixed;
-  z-index: 100000;
   width: 100vw;
+  z-index: 100000;
 
   // person-options-container__name
   &__name {
@@ -44,6 +44,10 @@
 
   // person-options-list__item--edit-btn
   &__item--edit-btn {
+    border-radius: 0;
+  }
+
+  &__item--delete-btn {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 20px;
@@ -62,8 +66,8 @@
     bottom: unset;
     left: unset;
     position: absolute;
-    top: 35px;
     right: 3px;
+    top: 35px;
     width: max-content;
     // person-options-container__name
     &__name {
@@ -74,7 +78,7 @@
   .person-options-list {
     // .person-options-list__item--triangled
     &__item--triangled:hover::before {
-      border-bottom: 10px solid lighten($options-ui-color, 5%);;
+      border-bottom: 10px solid lighten($options-ui-color, 5%);
     }
     &__item--triangled::before {
       border-left: 10px solid transparent;
@@ -85,6 +89,7 @@
       height: 0;
       position: absolute;
       right: 10px;
+      transition: border-bottom 200ms ease;
       top: -7px;
       width: 0;
     }

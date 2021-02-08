@@ -1,13 +1,13 @@
 .dark-background {
   background-color: rgba(0, 0, 0, 0.8);
-  height: 100vh;
+  height: 101vh;
   left: 0;
   position: fixed;
   transition: opacity 300ms ease;
   top: 0;
   opacity: 0;
   visibility: hidden;
-  width: 100vw;
+  width: 101vw;
   z-index: 100000;
 }
 
