@@ -1,14 +1,15 @@
 import { useContext, useState, useEffect } from 'react';
+import './PersonList.scss';
 import Person from '../Person/Person';
 import EmptyBox from '../EmptyBox/EmptyBox';
-import './PersonList.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
+import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
-import removePersonFromFavourites from '../../helper/removePersonFromFavourites';
+import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Modal from '../Modal/Modal';
-import AddPersonUI from '../AddPersonUI/AddPersonUI';
+import filterFavouritePeople from '../../helper/filterFavouritePeople';
 
 function PersonList(props) {
   const { currentPersonID, setCurrentPersonID, showUI } = props;
@@ -19,6 +20,7 @@ function PersonList(props) {
     backgroundState,
     showEditPersonUIState,
   } = useContext(AppContext);
+  const [peopleList, setPeopleList] = useContext(PeopleListContext);
   const [showFavourites] = favState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
@@ -26,7 +28,6 @@ function PersonList(props) {
   const [, setShowBackground] = backgroundState;
   const [isTimePassed, setIsTimePassed] = useState(true);
   const [showAddPersonUI, setShowAddPersonUI] = useState(false);
-  const personList = showFavourites ? state.favourites : state.people;
   const handleDeletePerson = (e, id) => {
     e.stopPropagation();
     setShowDeletePersonDialog(true);
@@ -38,12 +39,11 @@ function PersonList(props) {
 
   const removeItem = (id) => {
     const oldPeople = state.people;
-    const newFavourites = removePersonFromFavourites(id, state.favourites);
     let newPeople = oldPeople.filter((person) => person.id !== id);
     removeDataFromIDBStore('userDatabase', '1', 'people', id);
     dispatch({
-      type: 'REMOVE_ITEM',
-      payload: { people: newPeople, favourites: newFavourites },
+      type: 'REMOVE_PERSON',
+      payload: { people: newPeople },
     });
 
     setShowBackground(false);
@@ -78,6 +78,13 @@ function PersonList(props) {
     };
   });
 
+  useEffect(() => {
+    const people = showFavourites
+      ? filterFavouritePeople(state.people)
+      : state.people;
+    setPeopleList(people);
+  }, [showFavourites, state.people, setPeopleList]);
+
   return (
     <>
       {state.isModalOpen && (
@@ -94,17 +101,18 @@ function PersonList(props) {
         <button className="person-list__btn">
           <i className="fas fa-sort person-list__icon"></i>
         </button>
-        {personList.map((person) => (
-          <Person
-            key={person.id}
-            person={person}
-            handleDeletePerson={handleDeletePerson}
-            currentPersonID={currentPersonID}
-            setCurrentPersonID={setCurrentPersonID}
-            selectPersonHandler={selectPersonHandler}
-            setShowBackground={setShowBackground}
-          />
-        ))}
+        {peopleList &&
+          peopleList.map((person) => (
+            <Person
+              key={person.id}
+              person={person}
+              handleDeletePerson={handleDeletePerson}
+              currentPersonID={currentPersonID}
+              setCurrentPersonID={setCurrentPersonID}
+              selectPersonHandler={selectPersonHandler}
+              setShowBackground={setShowBackground}
+            />
+          ))}
         {(showAddPersonUI && (
           <AddPersonUI showAddPersonUIHandler={showAddPersonUIHandler} />
         )) || (

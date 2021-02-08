@@ -5,7 +5,6 @@ async function accesDB(database, version) {
     myDB = await openDB(database, version, {
       upgrade(database, oldVersion, newVersion, transaction) {
         database.createObjectStore('people', { keyPath: 'id' });
-        database.createObjectStore('favourites', { keyPath: 'id' });
       },
     });
   } catch (err) {
@@ -28,4 +27,4 @@ async function getIDBStore(database, version, store) {
   return myStore;
 }
 
-export {accesDB, getIDBStore};
+export { accesDB, getIDBStore };

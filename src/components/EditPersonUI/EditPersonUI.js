@@ -30,7 +30,7 @@ function EditPersonUI({
     e.stopPropagation();
     const newName = nameContainer.current.value;
     const newBirthday = dateContainer.current.value;
-    const picture = person.picture || blankImg;
+    const picture = didUserUploadPicture ? currentPicture : person.picture;
     let editedPerson = null;
     try {
       editedPerson = await createEditedPerson(newName, newBirthday, picture);
@@ -43,32 +43,19 @@ function EditPersonUI({
       );
 
       const newPeople = [...filteredPeople, editedPerson];
-      const newFavourites = changeEditedPersonFromFavourites(editedPerson);
       putItemToIDB(editedPerson, 'userDatabase', '1', 'people');
-      putItemToIDB(editedPerson, 'userDatabase', '1', 'favourites');
       dispatch({
         type: 'EDIT_PERSON',
         payload: {
           people: newPeople,
-          favourites: newFavourites || state.favourites,
         },
+        name: editedPerson.name,
       });
       setShowBackground(false);
       setShowEditPersonUI(false);
     } else {
       // !!! Add modal
       console.log('EDIT PERSON ERROR!');
-    }
-  };
-
-  const changeEditedPersonFromFavourites = (editedPerson) => {
-    let newFavourites = null;
-    if (findPersonByID(state.favourites, currentPersonIDForEdit)) {
-      const filteredFavourites = state.favourites.filter(
-        (person) => person.id !== currentPersonIDForEdit
-      );
-      newFavourites = [...filteredFavourites, editedPerson];
-      return newFavourites;
     }
   };
 
@@ -79,7 +66,6 @@ function EditPersonUI({
       birthday: birthday,
       picture: picture,
     };
-    console.log(birthday);
     picture = currentPicture
       ? await blobToArrayBuffer(currentPicture)
       : blankImg;

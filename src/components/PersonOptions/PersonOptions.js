@@ -2,10 +2,7 @@ import './PersonOptions.scss';
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import findPersonByID from '../../helper/findPersonByID';
-import {
-  putItemToIDB,
-  removeDataFromIDBStore,
-} from '../../utils/IndexedDB/indexedDBManagement';
+import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 
 function PersonOptions(props) {
   const { currentPersonID, setCurrentPersonID, handleDeletePerson } = props;
@@ -18,9 +15,8 @@ function PersonOptions(props) {
   const person = findPersonByID(state.people, currentPersonID);
   const [, setShowBackground] = backgroundState;
   const [, setShowEditPersonUI] = showEditPersonUIState;
-  const isPersonInFavourites = () => {
-    // Prevents the person from being added to favourites again.
-    return state.favourites.some((person) => person.id === currentPersonID);
+  const isPersonInFavourites = (person) => {
+    return person.inFavourites;
   };
 
   const editHandler = (e) => {
@@ -31,36 +27,53 @@ function PersonOptions(props) {
   };
 
   const addToFavoritesHandler = () => {
+    const oldPeople = state.people.filter(
+      (person) => currentPersonID !== person.id
+    );
+    const modifiedPerson = {
+      ...person,
+      inFavourites: true,
+    };
+
     dispatch({
       type: 'ADD_FAVOURITE',
-      payload: [...state.favourites, person],
+      payload: {
+        people: [...oldPeople, modifiedPerson],
+        name: modifiedPerson.name,
+      },
     });
-    putItemToIDB(person, 'userDatabase', '1', 'favourites');
+    putItemToIDB(modifiedPerson, 'userDatabase', '1', 'people');
     setCurrentPersonID(null);
   };
 
   const removeFromFavouritesHandler = () => {
-    const newFavourites = state.favourites.filter(
+    const oldPeople = state.people.filter(
       (person) => person.id !== currentPersonID
     );
+    const modifiedPerson = {
+      ...person,
+      inFavourites: false,
+    };
     dispatch({
       type: 'REMOVE_FAVOURITE',
-      payload: newFavourites,
+      payload: {
+        people: [...oldPeople, modifiedPerson],
+        name: modifiedPerson.name,
+      },
     });
-    removeDataFromIDBStore('userDatabase', '1', 'favourites', currentPersonID);
     setCurrentPersonID(null);
   };
 
   const setHandlerFunction = (e) => {
     e.stopPropagation();
     setShowBackground(false);
-    return isPersonInFavourites()
+    return isPersonInFavourites(person)
       ? removeFromFavouritesHandler
       : addToFavoritesHandler;
   };
 
   const setText = () => {
-    return isPersonInFavourites()
+    return isPersonInFavourites(person)
       ? 'Remove from favourites'
       : 'Add to favourites';
   };

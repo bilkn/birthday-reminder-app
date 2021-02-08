@@ -6,13 +6,13 @@ import { AppContext } from '../../context/AppContext/AppContext';
 import { reducer } from '../../utils/reducer';
 import defaultState from '../../utils/defaultState';
 import DarkBackground from '../DarkBackground/DarkBackground';
+import PeopleListProvider from "../../providers/PeopleListProvider"
 function App() {
   // Default state.
   const def = {
     people: [],
     isModalOpen: false,
     modalContent: '',
-    favourites: [],
   };
 
   const [state, dispatch] = useReducer(reducer, def);
@@ -26,15 +26,14 @@ function App() {
   const showEditPersonUIState = [showEditPersonUI, setShowEditPersonUI];
   const backgroundState = [showBackground, setShowBackground];
   const favState = [showFavourites, setShowFavourites];
-  
+
   const getInitialData = async () => {
     const data = await defaultState();
     const people = data.people;
-    const favourites = data.favourites;
 
     dispatch({
       type: 'INITIAL_LOAD',
-      payload: { people: people, favourites: favourites },
+      payload: { people: people },
     });
   };
 
@@ -51,7 +50,7 @@ function App() {
           favState,
           backgroundState,
           showAddPersonUIState,
-          showEditPersonUIState
+          showEditPersonUIState,
         }}
       >
         <DarkBackground
@@ -60,13 +59,15 @@ function App() {
           currentPersonID={currentPersonID}
           setCurrentPersonID={setCurrentPersonID}
         />
-        <AppHead />
-        <HomeMain
-          showUI={showUI}
-          setShowUI={setShowUI}
-          currentPersonID={currentPersonID}
-          setCurrentPersonID={setCurrentPersonID}
-        />
+        <PeopleListProvider>
+          <AppHead />
+          <HomeMain
+            showUI={showUI}
+            setShowUI={setShowUI}
+            currentPersonID={currentPersonID}
+            setCurrentPersonID={setCurrentPersonID}
+          />
+        </PeopleListProvider>
         <MobileNav />
       </AppContext.Provider>
     </>

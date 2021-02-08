@@ -1,43 +1,38 @@
 import { useRef, useContext } from 'react';
 import './SearchBox.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
-import { getDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
+import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
 import FilterPeopleByName from '../../helper/FilterPeopleByName';
+import filterFavouritePeople from '../../helper/filterFavouritePeople';
 
 function SearchBox({ setShowSearchBox }) {
-  const { dispatch, favState } = useContext(AppContext);
+  const { favState, state } = useContext(AppContext);
+  const [, setPeopleList] = useContext(PeopleListContext);
   const [showFavourites] = favState;
   const searchInput = useRef(null);
 
   const changeHandler = async () => {
     const name = searchInput.current.value;
-    let people = null;
-    if (showFavourites) {
-      people = await getDataFromIDBStore('userDatabase', '1', 'favourites');
-    } else {
-      people = await getDataFromIDBStore('userDatabase', '1', 'people');
-    }
+    displayPeople(name);
+  };
+
+  const displayPeople =  (name) => {
+
+    let people = showFavourites
+      ? filterFavouritePeople(state.people)
+      : state.people;
     if (people) {
-      FilterPeopleByName(people, name, dispatch, showFavourites);
+      const filteredPeople = FilterPeopleByName(people, name);
+      setPeopleList(filteredPeople);
     } else {
       console.log('Data could not found!');
     }
   };
 
   const closeBtnClickHandler = async () => {
-    setShowSearchBox(false);
-    let people = null;
     let name = '';
-    if (showFavourites) {
-      people = await getDataFromIDBStore('userDatabase', '1', 'favourites');
-    } else {
-      people = await getDataFromIDBStore('userDatabase', '1', 'people');
-    }
-    if (people) {
-      FilterPeopleByName(people, name, dispatch, showFavourites);
-    } else {
-      console.log('Data could not found!');
-    }
+    setShowSearchBox(false);
+    displayPeople(name);
   };
   return (
     <div className="search-box">

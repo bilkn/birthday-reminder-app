@@ -43,7 +43,7 @@ function AddPersonUI({ showAddPersonUIHandler }) {
   const addPerson = (name, birthday, picture) => {
     name = name.charAt(0).toUpperCase() + name.slice(1);
     const newPerson = createNewPerson(name, birthday, picture);
-    dispatch({ type: 'ADD_ITEM', payload: [...state.people, newPerson] });
+    dispatch({ type: 'ADD_PERSON', payload: [...state.people, newPerson] });
     putItemToIDB(newPerson, 'userDatabase', '1', 'people');
   };
 
@@ -53,6 +53,7 @@ function AddPersonUI({ showAddPersonUIHandler }) {
       name: name,
       birthday: birthday,
       picture: picture,
+      inFavourites: false,
     };
     return newPerson;
   };
