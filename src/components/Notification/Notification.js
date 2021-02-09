@@ -1,25 +1,25 @@
 import { useContext, useEffect } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
-import './Modal.scss';
+import './Notification.scss';
 
-function Modal({ isTimePassed, setIsTimePassed }) {
+function Notification({ isTimePassed, setIsTimePassed }) {
   const { state, dispatch } = useContext(AppContext);
 
-  const clearModal = () => {
+  const clearNotification = () => {
     dispatch({ type: 'REMOVE_MODAL' });
   };
 
   useEffect(() => {
     if (isTimePassed) {
       setIsTimePassed(false);
-      setTimeout(modalHandler, 2500);
+      setTimeout(notificationHandler, 2500);
     }
   });
-  const modalHandler = () => {
-    clearModal();
+  const notificationHandler = () => {
+    clearNotification();
     setIsTimePassed(true);
   };
-  return <p className="modal">{state.modalContent}</p>;
+  return <p className="notification">{state.notificationContent}</p>;
 }
 
-export default Modal;
+export default Notification;

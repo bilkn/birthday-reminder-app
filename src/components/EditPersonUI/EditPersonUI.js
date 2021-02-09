@@ -54,7 +54,7 @@ function EditPersonUI({
       setShowBackground(false);
       setShowEditPersonUI(false);
     } else {
-      // !!! Add modal
+      // !!! Add notification
       console.log('EDIT PERSON ERROR!');
     }
   };

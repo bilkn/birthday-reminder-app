@@ -7,7 +7,6 @@ import PeopleListContext from '../../context/PeopleListContext/PeopleListContext
 
 function MobileNav() {
   const {
-    state,
     dispatch,
     favState,
     showAddPersonUIState,

@@ -4,90 +4,89 @@ export const reducer = (state, action) => {
       return {
         ...state,
         people: action.payload,
-        isModalOpen: true,
-        modalContent: 'Person has been added.',
+        isNotificationOpen: true,
+        notificationContent: 'Person has been added.',
       };
 
     case 'REMOVE_PERSON': {
       return {
         ...state,
         people: action.payload.people,
-        isModalOpen: true,
-        modalContent: 'Person has been deleted.',
+        isNotificationOpen: true,
+        notificationContent: 'Person has been deleted.',
       };
     }
     case 'REMOVE_MODAL': {
       return {
         ...state,
-        isModalOpen: false,
-        modalContent: '',
+        isNotificationOpen: false,
+        notificationContent: '',
       };
     }
     case 'INVALID_NAME': {
       return {
         ...state,
-        isModalOpen: true,
-        modalContent: 'Name input must include at least one character.',
+        isNotificationOpen: true,
+        notificationContent: 'Name input must include at least one character.',
       };
     }
     case 'INVALID_DATE': {
       return {
         ...state,
-        isModalOpen: true,
-        modalContent:
+        isNotificationOpen: true,
+        notificationContent:
           'Please provide correct date format, (yyyy/mm/dd), or (dd/mm/yyyy) with any date seperators.',
       };
     }
     case 'INVALID_MONTH': {
       return {
         ...state,
-        isModalOpen: true,
-        modalContent:
-          'Month value cannot be greater than 12',
+        isNotificationOpen: true,
+        notificationContent: 'Month value cannot be greater than 12',
       };
     }
     case 'SORT_PEOPLE_BY_AGE': {
       return {
         ...state,
-        isModalOpen: true,
-        modalContent: 'SORT BY AGE',
+        isNotificationOpen: true,
+        notificationContent: 'SORT BY AGE',
       };
     }
     case 'SORT_PEOPLE_BY_MONTH': {
       return {
         ...state,
-        isModalOpen: true,
-        modalContent: 'SORT BY MONTH',
+        isNotificationOpen: true,
+        notificationContent: 'SORT BY MONTH',
       };
     }
     case 'SORT_PEOPLE_BY_NAME': {
       return {
         ...state,
-        isModalOpen: true,
-        modalContent: 'SORT BY NAME',
+        isNotificationOpen: true,
+        notificationContent: 'SORT BY NAME',
       };
     }
     case 'FILTER_PEOPLE_BY_NAME': {
       return {
         ...state,
         people: action.payload,
-        isModalOpen: false,
-        modalContent: '',
+        isNotificationOpen: false,
+        notificationContent: '',
       };
     }
     case 'INITIAL_LOAD': {
       return {
         ...state,
         people: action.payload.people,
-        isModalOpen: false,
-        modalContent: '',
+        isNotificationOpen: false,
+        notificationContent: '',
       };
     }
     case 'INVALID_FILE_TYPE': {
       return {
         ...state,
-        isModalOpen: true,
-        modalContent:
+        isNotificationOpen: true,
+        notificationContent:
           'Invalid file type. Please provide ".jpeg", or ".png" file for the picture.',
       };
     }
@@ -95,8 +94,8 @@ export const reducer = (state, action) => {
       const personName = action.payload.name;
       return {
         ...state,
-        isModalOpen: true,
-        modalContent: `${personName} has been added to your favorites.`,
+        isNotificationOpen: true,
+        notificationContent: `${personName} has been added to your favorites.`,
         people: action.payload.people,
       };
     }
@@ -104,8 +103,8 @@ export const reducer = (state, action) => {
       const personName = action.payload.name;
       return {
         ...state,
-        isModalOpen: true,
-        modalContent: `${personName} has been removed from your favorites.`,
+        isNotificationOpen: true,
+        notificationContent: `${personName} has been removed from your favorites.`,
         people: action.payload.people,
       };
     }
@@ -114,8 +113,8 @@ export const reducer = (state, action) => {
       console.log(action.payload);
       return {
         ...state,
-        isModalOpen: true,
-        modalContent: `${personName}'s information has been changed.`,
+        isNotificationOpen: true,
+        notificationContent: `${personName}'s information has been changed.`,
         people: action.payload.people,
       };
     }
