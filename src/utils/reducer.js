@@ -111,6 +111,7 @@ export const reducer = (state, action) => {
     }
     case 'EDIT_PERSON': {
       const personName = action.payload.name;
+      console.log(action.payload);
       return {
         ...state,
         isModalOpen: true,

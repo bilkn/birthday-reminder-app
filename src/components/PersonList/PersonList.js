@@ -95,6 +95,7 @@ function PersonList(props) {
           setShowDeletePersonDialog={setShowDeletePersonDialog}
           removeItem={removeItem}
           deletionUserID={deletionUserID}
+          setCurrentPersonID={setCurrentPersonID}
         />
       )}
       <ul className="person-list">

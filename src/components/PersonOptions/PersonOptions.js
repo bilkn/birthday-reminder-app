@@ -1,5 +1,5 @@
 import './PersonOptions.scss';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import findPersonByID from '../../helper/findPersonByID';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
@@ -15,8 +15,10 @@ function PersonOptions(props) {
   const person = findPersonByID(state.people, currentPersonID);
   const [, setShowBackground] = backgroundState;
   const [, setShowEditPersonUI] = showEditPersonUIState;
+  const [favText, setFavText] = useState('');
+
   const isPersonInFavourites = (person) => {
-    return person.inFavourites;
+    return person && person.inFavourites;
   };
 
   const editHandler = (e) => {
@@ -72,34 +74,40 @@ function PersonOptions(props) {
       : addToFavoritesHandler;
   };
 
-  const setText = () => {
-    return isPersonInFavourites(person)
-      ? 'Remove from favourites'
-      : 'Add to favourites';
+  const handleMouseOver = (e) => {
+    const mql = window.matchMedia('(min-width: 768px)');
+    if (mql.matches) {
+      const target = e.target.closest('div');
+      const handleMouseOut = (e) => {
+        setShowBackground(false);
+        const relatedTarget = e.relatedTarget;
+        if (!relatedTarget.classList.contains('person__options-btn')) {
+          setCurrentPersonID(null);
+          target.removeEventListener('mouseleave', handleMouseOut);
+        }
+      };
+      target.addEventListener('mouseleave', handleMouseOut);
+    }
   };
 
-  const handleMouseOver = (e) => {
-    const target = e.target.closest('div');
-    const handleMouseOut = (e) => {
-      const relatedTarget = e.relatedTarget;
-      if (!relatedTarget.classList.contains('person__options-btn')) {
-        setCurrentPersonID(null);
-        target.removeEventListener('mouseleave', handleMouseOut);
-      }
-    };
-    target.addEventListener('mouseleave', handleMouseOut);
-  };
+  useEffect(() => {
+    isPersonInFavourites(person)
+      ? setFavText('Remove from favourites')
+      : setFavText('Add to favourites');
+  }, [person]);
 
   return (
     <div className="person-options-container" onMouseEnter={handleMouseOver}>
-      <p className="person-options-container__name">Person: {person.name}</p>
+      <p className="person-options-container__name">
+        Person: {person && person.name}
+      </p>
       <ul className="person-options-list">
         <li className="person-options-list__item person-options-list__item--triangled">
           <button
             className="person-options-list__btn"
             onClick={(e) => setHandlerFunction(e)()}
           >
-            {setText()}
+            {favText}
           </button>
         </li>
         <li className="person-options-list__item person-options-list__item--edit-btn">

@@ -48,8 +48,8 @@ function EditPersonUI({
         type: 'EDIT_PERSON',
         payload: {
           people: newPeople,
+          name: editedPerson.name,
         },
-        name: editedPerson.name,
       });
       setShowBackground(false);
       setShowEditPersonUI(false);
@@ -61,6 +61,7 @@ function EditPersonUI({
 
   const createEditedPerson = async (name, birthday, picture) => {
     const editedPerson = {
+      ...person,
       id: currentPersonIDForEdit,
       name: name,
       birthday: birthday,

@@ -67,8 +67,8 @@ function App() {
             currentPersonID={currentPersonID}
             setCurrentPersonID={setCurrentPersonID}
           />
-        </PeopleListProvider>
         <MobileNav />
+        </PeopleListProvider>
       </AppContext.Provider>
     </>
   );
