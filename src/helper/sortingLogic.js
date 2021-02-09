@@ -1,18 +1,19 @@
 import reformatDateSeperator from './reformatDate';
 
-function sortingLogic({ state, dispatch, sortState }) {
-  const people = state.people;
+function sortingLogic(args) {
+  const { peopleList, dispatch, sortState, setPeopleList, showFavourites } = args;
+  const people = peopleList;
   if (sortState === 'sortByAge') {
-    sortByAge(people, dispatch);
+    sortByAge(people, dispatch, setPeopleList, showFavourites);
   } else if (sortState === 'sortByMonth') {
-    sortByMonth(people, dispatch);
+    sortByMonth(people, dispatch, setPeopleList, showFavourites);
   } else if (sortState === 'sortByName') {
-    sortByName(people, dispatch);
+    sortByName(people, dispatch, setPeopleList, showFavourites);
   }
 }
 
 // People sorting could be merged into a single function in the future.
-function sortByAge(oldPeople, dispatch) {
+function sortByAge(oldPeople, dispatch, setPeopleList, showFavourites) {
   const sortedPeople = oldPeople.sort((prev, cur) => {
     let newPrevBirthday = prev.birthday.slice();
     let newCurBirthday = cur.birthday.slice();
@@ -26,14 +27,18 @@ function sortByAge(oldPeople, dispatch) {
     const curDateInMs = new Date(curYear, curMonth, curDay).getTime();
     return prevDateInMs - curDateInMs;
   });
-
-  dispatch({
-    type: 'SORT_PEOPLE_BY_AGE',
-    payload: sortedPeople,
-  });
+  if (showFavourites) {
+    const favouritePeople = sortedPeople.filter(
+      (person) => person.inFavourites
+    );
+    setPeopleList(favouritePeople);
+  } else {
+    setPeopleList(sortedPeople);
+  }
+  dispatch({ type: 'SORT_PEOPLE_BY_AGE' });
 }
 
-function sortByMonth(oldPeople, dispatch) {
+function sortByMonth(oldPeople, dispatch, setPeopleList, showFavourites) {
   const sortedPeople = oldPeople.sort((prev, cur) => {
     let newPrevBirthday = prev.birthday.slice();
     let newCurBirthday = cur.birthday.slice();
@@ -41,24 +46,38 @@ function sortByMonth(oldPeople, dispatch) {
       newPrevBirthday,
       newCurBirthday
     );
-    const [prevDay, prevMonth] = prev.birthday.split('.');
-    const [curDay, curMonth] = cur.birthday.split('.');
+    const [prevDay, prevMonth] = newPrevBirthday.split('.');
+    const [curDay, curMonth] = newCurBirthday.split('.');
     const prevDatePoint = +prevDay + +prevMonth * 10;
     const curDatePoint = +curDay + +curMonth * 10;
-    return prevDatePoint - curDatePoint;
+    return curDatePoint - prevDatePoint;
   });
-
-  dispatch({ type: 'SORT_PEOPLE_BY_MONTH', payload: sortedPeople });
+  if (showFavourites) {
+    const favouritePeople = sortedPeople.filter(
+      (person) => person.inFavourites
+    );
+    setPeopleList(favouritePeople);
+  } else {
+    setPeopleList(sortedPeople);
+  }
+  dispatch({ type: 'SORT_PEOPLE_BY_MONTH' });
 }
 
-function sortByName(oldPeople, dispatch) {
+function sortByName(oldPeople, dispatch, setPeopleList, showFavourites) {
   const sortedPeople = oldPeople.sort((prev, cur) => {
     const [prevName] = prev.name;
     const [curName] = cur.name;
     return prevName.charCodeAt(0) - curName.charCodeAt(0);
   });
-
-  dispatch({ type: 'SORT_PEOPLE_BY_NAME', payload: sortedPeople });
+  if (showFavourites) {
+    const favouritePeople = sortedPeople.filter(
+      (person) => person.inFavourites
+    );
+    setPeopleList(favouritePeople);
+  } else {
+    setPeopleList(sortedPeople);
+  }
+  dispatch({ type: 'SORT_PEOPLE_BY_NAME' });
 }
 
 function validateAndReformatDate(newPrevBirthday, newCurBirthday) {

@@ -8,7 +8,7 @@ import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
-import Modal from '../Modal/Modal';
+import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helper/filterFavouritePeople';
 
 function PersonList(props) {
@@ -87,14 +87,18 @@ function PersonList(props) {
 
   return (
     <>
-      {state.isModalOpen && (
-        <Modal isTimePassed={isTimePassed} setIsTimePassed={setIsTimePassed} />
+      {state.isNotificationOpen && (
+        <Notification
+          isTimePassed={isTimePassed}
+          setIsTimePassed={setIsTimePassed}
+        />
       )}
       {showDeletePersonDialog && (
         <DeletePersonDialog
           setShowDeletePersonDialog={setShowDeletePersonDialog}
           removeItem={removeItem}
           deletionUserID={deletionUserID}
+          setCurrentPersonID={setCurrentPersonID}
         />
       )}
       <ul className="person-list">

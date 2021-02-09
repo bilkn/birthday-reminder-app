@@ -6,13 +6,13 @@ import { AppContext } from '../../context/AppContext/AppContext';
 import { reducer } from '../../utils/reducer';
 import defaultState from '../../utils/defaultState';
 import DarkBackground from '../DarkBackground/DarkBackground';
-import PeopleListProvider from "../../providers/PeopleListProvider"
+import PeopleListProvider from '../../providers/PeopleListProvider';
 function App() {
   // Default state.
   const def = {
     people: [],
-    isModalOpen: false,
-    modalContent: '',
+    isNotificationOpen: false,
+    notificationContent: '',
   };
 
   const [state, dispatch] = useReducer(reducer, def);
@@ -67,8 +67,8 @@ function App() {
             currentPersonID={currentPersonID}
             setCurrentPersonID={setCurrentPersonID}
           />
+          <MobileNav />
         </PeopleListProvider>
-        <MobileNav />
       </AppContext.Provider>
     </>
   );

@@ -48,19 +48,20 @@ function EditPersonUI({
         type: 'EDIT_PERSON',
         payload: {
           people: newPeople,
+          name: editedPerson.name,
         },
-        name: editedPerson.name,
       });
       setShowBackground(false);
       setShowEditPersonUI(false);
     } else {
-      // !!! Add modal
+      // !!! Add notification
       console.log('EDIT PERSON ERROR!');
     }
   };
 
   const createEditedPerson = async (name, birthday, picture) => {
     const editedPerson = {
+      ...person,
       id: currentPersonIDForEdit,
       name: name,
       birthday: birthday,
