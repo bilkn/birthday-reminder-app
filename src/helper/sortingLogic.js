@@ -1,8 +1,8 @@
 import reformatDateSeperator from './reformatDate';
 
 function sortingLogic(args) {
-  const { state, dispatch, sortState, setPeopleList, showFavourites } = args;
-  const people = state.people;
+  const { peopleList, dispatch, sortState, setPeopleList, showFavourites } = args;
+  const people = peopleList;
   if (sortState === 'sortByAge') {
     sortByAge(people, dispatch, setPeopleList, showFavourites);
   } else if (sortState === 'sortByMonth') {

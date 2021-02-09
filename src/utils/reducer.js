@@ -5,7 +5,7 @@ export const reducer = (state, action) => {
         ...state,
         people: action.payload,
         isModalOpen: true,
-        modalContent: 'Person is added.',
+        modalContent: 'Person has been added.',
       };
 
     case 'REMOVE_PERSON': {
@@ -13,7 +13,7 @@ export const reducer = (state, action) => {
         ...state,
         people: action.payload.people,
         isModalOpen: true,
-        modalContent: 'Person is removed.',
+        modalContent: 'Person has been deleted.',
       };
     }
     case 'REMOVE_MODAL': {
@@ -27,7 +27,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         isModalOpen: true,
-        modalContent: 'Name input should includes at least one character.',
+        modalContent: 'Name input must include at least one character.',
       };
     }
     case 'INVALID_DATE': {
@@ -43,7 +43,7 @@ export const reducer = (state, action) => {
         ...state,
         isModalOpen: true,
         modalContent:
-          'Please provide correct date format, month value cannot be greater than 12',
+          'Month value cannot be greater than 12',
       };
     }
     case 'SORT_PEOPLE_BY_AGE': {

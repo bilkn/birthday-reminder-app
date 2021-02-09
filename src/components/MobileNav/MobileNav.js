@@ -37,7 +37,7 @@ function MobileNav() {
       default:
         break;
     }
-    sortingLogic({ state, dispatch, sortState, setPeopleList, showFavourites });
+    sortingLogic({ peopleList, dispatch, sortState, setPeopleList, showFavourites });
   };
   return (
     <>
