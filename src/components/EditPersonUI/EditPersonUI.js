@@ -74,7 +74,9 @@ function EditPersonUI({
     switch (validationResult) {
       case 'INVALID_NAME':
       case 'INVALID_DATE':
+      case 'INVALID_DAY':
       case 'INVALID_MONTH':
+      case 'INVALID_YEAR':
       case 'INVALID_FILE_TYPE':
         dispatch({ type: validationResult });
         break;

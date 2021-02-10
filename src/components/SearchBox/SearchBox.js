@@ -2,7 +2,7 @@ import { useRef, useContext } from 'react';
 import './SearchBox.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
-import FilterPeopleByName from '../../helper/FilterPeopleByName';
+import filterPeopleByName from '../../helper/filterPeopleByName';
 import filterFavouritePeople from '../../helper/filterFavouritePeople';
 
 function SearchBox({ setShowSearchBox }) {
@@ -22,7 +22,7 @@ function SearchBox({ setShowSearchBox }) {
       ? filterFavouritePeople(state.people)
       : state.people;
     if (people) {
-      const filteredPeople = FilterPeopleByName(people, name);
+      const filteredPeople = filterPeopleByName(people, name);
       setPeopleList(filteredPeople);
     } else {
       console.log('Data could not found!');
