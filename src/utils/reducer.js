@@ -59,7 +59,7 @@ export const reducer = (state, action) => {
         ...state,
         isNotificationOpen: true,
         notificationContent:
-          'Day value must be between 1000 and current year (inclusive).',
+          'Year value must be between 1000 and current year (inclusive).',
       };
     }
     case 'SORT_PEOPLE_BY_AGE': {
@@ -127,7 +127,6 @@ export const reducer = (state, action) => {
     }
     case 'EDIT_PERSON': {
       const personName = action.payload.name;
-      console.log(action.payload);
       return {
         ...state,
         isNotificationOpen: true,

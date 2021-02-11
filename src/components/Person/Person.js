@@ -17,6 +17,7 @@ function Person(props) {
   const [pictureURL, setPictureURL] = useState(null);
   const [parentClass, setParentClass] = useState('');
   const [personAge, setPersonAge] = useState(null);
+  const [tabindex, setTabindex] = useState(-1);
   useEffect(() => {
     let pictureURL = null;
     try {
@@ -43,6 +44,16 @@ function Person(props) {
     setPersonAge(getPersonAge(person));
   }, [person]);
 
+  useEffect(() => {
+    const mql = window.matchMedia('(max-width: 768px)');
+    if (mql.matches) setTabindex(0);
+  }, [tabindex]);
+
+  const handleClick = () => {
+    const mql = window.matchMedia('(max-width: 768px)');
+    if (mql.matches) selectPersonHandler(id);
+  };
+
   const keyPressHandler = (e) => {
     if (e.key === 'Enter' && !currentPersonID) selectPersonHandler(id);
   };
@@ -66,8 +77,8 @@ function Person(props) {
     <div
       className={parentClass}
       onKeyPress={(e) => keyPressHandler(e)}
-      onClick={() => selectPersonHandler(id)}
-      tabIndex={1}
+      onClick={handleClick}
+      tabIndex={tabindex}
     >
       <button
         className="person__options-btn"

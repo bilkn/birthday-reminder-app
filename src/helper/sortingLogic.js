@@ -101,7 +101,6 @@ function validateAndReformatDate(newPrevBirthday, newCurBirthday) {
     ? newCurBirthday
     : newCurBirthday.replace(regex, '$5.$3.$1');
 
-  console.log(newCurBirthday);
   if (/-|\//.test(newPrevBirthday)) {
     newPrevBirthday = reformatDateSeperator(newPrevBirthday);
   }

@@ -13,7 +13,7 @@ const validatePersonData = (name, date, picture) => {
 };
 
 function dateValidation(date) {
-  return testDateWithCommonFormat(date) || testDateWithUncommonFormat(date);
+  return testDateWithCommonFormat(date).result || testDateWithUncommonFormat(date).result;
 }
 
 

@@ -55,10 +55,7 @@
 
 .person-age-container {
   text-align: center;
- /*  // .person-age-container__title {
-  &__title {
-    font-size: 1rem;
-  } */
+
   // person-age-container__age
   &__age {
     color: black;
@@ -68,10 +65,14 @@
 
 @media (min-width: 768px) {
   .person {
+    cursor: initial;
     // person__options-btn
     &__options-btn {
       display: flex;
       justify-content: flex-end;
     }
+  }
+  .person:hover {
+    background: $sec-color;
   }
 }

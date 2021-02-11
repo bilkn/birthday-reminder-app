@@ -23,8 +23,6 @@
   // person-options-list__item
   &__item {
     background: $options-ui-color;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
     position: relative;
     transition: background 200ms ease;
   }
@@ -40,18 +38,6 @@
     padding: 1rem 2rem;
     text-align: left;
     width: 100%;
-  }
-
-  // person-options-list__item--edit-btn
-  &__item--edit-btn {
-    border-radius: 0;
-  }
-
-  &__item--delete-btn {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
   }
 
   // person-options-list__line {
@@ -76,6 +62,22 @@
   }
 
   .person-options-list {
+    // person-options-list__item
+    &__item {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+    // person-options-list__item--delete-btn
+    &__item--delete-btn {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    // person-options-list__item--edit-btn
+    &__item--edit-btn {
+      border-radius: 0;
+    }
     // .person-options-list__item--triangled
     &__item--triangled:hover::before {
       border-bottom: 10px solid lighten($options-ui-color, 5%);

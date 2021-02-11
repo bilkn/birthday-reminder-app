@@ -1,7 +1,7 @@
 import AddPersonUIInfo from '../AddPersonUIInfo/AddPersonUIInfo';
 import EditPersonUIControls from '../EditPersonUIControls/EditPersonUIControls';
 import PictureInput from '../PictureInput/PictureInput';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import findPersonByID from '../../helper/findPersonByID';
 import './EditPersonUI.scss';
@@ -85,6 +85,16 @@ function EditPersonUI({
     }
     return null;
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setShowEditPersonUI(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="edit-person-ui">
