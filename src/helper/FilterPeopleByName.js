@@ -1,4 +1,4 @@
-function FilterPeopleByName(people, name) {
+function filterPeopleByName(people, name) {
   const filteredPeople = people.filter((person) => {
     const personName = person.name.toLowerCase();
     name = name.toLowerCase();
@@ -7,4 +7,4 @@ function FilterPeopleByName(people, name) {
   return filteredPeople;
 }
 
-export default FilterPeopleByName;
+export default filterPeopleByName;

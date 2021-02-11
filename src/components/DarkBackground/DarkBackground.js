@@ -1,19 +1,17 @@
 import './DarkBackground.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
 import { useEffect, useContext } from 'react';
-function DarkBackground(props) {
-  const { showAddPersonUIState, showEditPersonUIState } = useContext(
-    AppContext
-  );
-  const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
-  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
-
+function DarkBackground() {
   const {
-    showBackground,
-    setShowBackground,
+    showAddPersonUIState,
+    showEditPersonUIState,
+    backgroundState,
     currentPersonID,
     setCurrentPersonID,
-  } = props;
+  } = useContext(AppContext);
+  const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
+  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
+  const [showBackground, setShowBackground] = backgroundState;
   const backgroundHandler = (e) => {
     if (currentPersonID || showAddPersonUI || showEditPersonUI) {
       e.stopPropagation();

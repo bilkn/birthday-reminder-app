@@ -1,8 +1,8 @@
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useEffect } from 'react';
 import './SearchBox.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
-import FilterPeopleByName from '../../helper/FilterPeopleByName';
+import filterPeopleByName from '../../helper/filterPeopleByName';
 import filterFavouritePeople from '../../helper/filterFavouritePeople';
 
 function SearchBox({ setShowSearchBox }) {
@@ -16,13 +16,12 @@ function SearchBox({ setShowSearchBox }) {
     displayPeople(name);
   };
 
-  const displayPeople =  (name) => {
-
+  const displayPeople = (name) => {
     let people = showFavourites
       ? filterFavouritePeople(state.people)
       : state.people;
     if (people) {
-      const filteredPeople = FilterPeopleByName(people, name);
+      const filteredPeople = filterPeopleByName(people, name);
       setPeopleList(filteredPeople);
     } else {
       console.log('Data could not found!');
@@ -34,6 +33,16 @@ function SearchBox({ setShowSearchBox }) {
     setShowSearchBox(false);
     displayPeople(name);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') closeBtnClickHandler();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
   return (
     <div className="search-box">
       <input
@@ -42,6 +51,7 @@ function SearchBox({ setShowSearchBox }) {
         placeholder="Search by name"
         onChange={changeHandler}
         ref={searchInput}
+        autoFocus
       />
       <button className="search-box__close-btn" onClick={closeBtnClickHandler}>
         <i className="far fa-times-circle"></i>

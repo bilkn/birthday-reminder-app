@@ -38,11 +38,28 @@ export const reducer = (state, action) => {
           'Please provide correct date format, (yyyy/mm/dd), or (dd/mm/yyyy) with any date seperators.',
       };
     }
+
+    case 'INVALID_DAY': {
+      return {
+        ...state,
+        isNotificationOpen: true,
+        notificationContent: 'Day value must be between 1 and 31 (inclusive).',
+      };
+    }
     case 'INVALID_MONTH': {
       return {
         ...state,
         isNotificationOpen: true,
-        notificationContent: 'Month value cannot be greater than 12',
+        notificationContent:
+          'Month value must be between 1 and 12 (inclusive).',
+      };
+    }
+    case 'INVALID_YEAR': {
+      return {
+        ...state,
+        isNotificationOpen: true,
+        notificationContent:
+          'Year value must be between 1000 and current year (inclusive).',
       };
     }
     case 'SORT_PEOPLE_BY_AGE': {
@@ -110,7 +127,6 @@ export const reducer = (state, action) => {
     }
     case 'EDIT_PERSON': {
       const personName = action.payload.name;
-      console.log(action.payload);
       return {
         ...state,
         isNotificationOpen: true,

@@ -1,4 +1,3 @@
-import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import { useState, useContext } from 'react';
 import './MobileNav.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
@@ -17,7 +16,7 @@ function MobileNav() {
   const [showBackground, setShowBackground] = backgroundState;
   const [sortState, setSortState] = useState('sortByAge');
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
-  const showAddPersonUIHandler = () => {
+  const toggleAddPersonUI = () => {
     setShowBackground(!showBackground);
     setShowAddPersonUI(!showAddPersonUI);
   };
@@ -36,7 +35,13 @@ function MobileNav() {
       default:
         break;
     }
-    sortingLogic({ peopleList, dispatch, sortState, setPeopleList, showFavourites });
+    sortingLogic({
+      peopleList,
+      dispatch,
+      sortState,
+      setPeopleList,
+      showFavourites,
+    });
   };
   return (
     <>
@@ -47,10 +52,7 @@ function MobileNav() {
         >
           <i className="fas fa-sort-amount-down"></i>
         </button>
-        <button
-          className="mobile-nav__add-btn"
-          onClick={showAddPersonUIHandler}
-        >
+        <button className="mobile-nav__add-btn" onClick={toggleAddPersonUI}>
           <i className="fas fa-plus"></i>
         </button>
 
@@ -61,9 +63,6 @@ function MobileNav() {
           <i className="fas fa-star"></i>
         </button>
       </nav>
-      {showAddPersonUI && (
-        <AddPersonUI showAddPersonUIHandler={showAddPersonUIHandler} />
-      )}
     </>
   );
 }

@@ -1,9 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import validatePicture from '../../helper/validatePicture';
 import { AppContext } from '../../context/AppContext/AppContext';
 import './PictureInput.scss';
 function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
   const { dispatch } = useContext(AppContext);
+  const label = useRef(null);
   const fileInputHandler = (e) => {
     const picture = e.target.files[0];
     if (validatePicture(picture)) {
@@ -13,9 +14,23 @@ function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
       dispatch({ type: 'INVALID_FILE_TYPE' });
     }
   };
+  useEffect(() => {
+    label.current.focus();
+  }, []);
+
+  const onKeyDown = (e) => {
+    if (e.key === 'Enter') label.current.click();
+  };
+
   return (
     <div className="picture-input-container">
-      <label htmlFor="picture" className="picture-input-container__label">
+      <label
+        htmlFor="picture"
+        className="picture-input-container__label"
+        tabIndex={0}
+        ref={label}
+        onKeyDown={onKeyDown}
+      >
         <i
           className="fas fa-camera picture-input-container__icon"
           aria-hidden={true}

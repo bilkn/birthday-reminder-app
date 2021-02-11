@@ -12,29 +12,30 @@ import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helper/filterFavouritePeople';
 
 function PersonList(props) {
-  const { currentPersonID, setCurrentPersonID, showUI } = props;
+  const { currentPersonID, setCurrentPersonID } = props;
   const {
     state,
     dispatch,
     favState,
     backgroundState,
     showEditPersonUIState,
+    showAddPersonUIState,
   } = useContext(AppContext);
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
+  const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showFavourites] = favState;
-  const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
-  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
-  const [deletionUserID, setDeletionUserID] = useState(null);
   const [, setShowBackground] = backgroundState;
+  const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
+  const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
+  const [deletionUserID, setDeletionUserID] = useState(null);
   const [isTimePassed, setIsTimePassed] = useState(true);
-  const [showAddPersonUI, setShowAddPersonUI] = useState(false);
   const handleDeletePerson = (e, id) => {
     e.stopPropagation();
     setShowDeletePersonDialog(true);
     setDeletionUserID(id);
   };
-  const showAddPersonUIHandler = () => {
-    setShowAddPersonUI(!showAddPersonUI);
+  const toggleAddPersonUI = () => {
+    setShowAddPersonUI(() => !showAddPersonUI);
   };
 
   const removeItem = (id) => {
@@ -55,7 +56,7 @@ function PersonList(props) {
       setShowBackground(true);
     }
 
-    if (currentPersonID !== id && showUI) {
+    if (currentPersonID !== id) {
       setCurrentPersonID(id);
     }
   };
@@ -68,6 +69,7 @@ function PersonList(props) {
     if (e.key === 'Escape') {
       setCurrentPersonID(null);
       setShowBackground(false);
+      setShowAddPersonUI(() => false);
     }
   };
 
@@ -118,7 +120,7 @@ function PersonList(props) {
             />
           ))}
         {(showAddPersonUI && (
-          <AddPersonUI showAddPersonUIHandler={showAddPersonUIHandler} />
+          <AddPersonUI toggleAddPersonUI={toggleAddPersonUI} />
         )) || (
           <EmptyBox
             toggleAddPersonUIHandlerForLargerScreen={

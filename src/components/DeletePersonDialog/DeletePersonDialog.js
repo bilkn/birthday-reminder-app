@@ -22,6 +22,7 @@ function DeletePersonDialog(props) {
   const context = useContext(AppContext);
   const { backgroundState } = context;
   const [, setShowBackground] = backgroundState;
+
   return (
     <div className="delete-person-dialog">
       <p className="delete-person-dialog__text">
@@ -31,6 +32,7 @@ function DeletePersonDialog(props) {
         <button
           className="delete-person-dialog-controls__btn"
           onClick={deleteBtnClickHandler}
+          autoFocus
         >
           Yes
         </button>

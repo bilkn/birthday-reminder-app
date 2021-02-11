@@ -1,7 +1,17 @@
+import {
+  testDateWithCommonFormat,
+  testDateWithUncommonFormat,
+} from './dateFormatValidations';
 import reformatDateSeperator from './reformatDate';
 
 function sortingLogic(args) {
-  const { peopleList, dispatch, sortState, setPeopleList, showFavourites } = args;
+  const {
+    peopleList,
+    dispatch,
+    sortState,
+    setPeopleList,
+    showFavourites,
+  } = args;
   const people = peopleList;
   if (sortState === 'sortByAge') {
     sortByAge(people, dispatch, setPeopleList, showFavourites);
@@ -81,12 +91,16 @@ function sortByName(oldPeople, dispatch, setPeopleList, showFavourites) {
 }
 
 function validateAndReformatDate(newPrevBirthday, newCurBirthday) {
-  if (newPrevBirthday.slice(0, 4) >= 12) {
-    newPrevBirthday.reverse();
-  }
-  if (newCurBirthday.slice(0, 4) >= 12) {
-    newCurBirthday.reverse();
-  }
+  const { regex } = testDateWithUncommonFormat(newPrevBirthday);
+
+  newPrevBirthday = testDateWithCommonFormat(newPrevBirthday).result
+    ? newPrevBirthday
+    : newPrevBirthday.replace(regex, '$5.$3.$1');
+
+  newCurBirthday = testDateWithCommonFormat(newCurBirthday).result
+    ? newCurBirthday
+    : newCurBirthday.replace(regex, '$5.$3.$1');
+
   if (/-|\//.test(newPrevBirthday)) {
     newPrevBirthday = reformatDateSeperator(newPrevBirthday);
   }

@@ -12,13 +12,12 @@ import validatePersonData from '../../helper/validatePersonData';
 import AddPersonUIControls from '../AddPersonUIControls/AddPersonUIControls';
 import AddPersonUIINfo from '../AddPersonUIInfo/AddPersonUIInfo';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
-function AddPersonUI({ showAddPersonUIHandler }) {
+function AddPersonUI({ toggleAddPersonUI }) {
   const { state, dispatch } = useContext(AppContext);
   const [didUserUploadPicture, setDidUserUploadPicture] = useState(false);
   const [currentPicture, setCurrentPicture] = useState(null);
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
-
   const addPersonHandler = async () => {
     let name = nameContainer.current.value;
     const date = dateContainer.current.value;
@@ -29,13 +28,15 @@ function AddPersonUI({ showAddPersonUIHandler }) {
     switch (validationResult) {
       case 'INVALID_NAME':
       case 'INVALID_DATE':
+      case 'INVALID_DAY':
       case 'INVALID_MONTH':
+      case 'INVALID_YEAR':
       case 'INVALID_FILE_TYPE':
         dispatch({ type: validationResult });
         break;
       default:
         addPerson(name, date, picture);
-        showAddPersonUIHandler();
+        toggleAddPersonUI();
         break;
     }
   };
@@ -81,7 +82,7 @@ function AddPersonUI({ showAddPersonUIHandler }) {
         <AddPersonUIControls addPersonHandler={addPersonHandler} />
         <button
           className="add-person-ui__close-btn"
-          onClick={showAddPersonUIHandler}
+          onClick={toggleAddPersonUI}
         >
           <i className="fas fa-times"></i>
         </button>

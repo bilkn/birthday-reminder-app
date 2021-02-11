@@ -6,7 +6,7 @@ function getPersonAge(person) {
   if (birthday[0].length !== 4) {
     birthday = birthday.reverse();
   }
-
+  // Creates Date object with year, month and day values.
   const date = new Date(birthday[0], birthday[1], birthday[2]);
   var difference = Date.now() - date.getTime();
   var age_dt = new Date(difference);
