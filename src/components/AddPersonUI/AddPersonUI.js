@@ -12,7 +12,7 @@ import validatePersonData from '../../helper/validatePersonData';
 import AddPersonUIControls from '../AddPersonUIControls/AddPersonUIControls';
 import AddPersonUIINfo from '../AddPersonUIInfo/AddPersonUIInfo';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
-function AddPersonUI({ toggleAddPersonUI }) {
+function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
   const { state, dispatch } = useContext(AppContext);
   const [didUserUploadPicture, setDidUserUploadPicture] = useState(false);
   const [currentPicture, setCurrentPicture] = useState(null);
@@ -37,6 +37,7 @@ function AddPersonUI({ toggleAddPersonUI }) {
       default:
         addPerson(name, date, picture);
         toggleAddPersonUI();
+        setShowBackground(false);
         break;
     }
   };

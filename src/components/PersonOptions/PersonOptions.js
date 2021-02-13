@@ -81,7 +81,7 @@ function PersonOptions(props) {
       const handleMouseOut = (e) => {
         setShowBackground(false);
         const relatedTarget = e.relatedTarget;
-        if (!relatedTarget.classList.contains('person__options-btn')) {
+        if (!relatedTarget.classList.contains('person__dropdown-btn')) {
           setCurrentPersonID(null);
           target.removeEventListener('mouseleave', handleMouseOut);
         }

@@ -75,8 +75,8 @@ function sortByMonth(oldPeople, dispatch, setPeopleList, showFavourites) {
 
 function sortByName(oldPeople, dispatch, setPeopleList, showFavourites) {
   const sortedPeople = oldPeople.sort((prev, cur) => {
-    const [prevName] = prev.name;
-    const [curName] = cur.name;
+    const [prevName] = prev.name.toLowerCase();
+    const [curName] = cur.name.toLowerCase();
     return prevName.charCodeAt(0) - curName.charCodeAt(0);
   });
   if (showFavourites) {

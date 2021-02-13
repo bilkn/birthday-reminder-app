@@ -1,8 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import './MobileNav.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
 import sortingLogic from '../../helper/sortingLogic';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
+import handleSorting from '../../helper/handleSorting';
 
 function MobileNav() {
   const {
@@ -10,45 +11,36 @@ function MobileNav() {
     favState,
     showAddPersonUIState,
     backgroundState,
+    sortingState
   } = useContext(AppContext);
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showFavourites, setShowFavourites] = favState;
   const [showBackground, setShowBackground] = backgroundState;
-  const [sortState, setSortState] = useState('sortByAge');
+  const [sortState, setSortState] = sortingState;
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
+ 
   const toggleAddPersonUI = () => {
     setShowBackground(!showBackground);
     setShowAddPersonUI(!showAddPersonUI);
   };
-
-  const sortingClickHandler = () => {
-    switch (sortState) {
-      case 'sortByAge':
-        setSortState('sortByName');
-        break;
-      case 'sortByName':
-        setSortState('sortByMonth');
-        break;
-      case 'sortByMonth':
-        setSortState('sortByAge');
-        break;
-      default:
-        break;
-    }
-    sortingLogic({
+  const handleSortingClick = () => {
+    handleSorting(sortState, setSortState);
+    const args = {
       peopleList,
-      dispatch,
-      sortState,
       setPeopleList,
+      sortState,
       showFavourites,
-    });
+      dispatch,
+    };
+    sortingLogic(args);
   };
+
   return (
     <>
       <nav className="mobile-nav">
         <button
           className="mobile-nav__btn mobile-nav__btn--side"
-          onClick={sortingClickHandler}
+          onClick={handleSortingClick}
         >
           <i className="fas fa-sort-amount-down"></i>
         </button>
