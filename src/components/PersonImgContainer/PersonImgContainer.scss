@@ -1,6 +1,7 @@
 @import '../../styles/variables';
 .person-img-container {
   border-radius: 50%;
+  cursor: default;
   height: $person-img-size;
   width: $person-img-size;
 

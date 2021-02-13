@@ -11,8 +11,8 @@
   padding: 0.5rem 1rem;
   position: relative;
   transition: background 200ms ease;
-  // person__options-btn
-  &__options-btn {
+  // person__dropdown-btn
+  &__dropdown-btn {
     color: rgb(77, 76, 76);
     cursor: pointer;
     display: none;
@@ -22,7 +22,7 @@
     transition: color 200ms ease;
     top: 0;
   }
-  &__options-btn:hover {
+  &__dropdown-btn:hover {
     color: rgb(46, 46, 46);
   }
 }
@@ -66,8 +66,8 @@
 @media (min-width: 768px) {
   .person {
     cursor: initial;
-    // person__options-btn
-    &__options-btn {
+    // person__dropdown-btn
+    &__dropdown-btn {
       display: flex;
       justify-content: flex-end;
     }

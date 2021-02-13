@@ -10,15 +10,12 @@ function AppProvider(props) {
     notificationContent: '',
   };
   const [state, dispatch] = useReducer(reducer, def);
-  const [showFavourites, setShowFavourites] = useState(false);
   const [currentPersonID, setCurrentPersonID] = useState(null);
-  const [showBackground, setShowBackground] = useState(false);
-  const [showAddPersonUI, setShowAddPersonUI] = useState(false);
-  const [showEditPersonUI, setShowEditPersonUI] = useState(false);
-  const showAddPersonUIState = [showAddPersonUI, setShowAddPersonUI];
-  const showEditPersonUIState = [showEditPersonUI, setShowEditPersonUI];
-  const backgroundState = [showBackground, setShowBackground];
-  const favState = [showFavourites, setShowFavourites];
+  const showAddPersonUIState = useState(false);
+  const showEditPersonUIState = useState(false);
+  const backgroundState = useState(false);
+  const favState = useState(false);
+  const sortingState = useState('sortByName');
   // Default state.
   const getInitialData = async () => {
     const data = await defaultState();
@@ -45,6 +42,7 @@ function AppProvider(props) {
         showEditPersonUIState,
         currentPersonID,
         setCurrentPersonID,
+        sortingState
       }}
       {...props}
     />

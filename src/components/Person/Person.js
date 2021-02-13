@@ -55,9 +55,11 @@ function Person(props) {
   };
 
   const keyPressHandler = (e) => {
-    if (e.key === 'Enter' && !currentPersonID) selectPersonHandler(id);
+    console.log('key press');
+    if (e.key === 'Enter') selectPersonHandler(id);
   };
   const handleMouseEnter = (e) => {
+    console.log('Mouse enter');
     const target = e.target.closest('button');
     selectPersonHandler(id);
     const style = { height: '50px', width: '30px' };
@@ -76,12 +78,12 @@ function Person(props) {
   return (
     <div
       className={parentClass}
-      onKeyPress={(e) => keyPressHandler(e)}
+      onKeyPress={keyPressHandler}
       onClick={handleClick}
       tabIndex={tabindex}
     >
       <button
-        className="person__options-btn"
+        className="person__dropdown-btn"
         onMouseEnter={handleMouseEnter}
         style={optionsBtnStyle}
       >

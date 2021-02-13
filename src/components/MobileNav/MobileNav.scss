@@ -12,22 +12,28 @@
   width: 100vw;
   z-index: 1000;
 
-  // mobile-nav__add-btn
-  &__add-btn {
+  // mobile-nav__btn
+  &__btn {
     align-items: center;
     background: $third-color;
     border-radius: 50%;
     bottom: 30px;
+    cursor: pointer;
     display: flex;
     font-size: 2.3rem;
     justify-content: center;
     height: $person-img-size;
     position: relative;
+    transition: background 100ms ease;
     width: $person-img-size;
   }
 
-  // mobile-nav__add-btn--side
-  &__add-btn--side {
+  &__btn:hover {
+    background: lighten($third-color, 1.5%);
+  }
+
+  // mobile-nav__btn--side
+  &__btn--side {
     font-size: 1.6rem;
     position: static;
     height: 60px;
