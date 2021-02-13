@@ -47,17 +47,17 @@ function MobileNav() {
     <>
       <nav className="mobile-nav">
         <button
-          className="mobile-nav__add-btn mobile-nav__add-btn--side"
+          className="mobile-nav__btn mobile-nav__btn--side"
           onClick={sortingClickHandler}
         >
           <i className="fas fa-sort-amount-down"></i>
         </button>
-        <button className="mobile-nav__add-btn" onClick={toggleAddPersonUI}>
+        <button className="mobile-nav__btn" onClick={toggleAddPersonUI}>
           <i className="fas fa-plus"></i>
         </button>
 
         <button
-          className="mobile-nav__add-btn mobile-nav__add-btn--side"
+          className="mobile-nav__btn mobile-nav__btn--side"
           onClick={() => setShowFavourites(!showFavourites)}
         >
           <i className="fas fa-star"></i>
