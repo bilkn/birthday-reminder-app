@@ -1,14 +1,11 @@
-function handleSorting(sortState, setSortState) {
+function handleSorting(sortState) {
   switch (sortState) {
     case 'sortByName':
-      setSortState(()=>'sortByAge');
-      break;
+      return 'sortByAge';
     case 'sortByAge':
-      setSortState(()=>'sortByMonth');
-      break;
+      return 'sortByMonth';
     case 'sortByMonth':
-      setSortState(()=>'sortByName');
-      break;
+      return 'sortByName';
     default:
       break;
   }

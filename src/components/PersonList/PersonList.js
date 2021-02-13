@@ -28,7 +28,6 @@ function PersonList(props) {
   const [, setShowBackground] = backgroundState;
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
-  const [showSortingSelectbox, setShowSortingSelectbox] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [isTimePassed, setIsTimePassed] = useState(true);
   const handleDeletePerson = (e, id) => {
@@ -74,9 +73,6 @@ function PersonList(props) {
       setShowAddPersonUI(() => false);
     }
   };
-  const handleSelectboxClick = () => {
-    setShowSortingSelectbox(()=>!showSortingSelectbox);
-  };
 
   useEffect(() => {
     window.addEventListener('keyup', keyHandler);
@@ -94,7 +90,8 @@ function PersonList(props) {
 
   return (
     <>
-    {showSortingSelectbox && <SortingSelectbox />}
+      <SortingSelectbox  />
+
       {state.isNotificationOpen && (
         <Notification
           isTimePassed={isTimePassed}
@@ -110,9 +107,6 @@ function PersonList(props) {
         />
       )}
       <ul className="person-list">
-        <button className="person-list__btn" onClick={handleSelectboxClick}>
-          <i className="fas fa-sort person-list__icon"></i>
-        </button>
         {peopleList &&
           peopleList.map((person) => (
             <Person
@@ -126,7 +120,10 @@ function PersonList(props) {
             />
           ))}
         {(showAddPersonUI && (
-          <AddPersonUI setShowBackground = {setShowBackground} toggleAddPersonUI={toggleAddPersonUI} />
+          <AddPersonUI
+            setShowBackground={setShowBackground}
+            toggleAddPersonUI={toggleAddPersonUI}
+          />
         )) || (
           <EmptyBox
             toggleAddPersonUIHandlerForLargerScreen={

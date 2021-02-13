@@ -8,16 +8,17 @@ function sortingLogic(args) {
   const {
     peopleList,
     dispatch,
-    sortState,
+    nextSort,
     setPeopleList,
     showFavourites,
   } = args;
+ console.log(nextSort, "sorting")
   const people = peopleList;
-  if (sortState === 'sortByAge') {
+  if (nextSort === 'sortByAge') {
     sortByAge(people, dispatch, setPeopleList, showFavourites);
-  } else if (sortState === 'sortByMonth') {
+  } else if (nextSort === 'sortByMonth') {
     sortByMonth(people, dispatch, setPeopleList, showFavourites);
-  } else if (sortState === 'sortByName') {
+  } else if (nextSort === 'sortByName') {
     sortByName(people, dispatch, setPeopleList, showFavourites);
   }
 }
