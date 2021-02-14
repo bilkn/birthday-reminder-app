@@ -30,7 +30,6 @@ function AppProvider(props) {
   useEffect(() => {
     getInitialData();
   }, []);
-
   return (
     <AppContext.Provider
       value={{
@@ -42,7 +41,7 @@ function AppProvider(props) {
         showEditPersonUIState,
         currentPersonID,
         setCurrentPersonID,
-        sortingState
+        sortingState,
       }}
       {...props}
     />

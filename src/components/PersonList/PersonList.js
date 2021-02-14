@@ -25,13 +25,16 @@ function PersonList(props) {
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showFavourites] = favState;
-  const [, setShowBackground] = backgroundState;
+  const [showBackground, setShowBackground] = backgroundState;
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
-  const [showSortingSelectbox, setShowSortingSelectbox] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [isTimePassed, setIsTimePassed] = useState(true);
   const handleDeletePerson = (e, id) => {
+    const mql = window.matchMedia('(min-width: 768px)');
+    if (mql.matches) {
+      setCurrentPersonID(null);
+    }
     e.stopPropagation();
     setShowDeletePersonDialog(true);
     setDeletionUserID(id);
@@ -74,9 +77,6 @@ function PersonList(props) {
       setShowAddPersonUI(() => false);
     }
   };
-  const handleSelectboxClick = () => {
-    setShowSortingSelectbox(()=>!showSortingSelectbox);
-  };
 
   useEffect(() => {
     window.addEventListener('keyup', keyHandler);
@@ -92,9 +92,43 @@ function PersonList(props) {
     setPeopleList(people);
   }, [showFavourites, state.people, setPeopleList]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      // Sets several states according to the screen size, and active UI's (media queries weren't enough).
+      const mql = window.matchMedia('(min-width: 768px)');
+      if (mql.matches && showDeletePersonDialog) {
+        setCurrentPersonID(null);
+      }
+      if (
+        mql.matches &&
+        (showAddPersonUI || currentPersonID) &&
+        showBackground
+      ) {
+        setShowBackground(() => false);
+      } else if (
+        !mql.matches &&
+        (showAddPersonUI || currentPersonID) &&
+        !showBackground
+      ) {
+        setShowBackground(() => true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [
+    showBackground,
+    setShowBackground,
+    showAddPersonUI,
+    currentPersonID,
+    setCurrentPersonID,
+    showDeletePersonDialog,
+  ]);
   return (
     <>
-    {showSortingSelectbox && <SortingSelectbox />}
+      <SortingSelectbox />
+
       {state.isNotificationOpen && (
         <Notification
           isTimePassed={isTimePassed}
@@ -110,9 +144,6 @@ function PersonList(props) {
         />
       )}
       <ul className="person-list">
-        <button className="person-list__btn" onClick={handleSelectboxClick}>
-          <i className="fas fa-sort person-list__icon"></i>
-        </button>
         {peopleList &&
           peopleList.map((person) => (
             <Person
@@ -126,7 +157,10 @@ function PersonList(props) {
             />
           ))}
         {(showAddPersonUI && (
-          <AddPersonUI setShowBackground = {setShowBackground} toggleAddPersonUI={toggleAddPersonUI} />
+          <AddPersonUI
+            setShowBackground={setShowBackground}
+            toggleAddPersonUI={toggleAddPersonUI}
+          />
         )) || (
           <EmptyBox
             toggleAddPersonUIHandlerForLargerScreen={

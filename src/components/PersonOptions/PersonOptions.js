@@ -75,13 +75,13 @@ function PersonOptions(props) {
   };
 
   const handleMouseOver = (e) => {
-    const mql = window.matchMedia('(min-width: 768px)');
+    const mql = window.matchMedia('(min-width: 769px)');
     if (mql.matches) {
       const target = e.target.closest('div');
       const handleMouseOut = (e) => {
         setShowBackground(false);
         const relatedTarget = e.relatedTarget;
-        if (!relatedTarget.classList.contains('person__dropdown-btn')) {
+        if (relatedTarget && !relatedTarget.classList.contains('person__dropdown-btn')) {
           setCurrentPersonID(null);
           target.removeEventListener('mouseleave', handleMouseOut);
         }

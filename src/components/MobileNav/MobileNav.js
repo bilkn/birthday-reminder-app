@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import './MobileNav.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
 import sortingLogic from '../../helper/sortingLogic';
@@ -11,28 +11,29 @@ function MobileNav() {
     favState,
     showAddPersonUIState,
     backgroundState,
-    sortingState
+    sortingState,
   } = useContext(AppContext);
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showFavourites, setShowFavourites] = favState;
   const [showBackground, setShowBackground] = backgroundState;
   const [sortState, setSortState] = sortingState;
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
- 
+
   const toggleAddPersonUI = () => {
     setShowBackground(!showBackground);
     setShowAddPersonUI(!showAddPersonUI);
   };
   const handleSortingClick = () => {
-    handleSorting(sortState, setSortState);
+    const nextSort = handleSorting(sortState);
     const args = {
       peopleList,
       setPeopleList,
-      sortState,
+      nextSort,
       showFavourites,
       dispatch,
     };
     sortingLogic(args);
+    setSortState(nextSort);
   };
 
   return (

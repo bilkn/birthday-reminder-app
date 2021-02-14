@@ -45,28 +45,26 @@ function Person(props) {
   }, [person]);
 
   useEffect(() => {
-    const mql = window.matchMedia('(max-width: 768px)');
+    const mql = window.matchMedia('(max-width: 769px)');
     if (mql.matches) setTabindex(0);
   }, [tabindex]);
 
   const handleClick = () => {
-    const mql = window.matchMedia('(max-width: 768px)');
+    const mql = window.matchMedia('(max-width: 769px)');
     if (mql.matches) selectPersonHandler(id);
   };
 
   const keyPressHandler = (e) => {
-    console.log('key press');
     if (e.key === 'Enter') selectPersonHandler(id);
   };
   const handleMouseEnter = (e) => {
-    console.log('Mouse enter');
     const target = e.target.closest('button');
     selectPersonHandler(id);
     const style = { height: '50px', width: '30px' };
     setOptionsBtnStyle(style);
     const handleMouseLeave = (e) => {
       const relatedTarget = e.relatedTarget;
-      if (!relatedTarget.classList.contains('person-options-list__item')) {
+      if (relatedTarget && !relatedTarget.classList.contains('person-options-list__item')) {
         setCurrentPersonID(null);
         setOptionsBtnStyle(null);
         target.removeEventListener('mouseleave', handleMouseLeave);

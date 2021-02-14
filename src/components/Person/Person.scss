@@ -11,6 +11,7 @@
   padding: 0.5rem 1rem;
   position: relative;
   transition: background 200ms ease;
+
   // person__dropdown-btn
   &__dropdown-btn {
     color: rgb(77, 76, 76);
@@ -29,6 +30,9 @@
 
 .person:hover {
   background: $sec-color-hover;
+}
+.person:focus {
+  outline: none;
 }
 
 .person--highlighted {
@@ -63,7 +67,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .person {
     cursor: initial;
     // person__dropdown-btn
