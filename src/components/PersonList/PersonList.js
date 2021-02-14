@@ -25,7 +25,7 @@ function PersonList(props) {
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showFavourites] = favState;
-  const [, setShowBackground] = backgroundState;
+  const [showBackground, setShowBackground] = backgroundState;
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
@@ -88,9 +88,34 @@ function PersonList(props) {
     setPeopleList(people);
   }, [showFavourites, state.people, setPeopleList]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const mql = window.matchMedia('(min-width: 768px)');
+      console.log(showAddPersonUI && true);
+      if (
+        mql.matches &&
+        (showAddPersonUI || currentPersonID) &&
+        showBackground
+      ) {
+        console.log('true');
+        setShowBackground(() => false);
+      } else if (
+        !mql.matches &&
+        (showAddPersonUI || currentPersonID) &&
+        !showBackground
+      ) {
+        console.log('false');
+        setShowBackground(() => true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [showBackground, setShowBackground, showAddPersonUI, currentPersonID]);
   return (
     <>
-      <SortingSelectbox  />
+      <SortingSelectbox />
 
       {state.isNotificationOpen && (
         <Notification

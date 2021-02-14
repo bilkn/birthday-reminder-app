@@ -29,9 +29,9 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .person-list {
-    grid-template-columns: repeat(auto-fill, 330px);
+    grid-template-columns: repeat(auto-fill, 320px);
     // person-list__btn
     &__btn {
       grid-column: 2;
@@ -39,7 +39,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
   .person-list {
     grid-template-columns: repeat(auto-fill, 300px);
     width: 100%;

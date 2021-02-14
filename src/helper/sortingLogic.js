@@ -12,7 +12,6 @@ function sortingLogic(args) {
     setPeopleList,
     showFavourites,
   } = args;
- console.log(nextSort, "sorting")
   const people = peopleList;
   if (nextSort === 'sortByAge') {
     sortByAge(people, dispatch, setPeopleList, showFavourites);

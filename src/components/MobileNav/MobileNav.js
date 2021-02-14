@@ -24,8 +24,7 @@ function MobileNav() {
     setShowAddPersonUI(!showAddPersonUI);
   };
   const handleSortingClick = () => {
-    console.log(sortState, 'mobile nav');
-    const nextSort = handleSorting(sortState, setSortState);
+    const nextSort = handleSorting(sortState);
     const args = {
       peopleList,
       setPeopleList,

@@ -30,7 +30,6 @@ function AppProvider(props) {
   useEffect(() => {
     getInitialData();
   }, []);
-  console.log('helllo, ', sortingState, props);
   return (
     <AppContext.Provider
       value={{

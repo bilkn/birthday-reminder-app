@@ -12,7 +12,7 @@ function SortingSelectbox() {
   const handleChange = (e) => {
     const value = e.target.value;
     const nextSort = formatValue(value);
-    
+
     const args = {
       peopleList,
       setPeopleList,
@@ -21,8 +21,10 @@ function SortingSelectbox() {
       dispatch,
     };
     sortingLogic(args);
-    setSortState(nextSort)
+    setSortState(nextSort);
   };
+
+
 
   const formatValue = (value) => {
     switch (value) {
@@ -37,8 +39,12 @@ function SortingSelectbox() {
     }
   };
   return (
-    <select className="sorting-selectbox" onChange={handleChange}>
-      <option value="sort-by-name" className="sorting-selectbox__option">
+    <select className="sorting-selectbox" onChange={handleChange} defaultValue={sortState}>
+      <option
+        id="test"
+        value="sort-by-name"
+        className="sorting-selectbox__option"
+      >
         Sort by name
       </option>
       <option value="sort-by-age" className="sorting-selectbox__option">

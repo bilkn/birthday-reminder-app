@@ -55,11 +55,9 @@ function Person(props) {
   };
 
   const keyPressHandler = (e) => {
-    console.log('key press');
     if (e.key === 'Enter') selectPersonHandler(id);
   };
   const handleMouseEnter = (e) => {
-    console.log('Mouse enter');
     const target = e.target.closest('button');
     selectPersonHandler(id);
     const style = { height: '50px', width: '30px' };
