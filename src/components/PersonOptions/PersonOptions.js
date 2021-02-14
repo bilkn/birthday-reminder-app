@@ -75,7 +75,7 @@ function PersonOptions(props) {
   };
 
   const handleMouseOver = (e) => {
-    const mql = window.matchMedia('(min-width: 768px)');
+    const mql = window.matchMedia('(min-width: 769px)');
     if (mql.matches) {
       const target = e.target.closest('div');
       const handleMouseOut = (e) => {

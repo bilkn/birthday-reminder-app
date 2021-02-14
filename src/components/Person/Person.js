@@ -45,12 +45,12 @@ function Person(props) {
   }, [person]);
 
   useEffect(() => {
-    const mql = window.matchMedia('(max-width: 768px)');
+    const mql = window.matchMedia('(max-width: 769px)');
     if (mql.matches) setTabindex(0);
   }, [tabindex]);
 
   const handleClick = () => {
-    const mql = window.matchMedia('(max-width: 768px)');
+    const mql = window.matchMedia('(max-width: 769px)');
     if (mql.matches) selectPersonHandler(id);
   };
 

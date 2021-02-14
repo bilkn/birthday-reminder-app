@@ -31,6 +31,10 @@ function PersonList(props) {
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [isTimePassed, setIsTimePassed] = useState(true);
   const handleDeletePerson = (e, id) => {
+    const mql = window.matchMedia('(min-width: 768px)');
+    if (mql.matches) {
+      setCurrentPersonID(null);
+    }
     e.stopPropagation();
     setShowDeletePersonDialog(true);
     setDeletionUserID(id);
@@ -90,21 +94,22 @@ function PersonList(props) {
 
   useEffect(() => {
     const handleResize = () => {
+      // Sets several states according to the screen size, and active UI's (media queries weren't enough).
       const mql = window.matchMedia('(min-width: 768px)');
-      console.log(showAddPersonUI && true);
+      if (mql.matches && showDeletePersonDialog) {
+        setCurrentPersonID(null);
+      }
       if (
         mql.matches &&
         (showAddPersonUI || currentPersonID) &&
         showBackground
       ) {
-        console.log('true');
         setShowBackground(() => false);
       } else if (
         !mql.matches &&
         (showAddPersonUI || currentPersonID) &&
         !showBackground
       ) {
-        console.log('false');
         setShowBackground(() => true);
       }
     };
