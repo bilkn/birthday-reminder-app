@@ -35,6 +35,7 @@ function EditPersonUI({
     try {
       editedPerson = await createEditedPerson(newName, newBirthday, picture);
     } catch (err) {
+      // Add notification.
       console.log(err);
     }
     if (editedPerson) {
@@ -94,7 +95,7 @@ function EditPersonUI({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [setShowEditPersonUI]);
 
   return (
     <div className="edit-person-ui">

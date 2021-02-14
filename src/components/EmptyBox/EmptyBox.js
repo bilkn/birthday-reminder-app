@@ -1,11 +1,11 @@
 import './EmptyBox.scss';
-function EmptyBox({ toggleAddPersonUIHandlerForLargerScreen }) {
+function EmptyBox({ handleAddPersonUIForLargerScreen }) {
   const handleClick = (e) => {
-    toggleAddPersonUIHandlerForLargerScreen(e);
+    handleAddPersonUIForLargerScreen(e);
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') toggleAddPersonUIHandlerForLargerScreen(e);
+    if (e.key === 'Enter') handleAddPersonUIForLargerScreen(e);
   };
   return (
     <div

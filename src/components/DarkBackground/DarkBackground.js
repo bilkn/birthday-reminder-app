@@ -12,7 +12,7 @@ function DarkBackground() {
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [showBackground, setShowBackground] = backgroundState;
-  const backgroundHandler = (e) => {
+  const handleBackground = (e) => {
     if (currentPersonID || showAddPersonUI || showEditPersonUI) {
       e.stopPropagation();
       setShowBackground(false);
@@ -29,7 +29,7 @@ function DarkBackground() {
   const className = showBackground
     ? 'dark-background dark-background--visible'
     : 'dark-background';
-  return <div className={className} onClick={backgroundHandler}></div>;
+  return <div className={className} onClick={handleBackground}></div>;
 }
 
 export default DarkBackground;

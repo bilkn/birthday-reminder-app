@@ -11,7 +11,7 @@ function SearchBox({ setShowSearchBox }) {
   const [showFavourites] = favState;
   const searchInput = useRef(null);
 
-  const changeHandler = async () => {
+  const handleChange = async () => {
     const name = searchInput.current.value;
     displayPeople(name);
   };
@@ -28,7 +28,7 @@ function SearchBox({ setShowSearchBox }) {
     }
   };
 
-  const closeBtnClickHandler = async () => {
+  const handleSearchBoxClose = async () => {
     let name = '';
     setShowSearchBox(false);
     displayPeople(name);
@@ -36,7 +36,7 @@ function SearchBox({ setShowSearchBox }) {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') closeBtnClickHandler();
+      if (e.key === 'Escape') handleSearchBoxClose();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -49,11 +49,11 @@ function SearchBox({ setShowSearchBox }) {
         className="search-box__search-input"
         type="search"
         placeholder="Search by name"
-        onChange={changeHandler}
+        onChange={handleChange}
         ref={searchInput}
         autoFocus
       />
-      <button className="search-box__close-btn" onClick={closeBtnClickHandler}>
+      <button className="search-box__close-btn" onClick={handleSearchBoxClose}>
         <i className="far fa-times-circle"></i>
       </button>
     </div>

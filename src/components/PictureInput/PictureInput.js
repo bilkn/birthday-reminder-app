@@ -5,7 +5,7 @@ import './PictureInput.scss';
 function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
   const { dispatch } = useContext(AppContext);
   const label = useRef(null);
-  const fileInputHandler = (e) => {
+  const handleFile = (e) => {
     const picture = e.target.files[0];
     if (validatePicture(picture)) {
       setDidUserUploadPicture(true);
@@ -41,7 +41,7 @@ function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
         type="file"
         className="picture-input-container__picture"
         accept="image/png, image/jpeg"
-        onChange={fileInputHandler}
+        onChange={handleFile}
         hidden={true}
       ></input>
     </div>

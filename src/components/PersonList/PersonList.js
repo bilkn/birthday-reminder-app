@@ -55,7 +55,7 @@ function PersonList(props) {
     setShowBackground(false);
   };
 
-  const selectPersonHandler = (id) => {
+  const handleSelectPerson = (id) => {
     const mql = window.matchMedia('(max-width: 768px)');
     if (mql.matches) {
       setShowBackground(true);
@@ -66,11 +66,11 @@ function PersonList(props) {
     }
   };
 
-  const toggleAddPersonUIHandlerForLargerScreen = () => {
+  const handleAddPersonUIForLargerScreen = () => {
     setShowAddPersonUI(!showAddPersonUI);
   };
 
-  const keyHandler = (e) => {
+  const handleKeyUp = (e) => {
     if (e.key === 'Escape') {
       setCurrentPersonID(null);
       setShowBackground(false);
@@ -79,9 +79,9 @@ function PersonList(props) {
   };
 
   useEffect(() => {
-    window.addEventListener('keyup', keyHandler);
+    window.addEventListener('keyup', handleKeyUp);
     return () => {
-      window.removeEventListener('keyup', keyHandler);
+      window.removeEventListener('keyup', handleKeyUp);
     };
   });
 
@@ -95,7 +95,7 @@ function PersonList(props) {
   useEffect(() => {
     const handleResize = () => {
       // Sets several states according to the screen size, and active UI's (media queries weren't enough).
-      const mql = window.matchMedia('(min-width: 768px)');
+      const mql = window.matchMedia('(min-width: 769px)');
       if (mql.matches && showDeletePersonDialog) {
         setCurrentPersonID(null);
       }
@@ -152,7 +152,7 @@ function PersonList(props) {
               handleDeletePerson={handleDeletePerson}
               currentPersonID={currentPersonID}
               setCurrentPersonID={setCurrentPersonID}
-              selectPersonHandler={selectPersonHandler}
+              handleSelectPerson={handleSelectPerson}
               setShowBackground={setShowBackground}
             />
           ))}
@@ -163,9 +163,7 @@ function PersonList(props) {
           />
         )) || (
           <EmptyBox
-            toggleAddPersonUIHandlerForLargerScreen={
-              toggleAddPersonUIHandlerForLargerScreen
-            }
+            handleAddPersonUIForLargerScreen={handleAddPersonUIForLargerScreen}
           />
         )}
       </ul>

@@ -21,14 +21,14 @@ function PersonOptions(props) {
     return person && person.inFavourites;
   };
 
-  const editHandler = (e) => {
+  const handleEdit = (e) => {
     e.stopPropagation();
     setShowBackground(true);
     setShowEditPersonUI(true);
     setTimeout(() => setCurrentPersonID(null), 0);
   };
 
-  const addToFavoritesHandler = () => {
+  const handleAddFavourites = () => {
     const oldPeople = state.people.filter(
       (person) => currentPersonID !== person.id
     );
@@ -48,7 +48,7 @@ function PersonOptions(props) {
     setCurrentPersonID(null);
   };
 
-  const removeFromFavouritesHandler = () => {
+  const handleRemoveFavourites = () => {
     const oldPeople = state.people.filter(
       (person) => person.id !== currentPersonID
     );
@@ -70,8 +70,8 @@ function PersonOptions(props) {
     e.stopPropagation();
     setShowBackground(false);
     return isPersonInFavourites(person)
-      ? removeFromFavouritesHandler
-      : addToFavoritesHandler;
+      ? handleRemoveFavourites
+      : handleAddFavourites;
   };
 
   const handleMouseOver = (e) => {
@@ -81,7 +81,10 @@ function PersonOptions(props) {
       const handleMouseOut = (e) => {
         setShowBackground(false);
         const relatedTarget = e.relatedTarget;
-        if (relatedTarget && !relatedTarget.classList.contains('person__dropdown-btn')) {
+        if (
+          relatedTarget &&
+          !relatedTarget.classList.contains('person__dropdown-btn')
+        ) {
           setCurrentPersonID(null);
           target.removeEventListener('mouseleave', handleMouseOut);
         }
@@ -113,7 +116,7 @@ function PersonOptions(props) {
         <li className="person-options-list__item person-options-list__item--edit-btn">
           <button
             className="person-options-list__btn"
-            onClick={(e) => editHandler(e)}
+            onClick={(e) => handleEdit(e)}
           >
             Edit
           </button>

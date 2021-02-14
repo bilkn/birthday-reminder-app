@@ -10,7 +10,7 @@ function Person(props) {
     handleDeletePerson,
     currentPersonID,
     setCurrentPersonID,
-    selectPersonHandler,
+    handleSelectPerson,
   } = props;
   const { id, name, birthday, picture } = person;
   const [optionsBtnStyle, setOptionsBtnStyle] = useState(null);
@@ -51,20 +51,23 @@ function Person(props) {
 
   const handleClick = () => {
     const mql = window.matchMedia('(max-width: 769px)');
-    if (mql.matches) selectPersonHandler(id);
+    if (mql.matches) handleSelectPerson(id);
   };
 
-  const keyPressHandler = (e) => {
-    if (e.key === 'Enter') selectPersonHandler(id);
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') handleSelectPerson(id);
   };
   const handleMouseEnter = (e) => {
     const target = e.target.closest('button');
-    selectPersonHandler(id);
+    handleSelectPerson(id);
     const style = { height: '50px', width: '30px' };
     setOptionsBtnStyle(style);
     const handleMouseLeave = (e) => {
       const relatedTarget = e.relatedTarget;
-      if (relatedTarget && !relatedTarget.classList.contains('person-options-list__item')) {
+      if (
+        relatedTarget &&
+        !relatedTarget.classList.contains('person-options-list__item')
+      ) {
         setCurrentPersonID(null);
         setOptionsBtnStyle(null);
         target.removeEventListener('mouseleave', handleMouseLeave);
@@ -76,7 +79,7 @@ function Person(props) {
   return (
     <div
       className={parentClass}
-      onKeyPress={keyPressHandler}
+      onKeyPress={handleKeyPress}
       onClick={handleClick}
       tabIndex={tabindex}
     >
