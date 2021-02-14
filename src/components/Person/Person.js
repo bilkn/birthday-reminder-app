@@ -64,7 +64,7 @@ function Person(props) {
     setOptionsBtnStyle(style);
     const handleMouseLeave = (e) => {
       const relatedTarget = e.relatedTarget;
-      if (!relatedTarget.classList.contains('person-options-list__item')) {
+      if (relatedTarget && !relatedTarget.classList.contains('person-options-list__item')) {
         setCurrentPersonID(null);
         setOptionsBtnStyle(null);
         target.removeEventListener('mouseleave', handleMouseLeave);

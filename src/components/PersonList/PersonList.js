@@ -117,7 +117,14 @@ function PersonList(props) {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [showBackground, setShowBackground, showAddPersonUI, currentPersonID]);
+  }, [
+    showBackground,
+    setShowBackground,
+    showAddPersonUI,
+    currentPersonID,
+    setCurrentPersonID,
+    showDeletePersonDialog,
+  ]);
   return (
     <>
       <SortingSelectbox />
