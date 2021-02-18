@@ -1,9 +1,9 @@
 import './Person.scss';
-import createFileURL from '../../helper//createFileURL';
+import createFileURL from '../../helpers/createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
 import { useEffect, useState } from 'react';
-import getPersonAge from '../../helper/getPersonAge';
+import getPersonAge from '../../helpers/getPersonAge';
 function Person(props) {
   const {
     person,
@@ -13,7 +13,7 @@ function Person(props) {
     handleSelectPerson,
   } = props;
   const { id, name, birthday, picture } = person;
-  const [optionsBtnStyle, setOptionsBtnStyle] = useState(null);
+  const [dropdownBtnStyle, setDropdownBtnStyle] = useState(null);
   const [pictureURL, setPictureURL] = useState(null);
   const [parentClass, setParentClass] = useState('');
   const [personAge, setPersonAge] = useState(null);
@@ -61,7 +61,7 @@ function Person(props) {
     const target = e.target.closest('button');
     handleSelectPerson(id);
     const style = { height: '50px', width: '30px' };
-    setOptionsBtnStyle(style);
+    setDropdownBtnStyle(style);
     const handleMouseLeave = (e) => {
       const relatedTarget = e.relatedTarget;
       if (
@@ -69,7 +69,7 @@ function Person(props) {
         !relatedTarget.classList.contains('person-options-list__item')
       ) {
         setCurrentPersonID(null);
-        setOptionsBtnStyle(null);
+        setDropdownBtnStyle(null);
         target.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
@@ -86,7 +86,7 @@ function Person(props) {
       <button
         className="person__dropdown-btn"
         onMouseEnter={handleMouseEnter}
-        style={optionsBtnStyle}
+        style={dropdownBtnStyle}
       >
         <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
       </button>

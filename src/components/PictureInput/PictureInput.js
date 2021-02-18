@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef } from 'react';
-import validatePicture from '../../helper/validatePicture';
+import validatePicture from '../../helpers/validatePicture';
 import { AppContext } from '../../context/AppContext/AppContext';
 import './PictureInput.scss';
 function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {

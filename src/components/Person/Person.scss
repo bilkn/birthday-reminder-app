@@ -26,6 +26,10 @@
   &__dropdown-btn:hover {
     color: rgb(46, 46, 46);
   }
+  &__dropdown-btn:focus {
+    color: rgb(238, 238, 238);
+    outline: none;
+  }
 }
 
 .person:hover {

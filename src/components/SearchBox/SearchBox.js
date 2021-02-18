@@ -2,8 +2,8 @@ import { useRef, useContext, useEffect } from 'react';
 import './SearchBox.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
-import filterPeopleByName from '../../helper/filterPeopleByName';
-import filterFavouritePeople from '../../helper/filterFavouritePeople';
+import filterPeopleByName from '../../helpers/filterPeopleByName';
+import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 
 function SearchBox({ setShowSearchBox }) {
   const { favState, state } = useContext(AppContext);
@@ -42,7 +42,7 @@ function SearchBox({ setShowSearchBox }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleSearchBoxClose]);
   return (
     <div className="search-box">
       <input

@@ -34,6 +34,7 @@
     display: none;
     font-size: 1.3rem;
     color: $sec-color;
+    transition: color 100ms ease;
   }
 
   &__search-btn {

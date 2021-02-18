@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
-import sortingLogic from '../../helper/sortingLogic';
+import sortingLogic from '../../helpers/sortingLogic';
 import './SortingSelectbox.scss';
 function SortingSelectbox() {
   const { dispatch, favState, sortingState } = useContext(AppContext);

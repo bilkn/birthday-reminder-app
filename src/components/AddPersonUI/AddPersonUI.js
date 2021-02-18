@@ -7,8 +7,8 @@ import {
   blobToArrayBuffer,
 } from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
-import createFileURL from '../../helper/createFileURL';
-import validatePersonData from '../../helper/validatePersonData';
+import createFileURL from '../../helpers/createFileURL';
+import validatePersonData from '../../helpers/validatePersonData';
 import AddPersonUIControls from '../AddPersonUIControls/AddPersonUIControls';
 import AddPersonUIINfo from '../AddPersonUIInfo/AddPersonUIInfo';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';

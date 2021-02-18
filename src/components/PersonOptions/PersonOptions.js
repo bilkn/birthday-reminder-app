@@ -1,7 +1,7 @@
 import './PersonOptions.scss';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
-import findPersonByID from '../../helper/findPersonByID';
+import findPersonByID from '../../helpers/findPersonByID';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 
 function PersonOptions(props) {
@@ -76,6 +76,7 @@ function PersonOptions(props) {
 
   const handleMouseOver = (e) => {
     const mql = window.matchMedia('(min-width: 769px)');
+    const dropDownBtn = document.querySelector(".person__dropdown-btn");
     if (mql.matches) {
       const target = e.target.closest('div');
       const handleMouseOut = (e) => {
@@ -85,6 +86,7 @@ function PersonOptions(props) {
           relatedTarget &&
           !relatedTarget.classList.contains('person__dropdown-btn')
         ) {
+          dropDownBtn.style = {};
           setCurrentPersonID(null);
           target.removeEventListener('mouseleave', handleMouseOut);
         }

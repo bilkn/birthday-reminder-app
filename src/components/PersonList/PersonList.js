@@ -9,7 +9,7 @@ import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagemen
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Notification from '../Notification/Notification';
-import filterFavouritePeople from '../../helper/filterFavouritePeople';
+import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 import SortingSelectbox from '../SortingSelectbox/SortingSelectbox';
 
 function PersonList(props) {

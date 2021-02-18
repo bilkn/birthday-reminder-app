@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
-import findPersonByID from '../../helper/findPersonByID';
+import findPersonByID from '../../helpers/findPersonByID';
 import './DeletePersonDialog.scss';
 function DeletePersonDialog(props) {
   const {

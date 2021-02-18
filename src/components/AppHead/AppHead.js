@@ -9,7 +9,7 @@ function AppHead() {
 
   return (
     <header className="app-head">
-       {/*  <h1 className="app-head__logo">BirthdayApp</h1> */}
+      {/*  <h1 className="app-head__logo">BirthdayApp</h1> */}
       <nav className="app-head-nav">
         {(showSearchBox && (
           <SearchBox setShowSearchBox={setShowSearchBox} />
@@ -24,6 +24,9 @@ function AppHead() {
         <button
           className="app-head-nav__fav-btn"
           onClick={() => !setShowFavourites(!showFavourites)}
+          style={{
+            color: showFavourites ? ' #dcd6f7' : '#c9c2e8',
+          }}
         >
           <i className="fa fa-star app-head-nav__icon" aria-hidden="true"></i>
         </button>
