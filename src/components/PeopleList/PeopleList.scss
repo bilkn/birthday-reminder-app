@@ -1,14 +1,13 @@
-.person-list {
+.people-list {
   display: grid;
   gap: 20px;
   grid-template-columns: 100%;
   margin: 0 auto;
   justify-content: center;
   padding: 3rem 0 6rem 0;
-  position: relative;
   width: 90%;
 
-  // person-list__btn
+  // people-list__btn
   &__btn {
     align-self: flex-start;
     display: none;
@@ -20,9 +19,9 @@
 }
 
 @media (min-width: 768px) {
-  .person-list {
+  .people-list {
     padding: 5rem 0 6rem 0;
-    // person-list__btn
+    // people-list__btn
     &__btn {
       display: initial;
     }
@@ -30,9 +29,9 @@
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  .person-list {
+  .people-list {
     grid-template-columns: repeat(auto-fill, 320px);
-    // person-list__btn
+    // people-list__btn
     &__btn {
       grid-column: 2;
     }
@@ -40,7 +39,7 @@
 }
 
 @media (min-width: 1025px) {
-  .person-list {
+  .people-list {
     grid-template-columns: repeat(auto-fill, 300px);
     width: 100%;
   }

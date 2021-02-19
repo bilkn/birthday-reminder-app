@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import './PersonList.scss';
+import './PeopleList.scss';
 import Person from '../Person/Person';
 import EmptyBox from '../EmptyBox/EmptyBox';
 import { AppContext } from '../../context/AppContext/AppContext';
@@ -10,10 +10,9 @@ import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
-import SortingSelectbox from '../SortingSelectbox/SortingSelectbox';
 import sortingLogic from '../../helpers/sortingLogic';
 
-function PersonList(props) {
+function PeopleList(props) {
   const { currentPersonID, setCurrentPersonID } = props;
   const {
     state,
@@ -129,7 +128,7 @@ function PersonList(props) {
   ]);
 
   useEffect(() => {
-    if (peopleList.length && !isSorted ) {
+    if (peopleList.length && !isSorted) {
       const nextSort = 'sortByName';
       const args = {
         peopleList,
@@ -144,8 +143,6 @@ function PersonList(props) {
   }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]); // !!! May be changed in the future.
   return (
     <>
-      <SortingSelectbox />
-
       {state.isNotificationOpen && (
         <Notification
           isTimePassed={isTimePassed}
@@ -160,7 +157,7 @@ function PersonList(props) {
           setCurrentPersonID={setCurrentPersonID}
         />
       )}
-      <ul className="person-list">
+      <ul className="people-list">
         {peopleList &&
           peopleList.map((person) => (
             <Person
@@ -195,4 +192,4 @@ function PersonList(props) {
   );
 }
 
-export default PersonList;
+export default PeopleList;
