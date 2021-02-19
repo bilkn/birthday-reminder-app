@@ -7,8 +7,8 @@ import {
   blobToArrayBuffer,
 } from '../../utils/IndexedDB/indexedDBManagement';
 import PictureInput from '../PictureInput/PictureInput';
-import createFileURL from '../../helper/createFileURL';
-import validatePersonData from '../../helper/validatePersonData';
+import createFileURL from '../../helpers/createFileURL';
+import validatePersonData from '../../helpers/validatePersonData';
 import AddPersonUIControls from '../AddPersonUIControls/AddPersonUIControls';
 import AddPersonUIINfo from '../AddPersonUIInfo/AddPersonUIInfo';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
@@ -18,7 +18,7 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
   const [currentPicture, setCurrentPicture] = useState(null);
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
-  const addPersonHandler = async () => {
+  const handleAddPerson = async () => {
     let name = nameContainer.current.value;
     const date = dateContainer.current.value;
     let picture = currentPicture
@@ -80,7 +80,7 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
           nameContainer={nameContainer}
           dateContainer={dateContainer}
         />
-        <AddPersonUIControls addPersonHandler={addPersonHandler} />
+        <AddPersonUIControls handleAddPerson={handleAddPerson} />
         <button
           className="add-person-ui__close-btn"
           onClick={toggleAddPersonUI}

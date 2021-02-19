@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
-import sortingLogic from '../../helper/sortingLogic';
+import sortingLogic from '../../helpers/sortingLogic';
 import './SortingSelectbox.scss';
 function SortingSelectbox() {
   const { dispatch, favState, sortingState } = useContext(AppContext);
@@ -11,8 +11,7 @@ function SortingSelectbox() {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    const nextSort = formatValue(value);
-
+    const nextSort = reformatValue(value);
     const args = {
       peopleList,
       setPeopleList,
@@ -24,9 +23,7 @@ function SortingSelectbox() {
     setSortState(nextSort);
   };
 
-
-
-  const formatValue = (value) => {
+  const reformatValue = (value) => {
     switch (value) {
       case 'sort-by-name':
         return 'sortByName';
@@ -38,6 +35,7 @@ function SortingSelectbox() {
         break;
     }
   };
+  
   return (
     <select className="sorting-selectbox" onChange={handleChange} defaultValue={sortState}>
       <option

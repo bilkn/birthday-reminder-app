@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
-import PersonList from '../PersonList/PersonList';
+import PeopleList from '../PeopleList/PeopleList';
 import './HomeMain.scss';
 
 function HomeMain(props) {
@@ -9,7 +9,7 @@ function HomeMain(props) {
 
   return (
     <main className="home-main">
-      <PersonList
+      <PeopleList
         currentPersonID={currentPersonID}
         setCurrentPersonID={setCurrentPersonID}
         setShowUI={setShowUI}

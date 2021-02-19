@@ -3,7 +3,7 @@ import EditPersonUIControls from '../EditPersonUIControls/EditPersonUIControls';
 import PictureInput from '../PictureInput/PictureInput';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
-import findPersonByID from '../../helper/findPersonByID';
+import findPersonByID from '../../helpers/findPersonByID';
 import './EditPersonUI.scss';
 import {
   blobToArrayBuffer,
@@ -11,8 +11,8 @@ import {
 } from '../../utils/IndexedDB/indexedDBManagement';
 import blankImg from '../../assets/no-picture.png';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
-import createFileURL from '../../helper/createFileURL';
-import validatePersonData from '../../helper/validatePersonData';
+import createFileURL from '../../helpers/createFileURL';
+import validatePersonData from '../../helpers/validatePersonData';
 function EditPersonUI({
   currentPersonID,
   setShowEditPersonUI,
@@ -35,6 +35,7 @@ function EditPersonUI({
     try {
       editedPerson = await createEditedPerson(newName, newBirthday, picture);
     } catch (err) {
+      // Add notification.
       console.log(err);
     }
     if (editedPerson) {
@@ -94,7 +95,7 @@ function EditPersonUI({
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [setShowEditPersonUI]);
 
   return (
     <div className="edit-person-ui">

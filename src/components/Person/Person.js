@@ -1,19 +1,19 @@
 import './Person.scss';
-import createFileURL from '../../helper//createFileURL';
+import createFileURL from '../../helpers/createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
 import { useEffect, useState } from 'react';
-import getPersonAge from '../../helper/getPersonAge';
+import getPersonAge from '../../helpers/getPersonAge';
 function Person(props) {
   const {
     person,
     handleDeletePerson,
     currentPersonID,
     setCurrentPersonID,
-    selectPersonHandler,
+    handleSelectPerson,
   } = props;
   const { id, name, birthday, picture } = person;
-  const [optionsBtnStyle, setOptionsBtnStyle] = useState(null);
+  const [dropdownBtnStyle, setDropdownBtnStyle] = useState(null);
   const [pictureURL, setPictureURL] = useState(null);
   const [parentClass, setParentClass] = useState('');
   const [personAge, setPersonAge] = useState(null);
@@ -51,39 +51,58 @@ function Person(props) {
 
   const handleClick = () => {
     const mql = window.matchMedia('(max-width: 769px)');
-    if (mql.matches) selectPersonHandler(id);
+    if (mql.matches) handleSelectPerson(id);
   };
 
-  const keyPressHandler = (e) => {
-    if (e.key === 'Enter') selectPersonHandler(id);
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') handleSelectPerson(id);
+  };
+
+  const handleWindowKey = (e) => {
+    const mql = window.matchMedia('(max-width: 769px)');
+    if (e.key === 'Tab' && mql.matches) {
+      setTabindex(1);
+    } else if (e.key === 'Tab' && !mql.matches) {
+      setTabindex(-1);
+    }
   };
   const handleMouseEnter = (e) => {
     const target = e.target.closest('button');
-    selectPersonHandler(id);
+    handleSelectPerson(id);
     const style = { height: '50px', width: '30px' };
-    setOptionsBtnStyle(style);
+    setDropdownBtnStyle(style);
     const handleMouseLeave = (e) => {
       const relatedTarget = e.relatedTarget;
-      if (relatedTarget && !relatedTarget.classList.contains('person-options-list__item')) {
+      if (
+        relatedTarget &&
+        !relatedTarget.classList.contains('person-options-list__item')
+      ) {
         setCurrentPersonID(null);
-        setOptionsBtnStyle(null);
+        setDropdownBtnStyle(null);
         target.removeEventListener('mouseleave', handleMouseLeave);
       }
     };
     target.addEventListener('mouseleave', handleMouseLeave);
   };
 
+  useEffect(() => {
+    window.addEventListener('keyup', handleWindowKey);
+    return () => {
+      window.removeEventListener('keyup', handleWindowKey);
+    };
+  }, []);
+
   return (
     <div
       className={parentClass}
-      onKeyPress={keyPressHandler}
+      onKeyPress={handleKeyPress}
       onClick={handleClick}
       tabIndex={tabindex}
     >
       <button
         className="person__dropdown-btn"
         onMouseEnter={handleMouseEnter}
-        style={optionsBtnStyle}
+        style={dropdownBtnStyle}
       >
         <i className="fa fa-ellipsis-h" aria-hidden="true"></i>
       </button>

@@ -1,11 +1,11 @@
 import './AddPersonUIControls.scss';
-function AddPersonUIControls({ addPersonHandler }) {
+function AddPersonUIControls({ handleAddPerson }) {
   return (
     <div className="add-person-ui-controls">
       <button
         className="add-person-ui-controls__add-btn"
         onClick={() => {
-          addPersonHandler();
+          handleAddPerson();
         }}
       >
         <i

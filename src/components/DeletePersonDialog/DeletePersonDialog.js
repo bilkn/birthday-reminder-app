@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
-import findPersonByID from '../../helper/findPersonByID';
+import findPersonByID from '../../helpers/findPersonByID';
 import './DeletePersonDialog.scss';
 function DeletePersonDialog(props) {
   const {
@@ -11,7 +11,7 @@ function DeletePersonDialog(props) {
   } = props;
   const { backgroundState, state } = useContext(AppContext);
   const [, setShowBackground] = backgroundState;
-  const deleteBtnClickHandler = (e) => {
+  const handleDelete = (e) => {
     e.stopPropagation();
     const btnText = e.target.textContent;
     if (btnText === 'Yes') {
@@ -33,14 +33,14 @@ function DeletePersonDialog(props) {
       <div className="delete-person-dialog-controls">
         <button
           className="delete-person-dialog-controls__btn"
-          onClick={deleteBtnClickHandler}
+          onClick={handleDelete}
           autoFocus
         >
           Yes
         </button>
         <button
           className="delete-person-dialog-controls__btn delete-person-dialog-controls__btn--no-margin"
-          onClick={deleteBtnClickHandler}
+          onClick={handleDelete}
         >
           No
         </button>

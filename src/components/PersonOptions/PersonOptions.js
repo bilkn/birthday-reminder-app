@@ -1,7 +1,7 @@
 import './PersonOptions.scss';
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
-import findPersonByID from '../../helper/findPersonByID';
+import findPersonByID from '../../helpers/findPersonByID';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 
 function PersonOptions(props) {
@@ -21,14 +21,14 @@ function PersonOptions(props) {
     return person && person.inFavourites;
   };
 
-  const editHandler = (e) => {
+  const handleEdit = (e) => {
     e.stopPropagation();
     setShowBackground(true);
     setShowEditPersonUI(true);
     setTimeout(() => setCurrentPersonID(null), 0);
   };
 
-  const addToFavoritesHandler = () => {
+  const handleAddFavourites = () => {
     const oldPeople = state.people.filter(
       (person) => currentPersonID !== person.id
     );
@@ -48,7 +48,7 @@ function PersonOptions(props) {
     setCurrentPersonID(null);
   };
 
-  const removeFromFavouritesHandler = () => {
+  const handleRemoveFavourites = () => {
     const oldPeople = state.people.filter(
       (person) => person.id !== currentPersonID
     );
@@ -70,18 +70,23 @@ function PersonOptions(props) {
     e.stopPropagation();
     setShowBackground(false);
     return isPersonInFavourites(person)
-      ? removeFromFavouritesHandler
-      : addToFavoritesHandler;
+      ? handleRemoveFavourites
+      : handleAddFavourites;
   };
 
   const handleMouseOver = (e) => {
     const mql = window.matchMedia('(min-width: 769px)');
+    const dropDownBtn = document.querySelector(".person__dropdown-btn");
     if (mql.matches) {
       const target = e.target.closest('div');
       const handleMouseOut = (e) => {
         setShowBackground(false);
         const relatedTarget = e.relatedTarget;
-        if (relatedTarget && !relatedTarget.classList.contains('person__dropdown-btn')) {
+        if (
+          relatedTarget &&
+          !relatedTarget.classList.contains('person__dropdown-btn')
+        ) {
+          dropDownBtn.style = {};
           setCurrentPersonID(null);
           target.removeEventListener('mouseleave', handleMouseOut);
         }
@@ -113,7 +118,7 @@ function PersonOptions(props) {
         <li className="person-options-list__item person-options-list__item--edit-btn">
           <button
             className="person-options-list__btn"
-            onClick={(e) => editHandler(e)}
+            onClick={(e) => handleEdit(e)}
           >
             Edit
           </button>

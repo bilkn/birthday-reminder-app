@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import './MobileNav.scss';
 import { AppContext } from '../../context/AppContext/AppContext';
-import sortingLogic from '../../helper/sortingLogic';
+import sortingLogic from '../../helpers/sortingLogic';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
-import handleSorting from '../../helper/handleSorting';
+import handleSorting from '../../helpers/handleSorting';
 
 function MobileNav() {
   const {

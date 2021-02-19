@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react';
-import './PersonList.scss';
+import './PeopleList.scss';
 import Person from '../Person/Person';
 import EmptyBox from '../EmptyBox/EmptyBox';
 import { AppContext } from '../../context/AppContext/AppContext';
@@ -9,10 +9,10 @@ import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagemen
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Notification from '../Notification/Notification';
-import filterFavouritePeople from '../../helper/filterFavouritePeople';
-import SortingSelectbox from '../SortingSelectbox/SortingSelectbox';
+import filterFavouritePeople from '../../helpers/filterFavouritePeople';
+import sortingLogic from '../../helpers/sortingLogic';
 
-function PersonList(props) {
+function PeopleList(props) {
   const { currentPersonID, setCurrentPersonID } = props;
   const {
     state,
@@ -30,6 +30,7 @@ function PersonList(props) {
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [isTimePassed, setIsTimePassed] = useState(true);
+  const [isSorted, setIsSorted] = useState(false);
   const handleDeletePerson = (e, id) => {
     const mql = window.matchMedia('(min-width: 768px)');
     if (mql.matches) {
@@ -55,7 +56,7 @@ function PersonList(props) {
     setShowBackground(false);
   };
 
-  const selectPersonHandler = (id) => {
+  const handleSelectPerson = (id) => {
     const mql = window.matchMedia('(max-width: 768px)');
     if (mql.matches) {
       setShowBackground(true);
@@ -66,11 +67,11 @@ function PersonList(props) {
     }
   };
 
-  const toggleAddPersonUIHandlerForLargerScreen = () => {
+  const handleAddPersonUIForLargerScreen = () => {
     setShowAddPersonUI(!showAddPersonUI);
   };
 
-  const keyHandler = (e) => {
+  const handleKeyUp = (e) => {
     if (e.key === 'Escape') {
       setCurrentPersonID(null);
       setShowBackground(false);
@@ -79,9 +80,9 @@ function PersonList(props) {
   };
 
   useEffect(() => {
-    window.addEventListener('keyup', keyHandler);
+    window.addEventListener('keyup', handleKeyUp);
     return () => {
-      window.removeEventListener('keyup', keyHandler);
+      window.removeEventListener('keyup', handleKeyUp);
     };
   });
 
@@ -95,7 +96,7 @@ function PersonList(props) {
   useEffect(() => {
     const handleResize = () => {
       // Sets several states according to the screen size, and active UI's (media queries weren't enough).
-      const mql = window.matchMedia('(min-width: 768px)');
+      const mql = window.matchMedia('(min-width: 769px)');
       if (mql.matches && showDeletePersonDialog) {
         setCurrentPersonID(null);
       }
@@ -125,10 +126,23 @@ function PersonList(props) {
     setCurrentPersonID,
     showDeletePersonDialog,
   ]);
+
+  useEffect(() => {
+    if (peopleList.length && !isSorted) {
+      const nextSort = 'sortByName';
+      const args = {
+        peopleList,
+        setPeopleList,
+        nextSort,
+        showFavourites,
+        dispatch,
+      };
+      sortingLogic(args);
+      setIsSorted(true);
+    }
+  }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]); // !!! May be changed in the future.
   return (
     <>
-      <SortingSelectbox />
-
       {state.isNotificationOpen && (
         <Notification
           isTimePassed={isTimePassed}
@@ -143,7 +157,7 @@ function PersonList(props) {
           setCurrentPersonID={setCurrentPersonID}
         />
       )}
-      <ul className="person-list">
+      <ul className="people-list">
         {peopleList &&
           peopleList.map((person) => (
             <Person
@@ -152,7 +166,7 @@ function PersonList(props) {
               handleDeletePerson={handleDeletePerson}
               currentPersonID={currentPersonID}
               setCurrentPersonID={setCurrentPersonID}
-              selectPersonHandler={selectPersonHandler}
+              handleSelectPerson={handleSelectPerson}
               setShowBackground={setShowBackground}
             />
           ))}
@@ -163,9 +177,7 @@ function PersonList(props) {
           />
         )) || (
           <EmptyBox
-            toggleAddPersonUIHandlerForLargerScreen={
-              toggleAddPersonUIHandlerForLargerScreen
-            }
+            handleAddPersonUIForLargerScreen={handleAddPersonUIForLargerScreen}
           />
         )}
       </ul>
@@ -180,4 +192,4 @@ function PersonList(props) {
   );
 }
 
-export default PersonList;
+export default PeopleList;

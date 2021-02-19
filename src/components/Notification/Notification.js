@@ -12,10 +12,10 @@ function Notification({ isTimePassed, setIsTimePassed }) {
   useEffect(() => {
     if (isTimePassed) {
       setIsTimePassed(false);
-      setTimeout(notificationHandler, 2500);
+      setTimeout(notificationCallback, 2500);
     }
   });
-  const notificationHandler = () => {
+  const notificationCallback = () => {
     clearNotification();
     setIsTimePassed(true);
   };
