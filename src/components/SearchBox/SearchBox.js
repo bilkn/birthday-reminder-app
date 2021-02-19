@@ -42,7 +42,7 @@ function SearchBox({ setShowSearchBox }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleSearchBoxClose]);
+  }, []); // !!! Fix this.
   return (
     <div className="search-box">
       <input

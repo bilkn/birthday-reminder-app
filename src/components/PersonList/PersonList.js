@@ -11,6 +11,7 @@ import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 import SortingSelectbox from '../SortingSelectbox/SortingSelectbox';
+import sortingLogic from '../../helpers/sortingLogic';
 
 function PersonList(props) {
   const { currentPersonID, setCurrentPersonID } = props;
@@ -30,6 +31,7 @@ function PersonList(props) {
   const [showDeletePersonDialog, setShowDeletePersonDialog] = useState(false);
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [isTimePassed, setIsTimePassed] = useState(true);
+  const [isSorted, setIsSorted] = useState(false);
   const handleDeletePerson = (e, id) => {
     const mql = window.matchMedia('(min-width: 768px)');
     if (mql.matches) {
@@ -125,6 +127,21 @@ function PersonList(props) {
     setCurrentPersonID,
     showDeletePersonDialog,
   ]);
+
+  useEffect(() => {
+    if (peopleList.length && !isSorted ) {
+      const nextSort = 'sortByName';
+      const args = {
+        peopleList,
+        setPeopleList,
+        nextSort,
+        showFavourites,
+        dispatch,
+      };
+      sortingLogic(args);
+      setIsSorted(true);
+    }
+  }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]); // !!! May be changed in the future.
   return (
     <>
       <SortingSelectbox />

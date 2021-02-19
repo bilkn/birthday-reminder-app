@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
 import { AppContext } from '../context/AppContext/AppContext';
+import sortingLogic from '../helpers/sortingLogic';
 import defaultState from '../utils/defaultState';
 import { reducer } from '../utils/reducer';
 
