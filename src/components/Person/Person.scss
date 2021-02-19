@@ -35,9 +35,6 @@
 .person:hover {
   background: $sec-color-hover;
 }
-.person:focus {
-  outline: none;
-}
 
 .person--highlighted {
   z-index: 1000000;
@@ -79,8 +76,11 @@
       display: flex;
       justify-content: flex-end;
     }
-  }
-  .person:hover {
-    background: $sec-color;
+    &:hover {
+      background: $sec-color;
+    }
+    &:focus {
+      outline: none;
+    }
   }
 }

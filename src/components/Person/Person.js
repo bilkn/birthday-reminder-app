@@ -57,6 +57,15 @@ function Person(props) {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') handleSelectPerson(id);
   };
+
+  const handleWindowKey = (e) => {
+    const mql = window.matchMedia('(max-width: 769px)');
+    if (e.key === 'Tab' && mql.matches) {
+      setTabindex(1);
+    } else if (e.key === 'Tab' && !mql.matches) {
+      setTabindex(-1);
+    }
+  };
   const handleMouseEnter = (e) => {
     const target = e.target.closest('button');
     handleSelectPerson(id);
@@ -75,6 +84,13 @@ function Person(props) {
     };
     target.addEventListener('mouseleave', handleMouseLeave);
   };
+
+  useEffect(() => {
+    window.addEventListener('keyup', handleWindowKey);
+    return () => {
+      window.removeEventListener('keyup', handleWindowKey);
+    };
+  }, []);
 
   return (
     <div
