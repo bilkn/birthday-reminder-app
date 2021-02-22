@@ -18,13 +18,16 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
   const [currentPicture, setCurrentPicture] = useState(null);
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
+
   const handleAddPerson = async () => {
     let name = nameContainer.current.value;
     const date = dateContainer.current.value;
+
     let picture = currentPicture
       ? await blobToArrayBuffer(currentPicture)
       : blankImg;
     const validationResult = validatePersonData(name, date, picture);
+
     switch (validationResult) {
       case 'INVALID_NAME':
       case 'INVALID_DATE':

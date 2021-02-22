@@ -2,10 +2,9 @@ import './Person.scss';
 import createFileURL from '../../helpers/createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import getPersonAge from '../../helpers/getPersonAge';
 import matchMinMedia from '../../helpers/matchMinMedia';
-import ScreenContext from '../../context/ScreenContext/ScreenContext';
 
 function Person(props) {
   const {
@@ -16,12 +15,12 @@ function Person(props) {
     handleSelectPerson,
   } = props;
   const { id, name, birthday, picture } = person;
-  const [isLargeScreen, setIsLargeScreen] = useContext(ScreenContext);
   const [dropdownBtnStyle, setDropdownBtnStyle] = useState(null);
   const [pictureURL, setPictureURL] = useState(null);
   const [parentClass, setParentClass] = useState('');
   const [personAge, setPersonAge] = useState(null);
   const [tabindex, setTabindex] = useState(-1);
+
   useEffect(() => {
     let pictureURL = null;
     try {
@@ -68,6 +67,7 @@ function Person(props) {
     }
   };
 
+  // Handles person dropdown menu.
   const handleMouseEnter = (e) => {
     const target = e.target.closest('button');
     handleSelectPerson(id);

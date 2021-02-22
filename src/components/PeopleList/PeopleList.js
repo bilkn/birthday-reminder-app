@@ -13,11 +13,10 @@ import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 import sortingLogic from '../../helpers/sortingLogic';
 import matchMinMedia from '../../helpers/matchMinMedia';
-console.log(ScreenContext);
 function PeopleList(props) {
   const { currentPersonID, setCurrentPersonID } = props;
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
-  const [isScreenLarge, setIsScreenLarge] = useContext(ScreenContext);
+  const [, setIsScreenLarge] = useContext(ScreenContext);
   const {
     state,
     dispatch,
@@ -112,7 +111,7 @@ function PeopleList(props) {
         setShowBackground(() => false);
       } else if (
         !screenResult &&
-        (showAddPersonUI ||  currentPersonID || showDeletePersonDialog) &&
+        (showAddPersonUI || currentPersonID || showDeletePersonDialog) &&
         !showBackground
       ) {
         setShowBackground(() => true);
@@ -127,9 +126,7 @@ function PeopleList(props) {
     setShowBackground,
     showAddPersonUI,
     currentPersonID,
-    setCurrentPersonID,
     showDeletePersonDialog,
-    isScreenLarge,
     setIsScreenLarge,
   ]);
 

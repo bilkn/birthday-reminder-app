@@ -7,7 +7,6 @@ import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 
 function SearchBox({ setShowSearchBox }) {
   const { favState, state } = useContext(AppContext);
-
   const [, setPeopleList] = useContext(PeopleListContext);
   const [showFavourites] = favState;
   const searchInput = useRef(null);
@@ -44,6 +43,7 @@ function SearchBox({ setShowSearchBox }) {
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, []); // !!! Fix this.
+
   return (
     <div className="search-box">
       <input
@@ -54,7 +54,11 @@ function SearchBox({ setShowSearchBox }) {
         ref={searchInput}
         autoFocus
       />
-      <button className="search-box__close-btn" aria-label="Search" onClick={handleSearchBoxClose} >
+      <button
+        className="search-box__close-btn"
+        aria-label="Search"
+        onClick={handleSearchBoxClose}
+      >
         <i className="far fa-times-circle"></i>
       </button>
     </div>
