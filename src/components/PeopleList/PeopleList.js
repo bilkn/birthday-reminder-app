@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from 'react';
 import './PeopleList.scss';
 import Person from '../Person/Person';
-import EmptyBox from '../EmptyBox/EmptyBox';
+import EmptyBox from '../AddPersonUILarge/AddPersonUILarge';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
@@ -11,6 +11,7 @@ import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 import sortingLogic from '../../helpers/sortingLogic';
+import isScreenLarge from '../../helpers/isScreenLarge';
 
 function PeopleList(props) {
   const { currentPersonID, setCurrentPersonID } = props;
@@ -32,8 +33,7 @@ function PeopleList(props) {
   const [isTimePassed, setIsTimePassed] = useState(true);
   const [isSorted, setIsSorted] = useState(false);
   const handleDeletePerson = (e, id) => {
-    const mql = window.matchMedia('(min-width: 768px)');
-    if (mql.matches) {
+    if (isScreenLarge()) {
       setCurrentPersonID(null);
     }
     e.stopPropagation();
@@ -57,8 +57,7 @@ function PeopleList(props) {
   };
 
   const handleSelectPerson = (id) => {
-    const mql = window.matchMedia('(max-width: 768px)');
-    if (mql.matches) {
+    if (!isScreenLarge()) {
       setShowBackground(true);
     }
 
@@ -93,21 +92,23 @@ function PeopleList(props) {
     setPeopleList(people);
   }, [showFavourites, state.people, setPeopleList]);
 
+  
+
   useEffect(() => {
     const handleResize = () => {
       // Sets several states according to the screen size, and active UI's (media queries weren't enough).
-      const mql = window.matchMedia('(min-width: 769px)');
-      if (mql.matches && showDeletePersonDialog) {
+      const screenResult = isScreenLarge();
+      if (screenResult && showDeletePersonDialog) {
         setCurrentPersonID(null);
       }
       if (
-        mql.matches &&
+        screenResult &&
         (showAddPersonUI || currentPersonID) &&
         showBackground
       ) {
         setShowBackground(() => false);
       } else if (
-        !mql.matches &&
+        !screenResult &&
         (showAddPersonUI || currentPersonID) &&
         !showBackground
       ) {

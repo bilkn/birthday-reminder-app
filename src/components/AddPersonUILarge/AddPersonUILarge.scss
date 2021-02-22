@@ -1,4 +1,4 @@
-.empty-box {
+.add-person-ui-large {
   align-items: center;
   border: 3px dashed #7a7a7a;
   border-radius: 20px;
@@ -7,7 +7,7 @@
   justify-content: center;
   transition: background 100ms ease;
 
-  // empty-box__add-icon
+  // add-person-ui-large__add-icon
   &__add-icon {
     color: #7a7a7a;
     cursor: pointer;
@@ -15,17 +15,17 @@
   }
 }
 
-.empty-box:hover {
+.add-person-ui-large:hover {
   background: #e0e0e0;
   cursor: pointer;
 }
 
-.empty-box:active {
+.add-person-ui-large:active {
   background: #d6d6d6;
 }
 
 @media (min-width: 769px) {
-  .empty-box {
+  .add-person-ui-large {
     display: flex;
   }
 }

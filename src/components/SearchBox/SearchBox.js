@@ -53,7 +53,7 @@ function SearchBox({ setShowSearchBox }) {
         ref={searchInput}
         autoFocus
       />
-      <button className="search-box__close-btn" onClick={handleSearchBoxClose}>
+      <button className="search-box__close-btn" aria-label="Search" onClick={handleSearchBoxClose} >
         <i className="far fa-times-circle"></i>
       </button>
     </div>

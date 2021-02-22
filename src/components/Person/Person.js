@@ -4,6 +4,8 @@ import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
 import { useEffect, useState } from 'react';
 import getPersonAge from '../../helpers/getPersonAge';
+import isScreenLarge from '../../helpers/isScreenLarge';
+
 function Person(props) {
   const {
     person,
@@ -45,13 +47,12 @@ function Person(props) {
   }, [person]);
 
   useEffect(() => {
-    const mql = window.matchMedia('(max-width: 769px)');
-    if (mql.matches) setTabindex(0);
+    
+    if (!isScreenLarge()) setTabindex(0);
   }, [tabindex]);
 
   const handleClick = () => {
-    const mql = window.matchMedia('(max-width: 769px)');
-    if (mql.matches) handleSelectPerson(id);
+    if (!isScreenLarge()) handleSelectPerson(id);
   };
 
   const handleKeyPress = (e) => {
@@ -59,13 +60,13 @@ function Person(props) {
   };
 
   const handleWindowKey = (e) => {
-    const mql = window.matchMedia('(max-width: 769px)');
-    if (e.key === 'Tab' && mql.matches) {
+    if (e.key === 'Tab' && !isScreenLarge()) {
       setTabindex(1);
-    } else if (e.key === 'Tab' && !mql.matches) {
+    } else if (e.key === 'Tab' && isScreenLarge()) {
       setTabindex(-1);
     }
   };
+
   const handleMouseEnter = (e) => {
     const target = e.target.closest('button');
     handleSelectPerson(id);
