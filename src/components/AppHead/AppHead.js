@@ -1,21 +1,26 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './AppHead.scss';
 import SearchBox from '../SearchBox/SearchBox';
 import { AppContext } from '../../context/AppContext/AppContext';
 import SortingSelectbox from '../SortingSelectbox/SortingSelectbox';
+import ScreenContext from '../../context/ScreenContext/ScreenContext';
+import matchMinMedia from '../../helpers/matchMinMedia';
 function AppHead() {
   const { favState } = useContext(AppContext);
   const [showFavourites, setShowFavourites] = favState;
   const [showSearchBox, setShowSearchBox] = useState(false);
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
-  const handleShowSearchBox = ()=> {
+  const [isLargeScreen, setIsLargeScreen] = useContext(ScreenContext);
 
-  }
-
-  
+  useEffect(() => {
+    if (matchMinMedia(769)) setIsLargeScreen(() => true);
+    else setIsLargeScreen(() => false);
+  }, [setIsLargeScreen]);
   return (
     <header className="app-head">
-      {!showSearchBox && <h1 className="app-head__logo" >BirthdayReminder</h1>}
+      {(isLargeScreen || !showSearchBox) && (
+        <h1 className="app-head__logo">BirthdayReminder</h1>
+      )}
+
       <nav className="app-head-nav">
         {(showSearchBox && (
           <SearchBox setShowSearchBox={setShowSearchBox} />

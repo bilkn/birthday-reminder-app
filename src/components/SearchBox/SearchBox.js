@@ -7,6 +7,7 @@ import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 
 function SearchBox({ setShowSearchBox }) {
   const { favState, state } = useContext(AppContext);
+
   const [, setPeopleList] = useContext(PeopleListContext);
   const [showFavourites] = favState;
   const searchInput = useRef(null);
