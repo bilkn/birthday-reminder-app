@@ -2,9 +2,10 @@ import './Person.scss';
 import createFileURL from '../../helpers/createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import getPersonAge from '../../helpers/getPersonAge';
-import isScreenLarge from '../../helpers/isScreenLarge';
+import matchMinMedia from '../../helpers/matchMinMedia';
+import ScreenContext from '../../context/ScreenContext/ScreenContext';
 
 function Person(props) {
   const {
@@ -15,6 +16,7 @@ function Person(props) {
     handleSelectPerson,
   } = props;
   const { id, name, birthday, picture } = person;
+  const [isLargeScreen, setIsLargeScreen] = useContext(ScreenContext);
   const [dropdownBtnStyle, setDropdownBtnStyle] = useState(null);
   const [pictureURL, setPictureURL] = useState(null);
   const [parentClass, setParentClass] = useState('');
@@ -33,7 +35,7 @@ function Person(props) {
       console.log(err);
     }
 
-    setPictureURL((oldState) => (oldState = pictureURL));
+    setPictureURL(() => pictureURL);
   }, [picture]);
 
   useEffect(() => {
@@ -47,12 +49,11 @@ function Person(props) {
   }, [person]);
 
   useEffect(() => {
-    
-    if (!isScreenLarge()) setTabindex(0);
-  }, [tabindex]);
+    if (!matchMinMedia(769)) setTabindex(-1);
+  }, []);
 
   const handleClick = () => {
-    if (!isScreenLarge()) handleSelectPerson(id);
+    if (!matchMinMedia(769)) handleSelectPerson(id); // !!!
   };
 
   const handleKeyPress = (e) => {
@@ -60,9 +61,9 @@ function Person(props) {
   };
 
   const handleWindowKey = (e) => {
-    if (e.key === 'Tab' && !isScreenLarge()) {
+    if (e.key === 'Tab' && !matchMinMedia(769)) {
       setTabindex(1);
-    } else if (e.key === 'Tab' && isScreenLarge()) {
+    } else if (e.key === 'Tab' && matchMinMedia(769)) {
       setTabindex(-1);
     }
   };

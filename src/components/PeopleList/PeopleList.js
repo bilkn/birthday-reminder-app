@@ -4,6 +4,7 @@ import Person from '../Person/Person';
 import EmptyBox from '../AddPersonUILarge/AddPersonUILarge';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
+import ScreenContext from '../../context/ScreenContext/ScreenContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
@@ -11,10 +12,12 @@ import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 import sortingLogic from '../../helpers/sortingLogic';
-import isScreenLarge from '../../helpers/isScreenLarge';
-
+import matchMinMedia from '../../helpers/matchMinMedia';
+console.log(ScreenContext);
 function PeopleList(props) {
   const { currentPersonID, setCurrentPersonID } = props;
+  const [peopleList, setPeopleList] = useContext(PeopleListContext);
+  const [isScreenLarge, setIsScreenLarge] = useContext(ScreenContext);
   const {
     state,
     dispatch,
@@ -23,7 +26,6 @@ function PeopleList(props) {
     showEditPersonUIState,
     showAddPersonUIState,
   } = useContext(AppContext);
-  const [peopleList, setPeopleList] = useContext(PeopleListContext);
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showFavourites] = favState;
   const [showBackground, setShowBackground] = backgroundState;
@@ -32,8 +34,9 @@ function PeopleList(props) {
   const [deletionUserID, setDeletionUserID] = useState(null);
   const [isTimePassed, setIsTimePassed] = useState(true);
   const [isSorted, setIsSorted] = useState(false);
+
   const handleDeletePerson = (e, id) => {
-    if (isScreenLarge()) {
+    if (!matchMinMedia(769)) {
       setCurrentPersonID(null);
     }
     e.stopPropagation();
@@ -57,7 +60,7 @@ function PeopleList(props) {
   };
 
   const handleSelectPerson = (id) => {
-    if (!isScreenLarge()) {
+    if (!matchMinMedia(769)) {
       setShowBackground(true);
     }
 
@@ -70,20 +73,20 @@ function PeopleList(props) {
     setShowAddPersonUI(!showAddPersonUI);
   };
 
-  const handleKeyUp = (e) => {
-    if (e.key === 'Escape') {
-      setCurrentPersonID(null);
-      setShowBackground(false);
-      setShowAddPersonUI(() => false);
-    }
-  };
-
   useEffect(() => {
+    const handleKeyUp = (e) => {
+      if (e.key === 'Escape') {
+        setCurrentPersonID(null);
+        setShowBackground(false);
+        setShowAddPersonUI(() => false);
+      }
+    };
+
     window.addEventListener('keyup', handleKeyUp);
     return () => {
       window.removeEventListener('keyup', handleKeyUp);
     };
-  });
+  }, [setCurrentPersonID, setShowBackground, setShowAddPersonUI]);
 
   useEffect(() => {
     const people = showFavourites
@@ -92,24 +95,24 @@ function PeopleList(props) {
     setPeopleList(people);
   }, [showFavourites, state.people, setPeopleList]);
 
-  
-
   useEffect(() => {
     const handleResize = () => {
       // Sets several states according to the screen size, and active UI's (media queries weren't enough).
-      const screenResult = isScreenLarge();
-      if (screenResult && showDeletePersonDialog) {
-        setCurrentPersonID(null);
+      const screenResult = matchMinMedia(769);
+      if (screenResult) {
+        setIsScreenLarge(() => true);
+      } else {
+        setIsScreenLarge(() => false);
       }
       if (
         screenResult &&
-        (showAddPersonUI || currentPersonID) &&
+        (showAddPersonUI || currentPersonID || showDeletePersonDialog) &&
         showBackground
       ) {
         setShowBackground(() => false);
       } else if (
         !screenResult &&
-        (showAddPersonUI || currentPersonID) &&
+        (showAddPersonUI ||  currentPersonID || showDeletePersonDialog) &&
         !showBackground
       ) {
         setShowBackground(() => true);
@@ -126,6 +129,8 @@ function PeopleList(props) {
     currentPersonID,
     setCurrentPersonID,
     showDeletePersonDialog,
+    isScreenLarge,
+    setIsScreenLarge,
   ]);
 
   useEffect(() => {
