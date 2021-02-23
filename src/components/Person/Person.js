@@ -2,7 +2,7 @@ import './Person.scss';
 import createFileURL from '../../helpers/createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import getPersonAge from '../../helpers/getPersonAge';
 import matchMinMedia from '../../helpers/matchMinMedia';
 
@@ -20,6 +20,7 @@ function Person(props) {
   const [parentClass, setParentClass] = useState('');
   const [personAge, setPersonAge] = useState(null);
   const [tabindex, setTabindex] = useState(-1);
+  const personDiv = useRef(null);
 
   useEffect(() => {
     let pictureURL = null;
@@ -38,6 +39,7 @@ function Person(props) {
   }, [picture]);
 
   useEffect(() => {
+  /*   document.q */
     let parentClassName =
       currentPersonID === id ? 'person person--highlighted' : 'person';
     setParentClass(parentClassName);
@@ -52,7 +54,7 @@ function Person(props) {
   }, []);
 
   const handleClick = () => {
-    if (!matchMinMedia(769)) handleSelectPerson(id); // !!!
+    if (!matchMinMedia(769)) handleSelectPerson(id); 
   };
 
   const handleKeyPress = (e) => {
@@ -100,6 +102,7 @@ function Person(props) {
       onKeyPress={handleKeyPress}
       onClick={handleClick}
       tabIndex={tabindex}
+      /* ref={} */
     >
       <button
         className="person__dropdown-btn"

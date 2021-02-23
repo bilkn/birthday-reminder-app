@@ -8,7 +8,7 @@
   padding: 0.6rem;
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100%;
   z-index: 1000;
   &__logo {
     color: white;
@@ -47,7 +47,6 @@
 
 @media (min-width: 769px) {
   .app-head-nav {
-    padding: 1rem;
     // app-head-nav__fav-btn
     &__fav-btn {
       display: initial;

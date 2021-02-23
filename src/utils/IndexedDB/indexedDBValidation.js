@@ -3,7 +3,7 @@ async function accesDB(database, version) {
   let myDB = null;
   try {
     myDB = await openDB(database, version, {
-      upgrade(database, oldVersion, newVersion, transaction) {
+      upgrade(database) {
         database.createObjectStore('people', { keyPath: 'id' });
       },
     });

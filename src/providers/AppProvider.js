@@ -5,6 +5,7 @@ import defaultState from '../utils/defaultState';
 import { reducer } from '../utils/reducer';
 
 function AppProvider(props) {
+  // Default state.
   const def = {
     people: [],
     isNotificationOpen: false,
@@ -17,7 +18,6 @@ function AppProvider(props) {
   const backgroundState = useState(false);
   const favState = useState(false);
   const sortingState = useState('sortByName');
-  // Default state.
   const getInitialData = async () => {
     const data = await defaultState();
     const people = data.people;
