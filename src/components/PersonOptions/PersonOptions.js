@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext/AppContext';
 import findPersonByID from '../../helpers/findPersonByID';
 import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
+import matchMinMedia from '../../helpers/matchMinMedia';
 
 function PersonOptions(props) {
   const { currentPersonID, setCurrentPersonID, handleDeletePerson } = props;
@@ -75,9 +76,8 @@ function PersonOptions(props) {
   };
 
   const handleMouseOver = (e) => {
-    const mql = window.matchMedia('(min-width: 769px)');
     const dropDownBtn = document.querySelector(".person__dropdown-btn");
-    if (mql.matches) {
+    if (matchMinMedia(769)) {
       const target = e.target.closest('div');
       const handleMouseOut = (e) => {
         setShowBackground(false);

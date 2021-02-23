@@ -41,16 +41,22 @@ function MobileNav() {
       <nav className="mobile-nav">
         <button
           className="mobile-nav__btn mobile-nav__btn--side"
+          aria-label="Sort people list"
           onClick={handleSortingClick}
         >
           <i className="fas fa-sort-amount-down"></i>
         </button>
-        <button className="mobile-nav__btn" onClick={toggleAddPersonUI}>
+        <button
+          className="mobile-nav__btn"
+          aria-label="Add person"
+          onClick={toggleAddPersonUI}
+        >
           <i className="fas fa-plus"></i>
         </button>
 
         <button
           className="mobile-nav__btn mobile-nav__btn--side"
+          aria-label="Toggle favourites"
           onClick={() => setShowFavourites(!showFavourites)}
         >
           <i className="fas fa-star"></i>

@@ -13,11 +13,8 @@ import blankImg from '../../assets/no-picture.png';
 import PersonImgContainer from '../PersonImgContainer/PersonImgContainer';
 import createFileURL from '../../helpers/createFileURL';
 import validatePersonData from '../../helpers/validatePersonData';
-function EditPersonUI({
-  currentPersonID,
-  setShowEditPersonUI,
-  setShowBackground,
-}) {
+function EditPersonUI(props) {
+  const { currentPersonID, setShowEditPersonUI, setShowBackground } = props;
   const defaultState = currentPersonID;
   const nameContainer = useRef(null);
   const dateContainer = useRef(null);
@@ -26,6 +23,7 @@ function EditPersonUI({
   const [currentPicture, setCurrentPicture] = useState(null);
   const [didUserUploadPicture, setDidUserUploadPicture] = useState(false);
   const person = findPersonByID(state.people, currentPersonIDForEdit);
+
   const handleAcceptClick = async (e) => {
     e.stopPropagation();
     const newName = nameContainer.current.value;

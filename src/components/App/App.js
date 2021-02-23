@@ -4,14 +4,17 @@ import MobileNav from '../MobileNav/MobileNav';
 import DarkBackground from '../DarkBackground/DarkBackground';
 import PeopleListProvider from '../../providers/PeopleListProvider';
 import AppProvider from '../../providers/AppProvider';
+import ScreenProvider from '../../providers/ScreenProvider';
 function App() {
   return (
     <>
       <AppProvider>
         <DarkBackground />
         <PeopleListProvider>
-          <AppHead />
-          <HomeMain />
+          <ScreenProvider>
+            <AppHead />
+            <HomeMain />
+          </ScreenProvider>
           <MobileNav />
         </PeopleListProvider>
       </AppProvider>

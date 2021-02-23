@@ -12,6 +12,7 @@ function DarkBackground() {
   const [showAddPersonUI, setShowAddPersonUI] = showAddPersonUIState;
   const [showEditPersonUI, setShowEditPersonUI] = showEditPersonUIState;
   const [showBackground, setShowBackground] = backgroundState;
+
   const handleBackground = (e) => {
     if (currentPersonID || showAddPersonUI || showEditPersonUI) {
       e.stopPropagation();
@@ -21,14 +22,17 @@ function DarkBackground() {
       setCurrentPersonID(null);
     }
   };
+
   useEffect(() => {
     showBackground
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'initial');
   }, [showBackground]);
+
   const className = showBackground
     ? 'dark-background dark-background--visible'
     : 'dark-background';
+    
   return <div className={className} onClick={handleBackground}></div>;
 }
 

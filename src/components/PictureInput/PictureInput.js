@@ -5,6 +5,7 @@ import './PictureInput.scss';
 function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
   const { dispatch } = useContext(AppContext);
   const label = useRef(null);
+
   const handleFile = (e) => {
     const picture = e.target.files[0];
     if (validatePicture(picture)) {
@@ -14,13 +15,14 @@ function PictureInput({ setDidUserUploadPicture, setCurrentPicture }) {
       dispatch({ type: 'INVALID_FILE_TYPE' });
     }
   };
-  useEffect(() => {
-    label.current.focus();
-  }, []);
 
   const onKeyDown = (e) => {
     if (e.key === 'Enter') label.current.click();
   };
+
+  useEffect(() => {
+    label.current.focus();
+  }, []);
 
   return (
     <div className="picture-input-container">

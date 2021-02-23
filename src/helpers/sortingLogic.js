@@ -22,7 +22,6 @@ function sortingLogic(args) {
   }
 }
 
-// People sorting could be merged into a single function in the future.
 function sortByAge(oldPeople, dispatch, setPeopleList, showFavourites) {
   const sortedPeople = oldPeople.sort((prev, cur) => {
     let newPrevBirthday = prev.birthday.slice();
@@ -90,6 +89,7 @@ function sortByName(oldPeople, dispatch, setPeopleList, showFavourites) {
   dispatch({ type: 'SORT_PEOPLE_BY_NAME' });
 }
 
+// Validates the date input value, and reformats the value, if it can be reformatted.
 function validateAndReformatDate(newPrevBirthday, newCurBirthday) {
   const { regex } = testDateWithUncommonFormat(newPrevBirthday);
 

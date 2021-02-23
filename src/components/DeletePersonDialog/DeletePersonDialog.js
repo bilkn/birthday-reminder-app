@@ -11,9 +11,11 @@ function DeletePersonDialog(props) {
   } = props;
   const { backgroundState, state } = useContext(AppContext);
   const [, setShowBackground] = backgroundState;
+
   const handleDelete = (e) => {
     e.stopPropagation();
     const btnText = e.target.textContent;
+    
     if (btnText === 'Yes') {
       removeItem(deletionUserID);
     }

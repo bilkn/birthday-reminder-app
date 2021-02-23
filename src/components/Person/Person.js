@@ -2,8 +2,10 @@ import './Person.scss';
 import createFileURL from '../../helpers/createFileURL';
 import PersonOptions from '../PersonOptions/PersonOptions';
 import { arrayBufferToBlob } from '../../utils/IndexedDB/indexedDBManagement';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import getPersonAge from '../../helpers/getPersonAge';
+import matchMinMedia from '../../helpers/matchMinMedia';
+
 function Person(props) {
   const {
     person,
@@ -18,6 +20,8 @@ function Person(props) {
   const [parentClass, setParentClass] = useState('');
   const [personAge, setPersonAge] = useState(null);
   const [tabindex, setTabindex] = useState(-1);
+  const personDiv = useRef(null);
+
   useEffect(() => {
     let pictureURL = null;
     try {
@@ -31,10 +35,11 @@ function Person(props) {
       console.log(err);
     }
 
-    setPictureURL((oldState) => (oldState = pictureURL));
+    setPictureURL(() => pictureURL);
   }, [picture]);
 
   useEffect(() => {
+  /*   document.q */
     let parentClassName =
       currentPersonID === id ? 'person person--highlighted' : 'person';
     setParentClass(parentClassName);
@@ -45,13 +50,11 @@ function Person(props) {
   }, [person]);
 
   useEffect(() => {
-    const mql = window.matchMedia('(max-width: 769px)');
-    if (mql.matches) setTabindex(0);
-  }, [tabindex]);
+    if (!matchMinMedia(769)) setTabindex(-1);
+  }, []);
 
   const handleClick = () => {
-    const mql = window.matchMedia('(max-width: 769px)');
-    if (mql.matches) handleSelectPerson(id);
+    if (!matchMinMedia(769)) handleSelectPerson(id); 
   };
 
   const handleKeyPress = (e) => {
@@ -59,13 +62,14 @@ function Person(props) {
   };
 
   const handleWindowKey = (e) => {
-    const mql = window.matchMedia('(max-width: 769px)');
-    if (e.key === 'Tab' && mql.matches) {
+    if (e.key === 'Tab' && !matchMinMedia(769)) {
       setTabindex(1);
-    } else if (e.key === 'Tab' && !mql.matches) {
+    } else if (e.key === 'Tab' && matchMinMedia(769)) {
       setTabindex(-1);
     }
   };
+
+  // Handles person dropdown menu.
   const handleMouseEnter = (e) => {
     const target = e.target.closest('button');
     handleSelectPerson(id);
@@ -98,6 +102,7 @@ function Person(props) {
       onKeyPress={handleKeyPress}
       onClick={handleClick}
       tabIndex={tabindex}
+      /* ref={} */
     >
       <button
         className="person__dropdown-btn"
