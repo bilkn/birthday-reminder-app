@@ -1,18 +1,19 @@
 import { useContext, useState, useEffect } from 'react';
 import './PeopleList.scss';
 import Person from '../Person/Person';
-import EmptyBox from '../AddPersonUILarge/AddPersonUILarge';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
 import ScreenContext from '../../context/ScreenContext/ScreenContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
+import AddPersonUILarge from '../AddPersonUILarge/AddPersonUILarge';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 import sortingLogic from '../../helpers/sortingLogic';
 import matchMinMedia from '../../helpers/matchMinMedia';
+
 function PeopleList(props) {
   const { currentPersonID, setCurrentPersonID } = props;
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
@@ -179,7 +180,7 @@ function PeopleList(props) {
             toggleAddPersonUI={toggleAddPersonUI}
           />
         )) || (
-          <EmptyBox
+          <AddPersonUILarge
             handleAddPersonUIForLargerScreen={handleAddPersonUIForLargerScreen}
           />
         )}

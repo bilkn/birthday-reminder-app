@@ -43,6 +43,7 @@ function AppHead() {
           style={{
             color: showFavourites ? ' #dcd6f7' : '#c9c2e8',
           }}
+          aria-label="Favourites"
         >
           <i className="fa fa-star app-head-nav__icon" aria-hidden="true"></i>
         </button>

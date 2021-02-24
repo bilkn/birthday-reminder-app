@@ -5,7 +5,7 @@
   display: flex;
   height: 60px;
   justify-content: space-between;
-  padding: 0.6rem;
+  padding: 0.6rem 0.8rem;
   position: fixed;
   top: 0;
   width: 100%;
@@ -28,7 +28,7 @@
   &__search-btn {
     color: $third-color;
     font-size: 1.5rem;
-    margin-right: 1rem;
+    margin-right: 0;
   }
 
   // app-head-nav__fav-btn
@@ -50,6 +50,13 @@
     // app-head-nav__fav-btn
     &__fav-btn {
       display: initial;
+    }
+
+    // app-head-nav__search-btn
+    &__search-btn {
+      color: $third-color;
+      font-size: 1.5rem;
+      margin-right: 1rem;
     }
   }
 }
