@@ -4,8 +4,6 @@ React applicaton, where you can add and organize your loved ones' birthdays.
 
 In order to test the application with fake people, you can type "DEMO-DATA" to the search input.
 
-[MotiveMe](https://motiveme.xyz/)
-=======
 [Birthday Reminder App](https://bilkn.github.io/birthday-reminder-app/)
 
 
