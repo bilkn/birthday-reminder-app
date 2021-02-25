@@ -56,10 +56,7 @@ function EditPersonUI(props) {
       });
       setShowBackground(false);
       setShowEditPersonUI(false);
-    } else {
-      // !!! Add notification
-      console.log('EDIT PERSON ERROR!');
-    }
+    } 
   };
 
   const createEditedPerson = async (name, birthday, picture) => {

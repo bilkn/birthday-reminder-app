@@ -4,7 +4,6 @@ import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
 import filterPeopleByName from '../../helpers/filterPeopleByName';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
-import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
 import demoData from '../../demoData';
 
 function SearchBox({ setShowSearchBox }) {
@@ -21,6 +20,7 @@ function SearchBox({ setShowSearchBox }) {
         type: 'ADD_PERSON',
         payload: [...state.people, ...demoPeople],
       });
+      handleSearchBoxClose();
     }
     displayPeople(name);
   };
@@ -51,7 +51,7 @@ function SearchBox({ setShowSearchBox }) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []); // !!! Fix this.
+  }, []); 
 
   return (
     <div className="search-box">

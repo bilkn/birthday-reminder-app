@@ -148,7 +148,7 @@ function PeopleList(props) {
       sortingLogic(args);
       setIsSorted(true);
     }
-  }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]); // !!! May be changed in the future.
+  }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]); 
   return (
     <>
       {state.isNotificationOpen && (
