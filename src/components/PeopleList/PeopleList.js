@@ -50,7 +50,11 @@ function PeopleList(props) {
   const removeItem = (id) => {
     const oldPeople = state.people;
     let newPeople = oldPeople.filter((person) => person.id !== id);
-    removeDataFromIDBStore('userDatabase', '1', 'people', id);
+    try {
+      removeDataFromIDBStore('userDatabase', '1', 'people', id);
+    } catch (err) {
+      console.log(err);
+    }
     dispatch({
       type: 'REMOVE_PERSON',
       payload: { people: newPeople },

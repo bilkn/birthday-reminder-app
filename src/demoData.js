@@ -1,4 +1,4 @@
-const mockupData = {
+const demoData = {
   people: [
     {
       id: 1,
@@ -33,4 +33,4 @@ const mockupData = {
   ],
 };
 
-export default mockupData;
+export default demoData;

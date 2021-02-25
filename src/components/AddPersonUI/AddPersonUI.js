@@ -20,12 +20,16 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
   const dateContainer = useRef(null);
 
   const handleAddPerson = async () => {
-    let name = nameContainer.current.value;
+    const name = nameContainer.current.value;
     const date = dateContainer.current.value;
-
-    let picture = currentPicture
-      ? await blobToArrayBuffer(currentPicture)
-      : blankImg;
+    let picture = null;
+    try {
+       picture = currentPicture
+        ? await blobToArrayBuffer(currentPicture)
+        : blankImg;
+    } catch (err) {
+      console.log(err);
+    }
     const validationResult = validatePersonData(name, date, picture);
 
     switch (validationResult) {
@@ -49,7 +53,11 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
     name = name.charAt(0).toUpperCase() + name.slice(1);
     const newPerson = createNewPerson(name, birthday, picture);
     dispatch({ type: 'ADD_PERSON', payload: [...state.people, newPerson] });
-    putItemToIDB(newPerson, 'userDatabase', '1', 'people');
+    try {
+      putItemToIDB(newPerson, 'userDatabase', '1', 'people');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const createNewPerson = (name, birthday, picture) => {

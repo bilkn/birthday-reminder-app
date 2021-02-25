@@ -3,7 +3,7 @@ import getData from './data';
 async function defaultState() {
   const people = await getData('userDatabase', '1', 'people');
   const defaultState = {
-    people: people,
+    people,
     isNotificationOpen: false,
     notificationContext: '',
   };

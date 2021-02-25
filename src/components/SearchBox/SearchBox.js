@@ -4,20 +4,29 @@ import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
 import filterPeopleByName from '../../helpers/filterPeopleByName';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
+import { putItemToIDB } from '../../utils/IndexedDB/indexedDBManagement';
+import demoData from '../../demoData';
 
 function SearchBox({ setShowSearchBox }) {
-  const { favState, state } = useContext(AppContext);
+  const { dispatch, state, favState } = useContext(AppContext);
   const [, setPeopleList] = useContext(PeopleListContext);
   const [showFavourites] = favState;
   const searchInput = useRef(null);
 
   const handleChange = async () => {
     const name = searchInput.current.value;
+    if (name === 'DEMO-DATA') {
+      const { people: demoPeople } = demoData;
+      dispatch({
+        type: 'ADD_PERSON',
+        payload: [...state.people, ...demoPeople],
+      });
+    }
     displayPeople(name);
   };
 
   const displayPeople = (name) => {
-    let people = showFavourites
+    const people = showFavourites
       ? filterFavouritePeople(state.people)
       : state.people;
     if (people) {
@@ -29,7 +38,7 @@ function SearchBox({ setShowSearchBox }) {
   };
 
   const handleSearchBoxClose = async () => {
-    let name = '';
+    const name = '';
     setShowSearchBox(false);
     displayPeople(name);
   };

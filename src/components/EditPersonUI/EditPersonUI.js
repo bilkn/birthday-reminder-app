@@ -42,7 +42,11 @@ function EditPersonUI(props) {
       );
 
       const newPeople = [...filteredPeople, editedPerson];
-      putItemToIDB(editedPerson, 'userDatabase', '1', 'people');
+      try {
+        putItemToIDB(editedPerson, 'userDatabase', '1', 'people');
+      } catch (err) {
+        console.log(err);
+      }
       dispatch({
         type: 'EDIT_PERSON',
         payload: {
@@ -62,13 +66,17 @@ function EditPersonUI(props) {
     const editedPerson = {
       ...person,
       id: currentPersonIDForEdit,
-      name: name,
-      birthday: birthday,
-      picture: picture,
+      name,
+      birthday,
+      picture,
     };
-    picture = currentPicture
-      ? await blobToArrayBuffer(currentPicture)
-      : blankImg;
+    try {
+      picture = currentPicture
+        ? await blobToArrayBuffer(currentPicture)
+        : blankImg;
+    } catch (err) {
+      console.log(err);
+    }
     const validationResult = validatePersonData(name, birthday, picture);
     switch (validationResult) {
       case 'INVALID_NAME':

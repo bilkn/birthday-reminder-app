@@ -45,7 +45,11 @@ function PersonOptions(props) {
         name: modifiedPerson.name,
       },
     });
-    putItemToIDB(modifiedPerson, 'userDatabase', '1', 'people');
+    try {
+      putItemToIDB(modifiedPerson, 'userDatabase', '1', 'people');
+    } catch (err) {
+      console.log(err);
+    }
     setCurrentPersonID(null);
   };
 
@@ -76,7 +80,7 @@ function PersonOptions(props) {
   };
 
   const handleMouseOver = (e) => {
-    const dropDownBtn = document.querySelector(".person__dropdown-btn");
+    const dropDownBtn = document.querySelector('.person__dropdown-btn');
     if (matchMinMedia(769)) {
       const target = e.target.closest('div');
       const handleMouseOut = (e) => {
