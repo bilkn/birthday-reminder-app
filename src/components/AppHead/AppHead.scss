@@ -45,6 +45,19 @@
   }
 }
 
+@media (min-width: 768px) {
+  .app-head {
+    padding: 0.6rem 1.5rem;
+  }
+  .app-head-nav {
+    // app-head-nav__search-btn
+    &__search-btn {
+      color: $third-color;
+      font-size: 1.5rem;
+    }
+  }
+}
+
 @media (min-width: 769px) {
   .app-head-nav {
     // app-head-nav__fav-btn
@@ -54,9 +67,13 @@
 
     // app-head-nav__search-btn
     &__search-btn {
-      color: $third-color;
-      font-size: 1.5rem;
       margin-right: 1rem;
     }
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-head {
+    padding: 0.6rem 3%;
   }
 }

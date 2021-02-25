@@ -5,6 +5,7 @@
   color: black;
   font-size: 1.3rem;
   left: 50%;
+  line-height: 2rem;
   margin-left: -40vw;
   padding: 1rem;
   position: fixed;
@@ -12,4 +13,11 @@
   top: $site-head-height--mobile;
   width: 80vw;
   z-index: 100000000000;
+}
+
+@media (min-width: 768px) {
+  .notification {
+    margin-left: -200px;
+    width: 400px;
+  }
 }
