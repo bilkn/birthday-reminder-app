@@ -12,7 +12,7 @@
         "debug.log": true,
         "LICENSE": true,
         "node_modules": true,
-        "README.md": true
+        "README.md": false
     },
     "liveSassCompile.settings.excludeList": [
 

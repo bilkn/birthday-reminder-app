@@ -1,18 +1,19 @@
 import { useContext, useState, useEffect } from 'react';
 import './PeopleList.scss';
 import Person from '../Person/Person';
-import EmptyBox from '../AddPersonUILarge/AddPersonUILarge';
 import { AppContext } from '../../context/AppContext/AppContext';
 import PeopleListContext from '../../context/PeopleListContext/PeopleListContext';
 import ScreenContext from '../../context/ScreenContext/ScreenContext';
 import DeletePersonDialog from '../DeletePersonDialog/DeletePersonDialog';
 import { removeDataFromIDBStore } from '../../utils/IndexedDB/indexedDBManagement';
 import AddPersonUI from '../AddPersonUI/AddPersonUI';
+import AddPersonUILarge from '../AddPersonUILarge/AddPersonUILarge';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import Notification from '../Notification/Notification';
 import filterFavouritePeople from '../../helpers/filterFavouritePeople';
 import sortingLogic from '../../helpers/sortingLogic';
 import matchMinMedia from '../../helpers/matchMinMedia';
+
 function PeopleList(props) {
   const { currentPersonID, setCurrentPersonID } = props;
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
@@ -49,7 +50,11 @@ function PeopleList(props) {
   const removeItem = (id) => {
     const oldPeople = state.people;
     let newPeople = oldPeople.filter((person) => person.id !== id);
-    removeDataFromIDBStore('userDatabase', '1', 'people', id);
+    try {
+      removeDataFromIDBStore('userDatabase', '1', 'people', id);
+    } catch (err) {
+      console.log(err);
+    }
     dispatch({
       type: 'REMOVE_PERSON',
       payload: { people: newPeople },
@@ -143,7 +148,7 @@ function PeopleList(props) {
       sortingLogic(args);
       setIsSorted(true);
     }
-  }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]); // !!! May be changed in the future.
+  }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]); 
   return (
     <>
       {state.isNotificationOpen && (
@@ -179,7 +184,7 @@ function PeopleList(props) {
             toggleAddPersonUI={toggleAddPersonUI}
           />
         )) || (
-          <EmptyBox
+          <AddPersonUILarge
             handleAddPersonUIForLargerScreen={handleAddPersonUIForLargerScreen}
           />
         )}

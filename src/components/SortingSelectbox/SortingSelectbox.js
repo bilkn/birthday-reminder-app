@@ -37,7 +37,7 @@ function SortingSelectbox() {
   };
   
   return (
-    <select className="sorting-selectbox" onChange={handleChange} defaultValue={sortState}>
+    <select className="sorting-selectbox" aria-selected role="option" onChange={handleChange}  defaultValue={sortState}> 
       <option
         id="test"
         value="sort-by-name"

@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState } from 'react';
 import { AppContext } from '../context/AppContext/AppContext';
-import sortingLogic from '../helpers/sortingLogic';
 import defaultState from '../utils/defaultState';
+import { getIDBStore } from '../utils/IndexedDB/indexedDBValidation';
 import { reducer } from '../utils/reducer';
 
 function AppProvider(props) {
@@ -18,14 +18,18 @@ function AppProvider(props) {
   const backgroundState = useState(false);
   const favState = useState(false);
   const sortingState = useState('sortByName');
+  
   const getInitialData = async () => {
-    const data = await defaultState();
-    const people = data.people;
-
-    dispatch({
-      type: 'INITIAL_LOAD',
-      payload: { people: people },
-    });
+    try {
+      const data = await defaultState();
+      const { people } = data;
+      dispatch({
+        type: 'INITIAL_LOAD',
+        payload: { people: people },
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
