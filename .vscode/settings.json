@@ -8,7 +8,7 @@
         ".eslintcache": true,
         ".gitignore": true,
         ".vscode": true,
-        "**.json": true,
+        "**.json": false,
         "debug.log": true,
         "LICENSE": true,
         "node_modules": true,
