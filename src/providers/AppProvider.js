@@ -1,7 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
 import { AppContext } from '../context/AppContext/AppContext';
 import defaultState from '../utils/defaultState';
-import { getIDBStore } from '../utils/IndexedDB/indexedDBValidation';
 import { reducer } from '../utils/reducer';
 
 function AppProvider(props) {
