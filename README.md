@@ -6,7 +6,6 @@ In order to test the application with fake people, you can type "DEMO-DATA" to t
 
 [Birthday Reminder App](https://bilkn.github.io/birthday-reminder-app/)
 
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.

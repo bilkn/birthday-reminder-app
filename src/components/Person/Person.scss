@@ -41,6 +41,7 @@
 }
 
 .person-info {
+  align-items: center;
   display: flex;
   flex-direction: column;
 
@@ -81,6 +82,14 @@
     }
     &:focus {
       outline: none;
+    }
+  }
+  .person-info {
+    
+    // person-info__name
+    &__name {
+      overflow-wrap: break-word;
+      width: 130px;
     }
   }
 }
