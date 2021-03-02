@@ -14,7 +14,7 @@ const demoData = {
     },
     {
       id: 3,
-      name: 'William Bloom',
+      name: 'Tom Bloom',
       birthday: '12.02.1990',
       picture: './assets/man-2.png',
     },
