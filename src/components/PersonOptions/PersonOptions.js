@@ -24,7 +24,7 @@ function PersonOptions(props) {
 
   const handleEdit = (e) => {
     e.stopPropagation();
-    setShowBackground(() => true);
+    setShowBackground(true);
     setShowEditPersonUI(true);
     setTimeout(() => setCurrentPersonID(null), 0);
   };

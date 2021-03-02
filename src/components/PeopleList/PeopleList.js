@@ -113,13 +113,13 @@ function PeopleList(props) {
         (showAddPersonUI || currentPersonID || showDeletePersonDialog) &&
         showBackground
       ) {
-        setShowBackground(() => false);
+        setShowBackground(false);
       } else if (
         !screenResult &&
         (showAddPersonUI || currentPersonID || showDeletePersonDialog) &&
         !showBackground
       ) {
-        setShowBackground(() => true);
+        setShowBackground(true);
       }
     };
     window.addEventListener('resize', handleResize);
