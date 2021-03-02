@@ -24,7 +24,7 @@ function PersonOptions(props) {
 
   const handleEdit = (e) => {
     e.stopPropagation();
-    setShowBackground(true);
+    setShowBackground(() => true);
     setShowEditPersonUI(true);
     setTimeout(() => setCurrentPersonID(null), 0);
   };
@@ -84,7 +84,6 @@ function PersonOptions(props) {
     if (matchMinMedia(769)) {
       const target = e.target.closest('div');
       const handleMouseOut = (e) => {
-        setShowBackground(false);
         const relatedTarget = e.relatedTarget;
         if (
           relatedTarget &&

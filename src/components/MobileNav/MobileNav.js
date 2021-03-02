@@ -20,8 +20,8 @@ function MobileNav() {
   const [peopleList, setPeopleList] = useContext(PeopleListContext);
 
   const toggleAddPersonUI = () => {
-    setShowBackground(!showBackground);
-    setShowAddPersonUI(!showAddPersonUI);
+    setShowBackground(()=>!showBackground);
+    setShowAddPersonUI(()=>!showAddPersonUI);
   };
   const handleSortingClick = () => {
     const nextSort = handleSorting(sortState);

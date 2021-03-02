@@ -24,7 +24,7 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
     const date = dateContainer.current.value;
     let picture = null;
     try {
-       picture = currentPicture
+      picture = currentPicture
         ? await blobToArrayBuffer(currentPicture)
         : blankImg;
     } catch (err) {
@@ -43,8 +43,8 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
         break;
       default:
         addPerson(name, date, picture);
-        toggleAddPersonUI();
         setShowBackground(false);
+        toggleAddPersonUI();
         break;
     }
   };

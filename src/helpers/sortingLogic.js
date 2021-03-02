@@ -59,7 +59,6 @@ function sortByMonth(oldPeople, dispatch, setPeopleList, showFavourites) {
     const [curDay, curMonth] = newCurBirthday.split('.');
     const prevDatePoint = +prevDay + +prevMonth * 100;
     const curDatePoint = +curDay + +curMonth * 100;
-    console.log("newPrevBirthday:",prevDay, prevMonth, newPrevBirthday, prevDatePoint, "newCurBirthday:", curDay, curMonth, newCurBirthday, curDatePoint)
     return curDatePoint - prevDatePoint;
   });
   if (showFavourites) {

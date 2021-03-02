@@ -82,7 +82,7 @@ function PeopleList(props) {
       if (e.key === 'Escape') {
         setCurrentPersonID(null);
         setShowBackground(false);
-        setShowAddPersonUI(() => false);
+        setShowAddPersonUI(false);
       }
     };
 
@@ -148,7 +148,7 @@ function PeopleList(props) {
       sortingLogic(args);
       setIsSorted(true);
     }
-  }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]); 
+  }, [dispatch, peopleList, setPeopleList, isSorted, showFavourites]);
   return (
     <>
       {state.isNotificationOpen && (
