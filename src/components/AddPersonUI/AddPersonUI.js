@@ -73,7 +73,7 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
 
   return (
     <>
-      <div className="add-person-ui">
+      <li className="add-person-ui">
         {didUserUploadPicture ? (
           <PersonImgContainer
             createFileURL={createFileURL}
@@ -98,7 +98,7 @@ function AddPersonUI({ setShowBackground, toggleAddPersonUI }) {
         >
           <i className="fas fa-times"></i>
         </button>
-      </div>
+      </li>
     </>
   );
 }

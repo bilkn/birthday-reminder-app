@@ -96,7 +96,7 @@ function Person(props) {
   }, []);
 
   return (
-    <div
+    <li
       className={parentClass}
       onKeyPress={handleKeyPress}
       onClick={handleClick}
@@ -132,7 +132,7 @@ function Person(props) {
         <p className="person-age-container__title">Age:</p>
         <p className="person-age-container__age">{personAge}</p>
       </div>
-    </div>
+    </li>
   );
 }
 

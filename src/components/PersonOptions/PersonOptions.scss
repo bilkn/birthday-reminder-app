@@ -84,10 +84,16 @@
     &__item--edit-btn {
       border-radius: 0;
     }
-    // .person-options-list__item--triangled
+    // person-options-list__item--triangled
     &__item--triangled:hover::before {
       border-bottom: 10px solid lighten($options-ui-color, 5%);
     }
+    // person-options-list__item--triangled:focus-within::before
+    &__item--triangled:focus-within::before {
+      border-bottom: 10px solid lighten($options-ui-color, 5%) !important;
+    }
+
+    // person-options-list__item--triangled::before
     &__item--triangled::before {
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;

@@ -136,7 +136,7 @@ function PeopleList(props) {
   ]);
 
   useEffect(() => {
-    if (peopleList.length && !isSorted) {
+    if (peopleList.length > 1 && !isSorted) {
       const nextSort = 'sortByName';
       const args = {
         peopleList,
