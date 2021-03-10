@@ -37,21 +37,29 @@ function SortingSelectbox() {
   };
   
   return (
-    <select className="sorting-selectbox" aria-selected role="option" onChange={handleChange}  defaultValue={sortState}> 
-      <option
-        id="test"
-        value="sort-by-name"
-        className="sorting-selectbox__option"
+    <label>
+      <select
+        className="sorting-selectbox"
+        aria-selected
+        role="option"
+        onChange={handleChange}
+        defaultValue={sortState}
       >
-        Sort by name
-      </option>
-      <option value="sort-by-age" className="sorting-selectbox__option">
-        Sort by age
-      </option>
-      <option value="sort-by-month" className="sorting-selectbox__option">
-        Sort by month
-      </option>
-    </select>
+        <option
+          id="test"
+          value="sort-by-name"
+          className="sorting-selectbox__option"
+        >
+          Sort by name
+        </option>
+        <option value="sort-by-age" className="sorting-selectbox__option">
+          Sort by age
+        </option>
+        <option value="sort-by-month" className="sorting-selectbox__option">
+          Sort by month
+        </option>
+      </select>
+    </label>
   );
 }
 
